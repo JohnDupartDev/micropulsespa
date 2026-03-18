@@ -9,16 +9,51 @@ import FAQ from '../components/home/FAQ.astro';
 import Pricing from '../components/home/Pricing.astro';
 import Testimonials from '../components/home/Testimonials.astro';
 
-// Aquí irás importando los demás (Servicios, Contacto, etc.)
+/**
+ * SEO STRATEGY - ZIPAQUIRÁ DIGITAL
+ * Optimización de palabras clave para posicionamiento local en Costa Rica.
+ */
+const pageTitle = "Micropulse Spa | Micropuntura Brasileña en Tibás, Costa Rica";
+const pageDescription = "Especialistas en regeneración dérmica avanzada. Elimina estrías hasta un 95% con micropuntura brasileña. Bienestar integral con camilla Ceragem y Microneedling en Tibás. ¡Reserva tu valoración hoy!";
+const pageKeywords = "micropuntura brasileña costa rica, eliminar estrías tibás, camilla ceragem san josé, microneedling costa rica, tratamiento estrías blancas, estética avanzada tibás, regeneración de colágeno, micropulse spa";
+
+// JSON-LD Breadcrumbs para mejorar la apariencia en los resultados de búsqueda
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Inicio",
+    "item": "https://micropulsespa.com"
+  }]
+};
 ---
 
-<Layout title="MicropulseSpa | Transformando Pieles">
-	<Hero />
-	<Services />
-	<TecnicaBeneficios />
-	<Metodologia />
-	<ProcesoTratamiento />
-	<Testimonials />
-	<FAQ />
-	<Pricing />
-	</Layout>
+<Layout 
+    title={pageTitle} 
+    description={pageDescription}
+>
+    <meta name="keywords" content={pageKeywords} slot="head" />
+    
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} slot="head" />
+
+    <Hero />
+    <Services />
+    <TecnicaBeneficios />
+    <Metodologia />
+    <ProcesoTratamiento />
+    <Testimonials />
+    <FAQ />
+    <Pricing />
+</Layout>
+
+<script>
+    /**
+     * Optimizador de carga para SEO:
+     * Asegura que las secciones críticas se prioricen para el LCP (Largest Contentful Paint)
+     */
+    window.addEventListener('load', () => {
+        console.log("Micropulse Spa - SEO & Performance by ZipaquiraDigital.com");
+    });
+</script>

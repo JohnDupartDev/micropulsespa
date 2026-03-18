@@ -5,15 +5,15 @@ import Footer from '../components/Footer.astro';
 
 
 interface Props {
-	title?: string;
-	description?: string;
-	image?: string;
+    title?: string;
+    description?: string;
+    image?: string;
 }
 
 const { 
-	title = "MicropulseSpa | Micropuntura Brasileña y Bienestar en Tibás",
-	description = "Especialistas en micropuntura brasileña en San José. Eliminamos hasta un 95% de estrías. Relájate en nuestra camilla Ceragem. ¡Reserva hoy al 8822-7210!",
-	image = "/og-image.jpg"
+    title = "MicropulseSpa | Micropuntura Brasileña y Bienestar en Tibás",
+    description = "Especialistas en micropuntura brasileña en San José. Eliminamos hasta un 95% de estrías. Relájate en nuestra camilla Ceragem. ¡Reserva hoy al 8822-7210!",
+    image = "/og-image.jpg"
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, "https://micropulsespa.com");
@@ -29,7 +29,7 @@ const schema = {
   "@id": "https://micropulsespa.com",
   "url": "https://micropulsespa.com",
   "telephone": "+50688227210",
-  "priceRange": "$$",
+  "priceRange": "₡₡",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "5 esquinas del puente elevado, 300 metros al este y 75 al norte, séptima casa entrando a mano izquierda, portón negro",
@@ -60,68 +60,93 @@ const schema = {
 ---
 
 <!doctype html>
-<html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="theme-color" content="#b66ab2" />
+<html lang="es-CR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="theme-color" content="#b66ab2" />
+        <meta name="author" content="ZipaquiraDigital.com" />
 
-		<title>{title}</title>
-		<meta name="title" content={title} />
-		<meta name="description" content={description} />
-		<link rel="canonical" href={canonicalURL} />
-		<meta name="robots" content="index, follow, max-image-preview:large" />
+        <title>{title}</title>
+        <meta name="title" content={title} />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+        
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="googlebot" content="index, follow" />
 
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content={Astro.url} />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content={socialImageURL} />
-		<meta property="og:locale" content="es_CR" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={Astro.url} />
+        <meta property="og:site_name" content="MicropulseSpa" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={socialImageURL} />
+        <meta property="og:locale" content="es_CR" />
 
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content={Astro.url} />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content={socialImageURL} />
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={Astro.url} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={socialImageURL} />
 
-		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<link rel="manifest" href="/site.webmanifest" />
-	</head>
-	<body class="bg-brand-white text-brand-dark selection:bg-brand-primary/30 selection:text-brand-dark">
-		<Header />
-		
-		<slot />
-		
-		<style is:global>
-			/* Optimizaciones globales adicionales */
-			:root {
-				--brand-primary: #b66ab2;
-				--brand-light: #ecdfed;
-				--brand-dark: #212121;
-			}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
 
-			/* Aseguramos que no haya scroll horizontal por elementos rebeldes */
-			html, body {
-				overflow-x: hidden;
-				position: relative;
-				width: 100%;
-			}
+        <link rel="sitemap" href="/sitemap-index.xml" />
+    </head>
+    <body class="bg-brand-white text-brand-dark selection:bg-brand-primary/30 selection:text-brand-dark">
+        <Header />
+        
+        <main id="main-content">
+            <slot />
+        </main>
+        
+        <Footer />
 
-			/* Mejoras de suavizado de fuente */
-			body {
-				-webkit-font-smoothing: antialiased;
-				-moz-osx-font-smoothing: grayscale;
-				text-rendering: optimizeLegibility;
-			}
-		</style>
-		<Footer />
-	</body>
+        <style is:global>
+            /* Variables Globales de Marca */
+            :root {
+                --brand-primary: #b66ab2;
+                --brand-light: #ecdfed;
+                --brand-dark: #212121;
+                --brand-white: #ffffff;
+            }
+
+            /* Reset y Prevención de Desbordamiento */
+            html, body {
+                overflow-x: hidden;
+                position: relative;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                scroll-behavior: smooth;
+            }
+
+            /* Tipografía y Renderizado Pro */
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+                font-display: swap;
+            }
+
+            /* Accesibilidad: Foco visible */
+            :focus-visible {
+                outline: 2px solid var(--brand-primary);
+                outline-offset: 4px;
+            }
+
+            /* Estilos sutiles para el desarrollador en consola */
+            @media print {
+                .no-print { display: none; }
+            }
+        </style>
+    </body>
 </html>

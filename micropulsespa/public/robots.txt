@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Evitar indexar archivos temporales o de configuración
+Disallow: /.vercel/
+Disallow: /_astro/
+
+# Enlace al sitemap (Asegúrate de que coincida con tu dominio)
+Sitemap: https://micropulsespa.com/sitemap-index.xml
