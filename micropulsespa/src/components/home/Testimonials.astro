@@ -1,0 +1,163 @@
+---
+// src/components/Testimonials.astro
+const testimonials = [
+  {
+    name: "Mariela Rojas",
+    role: "Tratamiento de Estrías",
+    text: "Increíble. Tenía estrías blancas de hace años y con la micropuntura casi ni se notan. ¡Súper recomendada!",
+    stars: 5,
+  },
+  {
+    name: "Josué Delgado",
+    role: "Camilla Ceragem",
+    text: "La camilla Ceragem me cambió la vida con mis dolores de espalda. Es un antes y un después en mi salud.",
+    stars: 5,
+  },
+  {
+    name: "Karla V.",
+    role: "Microneedling",
+    text: "Mi piel se ve como porcelana. Los poros se cerraron y tengo un brillo natural que nunca había tenido.",
+    stars: 5,
+  },
+  {
+    name: "Lucía Méndez",
+    role: "Tratamiento Cicatrices",
+    text: "El trato es muy profesional y las instalaciones impecables. Se nota la experiencia en cada sesión.",
+    stars: 5,
+  },
+  {
+    name: "Adriana P.",
+    role: "Regeneración Celular",
+    text: "Excelente servicio. No duele nada y los resultados son permanentes. ¡La mejor inversión en mi piel!",
+    stars: 5,
+  },
+];
+
+// Triplicamos para asegurar el loop infinito sin cortes visuales
+const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+---
+
+<section class="flex flex-col gap-10 py-24 bg-white w-full overflow-hidden relative">
+  
+  <style is:global>
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-33.33%); }
+    }
+    @keyframes scroll-right {
+      0% { transform: translateX(-33.33%); }
+      100% { transform: translateX(0); }
+    }
+    
+    .pause-on-hover:hover {
+      animation-play-state: paused !important;
+    }
+
+    .marquee-row {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+  </style>
+
+  <div class="container mx-auto px-6 mb-4 flex flex-col items-center text-center reveal opacity-0 translate-y-10 transition-all duration-1000">
+    <div class="inline-flex items-center gap-2 bg-brand-primary/10 px-4 py-1.5 rounded-full mb-6">
+      <span class="w-2 h-2 bg-brand-primary rounded-full animate-pulse"></span>
+      <span class="text-[10px] font-black tracking-[0.2em] uppercase text-brand-primary">Experiencias Reales</span>
+    </div>
+    <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-brand-dark ">
+      Clientes <span class="text-brand-primary">Felices</span>
+    </h2>
+    <p class="text-slate-500 mt-4 max-w-xl font-medium">
+      Lo que dicen quienes ya transformaron su piel con nuestra tecnología brasileña.
+    </p>
+
+    <a 
+      href="https://www.instagram.com/stories/highlights/18055669426542857/" 
+      target="_blank"
+      class="group flex items-center gap-2 mt-8 text-sm font-black text-brand-primary hover:text-brand-dark transition-all"
+    >
+      <svg viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+        <path d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.701-6.033-6.032s2.701-6.032,6.033-6.032c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z"/>
+      </svg>
+      <span>VER RESEÑAS EN INSTAGRAM</span>
+      <svg class="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+    </a>     
+  </div>
+
+  <div class="flex flex-col gap-8 relative">
+    <div class="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+    
+    <div class="marquee-row pause-on-hover" style="animation-name: scroll-left; animation-duration: 40s;">
+      {duplicatedTestimonials.map((item) => (
+        <div class="w-[320px] md:w-[450px] flex-shrink-0 flex flex-col p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 shadow-sm relative hover:shadow-xl hover:bg-white transition-all duration-500 group">
+          <svg class="absolute top-8 right-8 text-brand-primary/10 w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V5C14.017 3.89543 14.9124 3 16.017 3H19.017C21.2261 3 23.017 4.79086 23.017 7V15C23.017 18.866 19.883 22 16.017 22H14.017V21ZM2.01693 21L2.01693 18C2.01693 16.8954 2.91236 16 4.01693 16H7.01693C7.56921 16 8.01693 15.5523 8.01693 15V9C8.01693 8.44772 7.56921 8 7.01693 8H4.01693C2.91236 8 2.01693 7.10457 2.01693 6V5C2.01693 3.89543 2.91236 3 4.01693 3H7.01693C9.22607 3 11.0169 4.79086 11.0169 7V15C11.0169 18.866 7.88293 22 4.01693 22H2.01693V21Z"/></svg>
+
+          <div class="flex items-center gap-4 mb-6 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-brand-primary text-white flex items-center justify-center font-black text-xl shadow-lg shadow-brand-primary/20">
+               {item.name.charAt(0)}
+            </div>
+            <div>
+              <p class="text-lg font-black text-brand-dark">{item.name}</p>
+              <p class="text-[10px] text-brand-primary font-black uppercase tracking-widest">{item.role}</p>
+            </div>
+          </div>
+
+          <div class="flex text-brand-primary gap-1 mb-4">
+            {[...Array(item.stars)].map((_) => (
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            ))}
+          </div>
+
+          <p class="text-slate-600 font-medium leading-relaxed italic relative z-10">
+            "{item.text}"
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <div class="marquee-row pause-on-hover" style="animation-name: scroll-right; animation-duration: 50s;">
+      {duplicatedTestimonials.reverse().map((item) => (
+        <div class="w-[320px] md:w-[450px] flex-shrink-0 flex flex-col p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 shadow-sm relative hover:shadow-xl hover:bg-white transition-all duration-500 group">
+          <div class="flex items-center gap-4 mb-6 relative z-10">
+            <div class="w-14 h-14 rounded-2xl bg-brand-dark text-brand-primary flex items-center justify-center font-black text-xl shadow-lg">
+               {item.name.charAt(0)}
+            </div>
+            <div>
+              <p class="text-lg font-black text-brand-dark">{item.name}</p>
+              <p class="text-[10px] text-brand-primary font-black uppercase tracking-widest">{item.role}</p>
+            </div>
+          </div>
+
+          <div class="flex text-brand-primary gap-1 mb-4">
+            {[...Array(item.stars)].map((_) => (
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            ))}
+          </div>
+
+          <p class="text-slate-600 font-medium leading-relaxed italic relative z-10">
+            "{item.text}"
+          </p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Animación de revelado al scroll para el Header
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-10');
+        entry.target.classList.add('opacity-100', 'translate-y-0');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

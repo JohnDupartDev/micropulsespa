@@ -1,0 +1,127 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro'; 
+import Footer from '../components/Footer.astro';
+
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+}
+
+const { 
+	title = "MicropulseSpa | Micropuntura Brasileña y Bienestar en Tibás",
+	description = "Especialistas en micropuntura brasileña en San José. Eliminamos hasta un 95% de estrías. Relájate en nuestra camilla Ceragem. ¡Reserva hoy al 8822-7210!",
+	image = "/og-image.jpg"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, "https://micropulsespa.com");
+const socialImageURL = new URL(image, Astro.url);
+
+// JSON-LD para SEO Local y Negocio (Rich Snippets)
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  "name": "MicropulseSpa",
+  "alternateName": "Micropulse Spa Costa Rica",
+  "image": socialImageURL,
+  "@id": "https://micropulsespa.com",
+  "url": "https://micropulsespa.com",
+  "telephone": "+50688227210",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "5 esquinas del puente elevado, 300 metros al este y 75 al norte, séptima casa entrando a mano izquierda, portón negro",
+    "addressLocality": "Tibás",
+    "addressRegion": "San José",
+    "postalCode": "11301",
+    "addressCountry": "CR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 9.9575,
+    "longitude": -84.0811
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61552307075682",
+    "https://www.instagram.com/micropulsespa/"
+  ],
+  "description": "Expertos en salud estética. Especialidad en micropuntura brasileña para estrías y terapia de relajación con tecnología Ceragem en Costa Rica."
+};
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#b66ab2" />
+
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+		<meta name="robots" content="index, follow, max-image-preview:large" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={Astro.url} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={socialImageURL} />
+		<meta property="og:locale" content="es_CR" />
+
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={Astro.url} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={socialImageURL} />
+
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+	</head>
+	<body class="bg-brand-white text-brand-dark selection:bg-brand-primary/30 selection:text-brand-dark">
+		<Header />
+		
+		<slot />
+		
+		<style is:global>
+			/* Optimizaciones globales adicionales */
+			:root {
+				--brand-primary: #b66ab2;
+				--brand-light: #ecdfed;
+				--brand-dark: #212121;
+			}
+
+			/* Aseguramos que no haya scroll horizontal por elementos rebeldes */
+			html, body {
+				overflow-x: hidden;
+				position: relative;
+				width: 100%;
+			}
+
+			/* Mejoras de suavizado de fuente */
+			body {
+				-webkit-font-smoothing: antialiased;
+				-moz-osx-font-smoothing: grayscale;
+				text-rendering: optimizeLegibility;
+			}
+		</style>
+		<Footer />
+	</body>
+</html>

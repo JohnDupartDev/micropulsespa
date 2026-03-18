@@ -1,0 +1,144 @@
+---
+// src/components/Pricing.astro
+---
+
+<section class="relative py-20 bg-white overflow-hidden" id="precios">
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-primary/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-lavender/20 rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-16 space-y-4 reveal opacity-0 translate-y-10 transition-all duration-1000">
+      <h2 class="text-4xl md:text-6xl font-black tracking-tighter text-brand-dark">
+        Tu piel merece <span class="text-brand-primary italic">lo mejor</span>
+      </h2>
+      <p class="max-w-2xl mx-auto text-slate-600 text-lg font-medium leading-relaxed">
+        Descubre tratamientos personalizados que realzan tu belleza natural, ayudándote a lucir una piel más saludable, luminosa y renovada.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+      
+      <div class="reveal opacity-0 translate-y-10 transition-all duration-700 delay-100 bg-white border border-brand-primary/10 rounded-[2.5rem] p-8 flex flex-col shadow-lg hover:shadow-2xl hover:shadow-brand-primary/10 hover:-translate-y-2 transition-all duration-500 group">
+        <div class="mb-6">
+          <h3 class="text-xl font-black text-brand-dark mb-2">Micropuntura Avanzada</h3>
+          <div class="flex items-baseline gap-1">
+            <span class="text-3xl font-black text-brand-primary">₡40.000</span>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">/ Sesión</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-slate-700 mb-6 bg-brand-primary/5 p-3 rounded-2xl border border-brand-primary/10">
+          <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span class="text-xs font-bold italic uppercase tracking-tighter">2 Horas de tratamiento</span>
+        </div>
+        <div class="space-y-4 mb-8 flex-grow text-slate-700 font-medium">
+          {["Cicatrices medianas", "Cicatrices pequeñas", "Evaluación profesional"].map((item) => (
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span class="text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+        <a href="https://wa.me/50688227210" class="w-full py-4 rounded-2xl bg-brand-primary/10 text-brand-primary text-center font-black hover:bg-brand-primary hover:text-white transition-all duration-300">
+          Elegir Plan
+        </a>
+      </div>
+
+      <div class="reveal opacity-0 scale-95 transition-all duration-1000 delay-200 relative bg-white border-2 border-brand-primary rounded-[3rem] p-10 flex flex-col shadow-2xl shadow-brand-primary/20 lg:scale-105 z-10 hover:-translate-y-4 transition-all duration-500">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-primary text-white text-[10px] font-black uppercase tracking-widest px-6 py-2 rounded-full shadow-xl">
+          Más Popular
+        </div>
+        <div class="mb-6">
+          <h3 class="text-xl font-black text-brand-dark mb-2 uppercase tracking-tighter">Micropuntura Renovadora</h3>
+          <div class="flex items-baseline gap-1">
+            <span class="text-4xl font-black text-brand-primary">₡30.000</span>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">/ Sesión</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-brand-primary mb-6 bg-brand-primary/10 p-4 rounded-2xl border border-brand-primary/20">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span class="text-xs font-bold italic uppercase tracking-tighter">45min - 1h de duración</span>
+        </div>
+        <div class="space-y-4 mb-10 flex-grow">
+          {[
+            "Estrías & Secuelas de Acné",
+            "Vitíligo & Líneas de Expresión",
+            "Arrugas & Efecto Lifting",
+            "Hidratación Profunda"
+          ].map((item) => (
+            <div class="flex items-center gap-3">
+              <svg class="w-6 h-6 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span class="text-sm font-black text-brand-dark tracking-tight">{item}</span>
+            </div>
+          ))}
+        </div>
+        <a href="https://wa.me/50688227210" class="w-full py-5 rounded-2xl bg-brand-primary text-white font-black hover:bg-brand-dark shadow-xl shadow-brand-primary/30 transition-all text-center uppercase tracking-widest text-xs">
+          Reservar Ahora
+        </a>
+      </div>
+
+      <div class="reveal opacity-0 translate-y-10 transition-all duration-700 delay-300 bg-white border border-brand-primary/10 rounded-[2.5rem] p-8 flex flex-col shadow-lg hover:shadow-2xl hover:shadow-brand-primary/10 hover:-translate-y-2 transition-all duration-500 group">
+        <div class="mb-6">
+          <h3 class="text-xl font-black text-brand-dark mb-2">Micropuntura Intensiva</h3>
+          <div class="flex items-baseline gap-1">
+            <span class="text-3xl font-black text-brand-primary">₡45.000</span>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">/ Sesión</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-slate-700 mb-6 bg-brand-primary/5 p-3 rounded-2xl border border-brand-primary/10">
+          <svg class="w-5 h-5 text-brand-primary" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          <span class="text-xs font-bold italic uppercase tracking-tighter">2 Horas de tratamiento</span>
+        </div>
+        <div class="space-y-4 mb-8 flex-grow text-slate-700 font-medium">
+          {["Abdominoplastia", "Queloides & Cicatrices", "Tratamiento reparador focal"].map((item) => (
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span class="text-sm">{item}</span>
+            </div>
+          ))}
+        </div>
+        <a href="https://wa.me/50688227210" class="w-full py-4 rounded-2xl bg-brand-primary/10 text-brand-primary text-center font-black hover:bg-brand-primary hover:text-white transition-all duration-300">
+          Elegir Plan
+        </a>
+      </div>
+    </div>
+
+    <div class="reveal opacity-0 translate-y-10 mt-24 p-8 md:p-16 rounded-[3.5rem] bg-brand-dark text-white relative overflow-hidden shadow-2xl">
+      <div class="absolute right-0 top-0 w-1/2 h-full opacity-20 pointer-events-none">
+        <div class="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-primary via-transparent to-transparent"></div>
+      </div>
+      
+      <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10">
+        <div class="max-w-xl text-center lg:text-left space-y-4">
+          <h3 class="text-3xl md:text-5xl font-black tracking-tighter">¿Buscas un cambio <span class="text-brand-primary italic">más profundo?</span></h3>
+          <p class="text-slate-300 text-lg font-light leading-relaxed">
+            Ahorra al contratar varias sesiones y asegura la continuidad de tu tratamiento para obtener resultados óptimos y duraderos.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
+          <a href="https://wa.me/50688227210" class="bg-brand-primary hover:bg-white hover:text-brand-primary text-white px-10 py-5 rounded-2xl font-black transition-all duration-300 text-center shadow-lg shadow-brand-primary/20 text-sm uppercase tracking-widest">
+            Ver Paquetes
+          </a>
+          <a href="https://wa.me/50688227210" class="bg-white/5 hover:bg-white/10 text-white px-10 py-5 rounded-2xl font-bold backdrop-blur-sm transition-all border border-white/10 text-sm text-center">
+            Contactar Asesor
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const observerOptions = { threshold: 0.1 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-10', 'scale-95');
+        entry.target.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
