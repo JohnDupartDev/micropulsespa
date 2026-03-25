@@ -1,0 +1,431 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BookingFlow from '../../components/BookingFlow.astro'; // Importamos el flujo de reserva
+
+const beneficios = [
+  {
+    id: "postura",
+    title: "Reconstruye tu Columna",
+    subtitle: "Alivio del dolor",
+    desc: "Aplica presión secuencial en vértebras específicas para revertir años de mala postura y devolver la curvatura natural de tu espalda. Es utilizada para tratar dolores de espalda, cuello, hombros y problemas de ciática",
+    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
+    stat: "87%",
+    statLabel: "mejora postural"
+  },
+  {
+    id: "dolor",
+    title: "Apaga el Dolor",
+    subtitle: "Termoterapia Profunda",
+    desc: "Radiación infrarroja de onda larga que penetra tejidos musculares y articulaciones. Aumenta la circulación sanguínea en un 300%, libera endorfinas y favorece la eliminación de toxinas ayudado a reducir la inflamación.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    stat: "4.7cm",
+    statLabel: "penetración térmica"
+  },
+  {
+    id: "estres",
+    title: "Reconecta tu Sistema Nervioso",
+    subtitle: "Frecuencia Alfa",
+    desc: "Vibraciones de baja frecuencia sincronizadas con ondas cerebrales alfa. Reduce el cortisol hasta un 40% induciendo un estado de calma profunda similar a 4 horas de sueño reparador. Puede ayudar en casos de estreñimiento y colitis nerviosa.",
+    icon: "M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z",
+    stat: "40%",
+    statLabel: "menos estrés"
+  }
+];
+
+const pasos = [
+  { num: "01", titulo: "Masaje y Quiropraxia", desc: "Los rodillos realizan un escaneo de la columna para adaptar el masaje a la curvatura de cada usuario." },
+  { num: "02", titulo: "Acupresión y Moxibustión", desc: "Aplican presión y calor intenso en puntos específicos (puntos de acupuntura) para estimular la energía del cuerpo." },
+  { num: "03", titulo: "Calor Infrarrojo", desc: "Las piedras de jade emiten calor que penetra profundamente en los tejidos, mejorando la circulación sanguínea y relajando los músculos" },
+  { num: "04", titulo: "Relajación Profunda", desc: "Finalizas con una sensación de ligereza y movilidad renovada." }
+];
+
+const testimonios = [
+  { 
+    nombre: "María Fernanda R.", 
+    edad: "52 años", 
+    texto: "Llegué con una hernia lumbar diagnosticada hace 8 años. Después de 6 sesiones, puedo dormir completa sin despertarme por el dolor. La tecnología de esta camilla es impresionante.", 
+    resultado: "Disminución del 90% del dolor", 
+    avatar: "MF" 
+  },
+  { 
+    nombre: "Carlos Hidalgo", 
+    edad: "38 años", 
+    texto: "Trabajo 10 horas sentado frente a una computadora. Mi espalda estaba completamente rígida. Con solo 3 sesiones recuperé movilidad y la tensión acumulada desapareció.", 
+    resultado: "Movilidad restaurada", 
+    avatar: "CH" 
+  },
+  { 
+    nombre: "Adriana Soto", 
+    edad: "45 años", 
+    texto: "Sufría de insomnio crónico por estrés. La sesión de Ceragem me ayuda a resetear mi sistema nervioso. Ahora vengo dos veces por semana y mi calidad de vida cambió radicalmente.", 
+    resultado: "Sueño reparador", 
+    avatar: "AS" 
+  }
+];
+---
+
+<Layout 
+  title="Camilla Ceragem V3 | Tecnología Médica para tu Columna | Micropulse Spa"
+  description="Descubre el masaje inteligente que escanea, diagnostica y trata tu espalda. Terapia con calor infrarrojo, quiropraxia automatizada y relajación profunda en Tibás."
+>
+
+  <section class="relative pt-40 overflow-hidden bg-gradient-to-br from-white via-white to-brand-light/20">
+   
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
+      <div class="relative z-10 text-center lg:text-left">
+        <div class="inline-flex items-center gap-2 bg-brand-primary/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-brand-primary/20">
+          <span class="w-2 h-2 rounded-full bg-brand-primary animate-pulse"></span>
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.2em]">Revitalización Sistémica Avanzada</span>
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-black text-brand-dark tracking-tighter mb-6 ">
+          Energía y alivio <br/> 
+          <span class="text-zinc-900"> para tu</span>
+          <span class="text-brand-primary uppercase">cuerpo.</span>
+        </h1>
+        
+        <p class="text-lg text-zinc-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+         La <strong class="text-brand-dark italic"> Camilla Ceragem </strong> fusiona sabiduría milenaria y tecnología médica para desbloquear la vitalidad de tu cuerpo. Mediante <strong class="text-brand-primary">termo-acupresión con jade</strong>, logramos una descompresión profunda que optimiza la circulación y mejora el sistema nervioso.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10">
+          <button 
+             id="btn-reserva-ceragem"
+             class="bg-gradient-to-r from-brand-primary to-pink-300 text-white px-5 py-3 rounded-full font-black shadow-2xl shadow-brand-primary/40 hover:-translate-y-1 transition-all text-center cursor-pointer uppercase text-xs tracking-widest"
+          >
+            RESERVAR EXPERIENCIA
+          </button>
+
+          <a href="#proceso" 
+             class="border-2 border-brand-primary/30 text-brand-dark px-5 py-3 rounded-full font-bold hover:bg-brand-primary/5 transition-all text-center text-xs tracking-widest">
+            Descubre la ciencia
+          </a>
+        </div>
+        
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-6 pb-5">
+          <div class="text-left pb-10">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Bienestar Garantizado</p>
+            <p class="text-sm font-black text-brand-dark italic">98% de satisfacción real</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="relative group">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/10 to-brand-secondary/30 blur-[80px] rounded-full group-hover:blur-[100px] transition-all"></div>
+        <div class=" rounded-4xl bg-white overflow-hidden border-2 border-white shadow-2xl">
+          <img src="/images/S-camilla.jpg" alt="Bienestar integral en Micropulse Spa" class="w-full h-full object-contain " />
+          <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md rounded-2xl p-5 flex items-center justify-between border border-brand-light">
+            <div>
+              <p class="text-[10px] font-black text-brand-primary uppercase tracking-widest">Efecto Sistémico</p>
+              <p class="text-sm font-black text-brand-dark">Jade y Calor para el cuerpo completo</p>
+            </div>
+            <div class="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/30">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+  <section class="py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Tecnología de vanguardia</span>
+        <h2 class="text-4xl md:text-5xl font-black text-brand-dark mt-3 mb-5 tracking-tight">
+          Tres mecanismos <br/>
+          <span class="text-brand-primary">un solo objetivo:</span> tu bienestar
+        </h2>
+        <p class="text-slate-500 text-lg">La única camilla que combina quiropraxia automatizada, calor infrarrojo y masaje por vibración en un solo equipo.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {beneficios.map((b) => (
+          <div class="bg-white p-8 rounded-[2rem] border border-slate-200 hover:border-brand-primary/40 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-primary/5 to-transparent rounded-full blur-2xl"></div>
+            
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-light to-brand-primary/10 flex items-center justify-center text-brand-primary mb-6 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={b.icon}></path>
+              </svg>
+            </div>
+            
+            <div class="flex items-baseline gap-1 mb-2">
+              <span class="text-3xl font-black text-brand-primary">{b.stat}</span>
+              <span class="text-xs font-medium text-slate-400 uppercase">{b.statLabel}</span>
+            </div>
+            
+            <span class="text-[10px] font-black text-brand-primary/70 uppercase tracking-[0.15em]">{b.subtitle}</span>
+            <h3 class="text-xl font-black text-brand-dark mt-2 mb-3">{b.title}</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">{b.desc}</p>
+            
+            <div class="mt-6 w-full h-[2px] bg-slate-100 rounded-full overflow-hidden">
+              <div class="w-0 group-hover:w-full h-full bg-gradient-to-r from-brand-primary to-brand-secondary transition-all duration-1000"></div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-28 bg-white" id="proceso">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Experiencia premium</span>
+        <h2 class="text-4xl md:text-5xl font-black text-brand-dark mt-3 mb-5">
+          Así transformamos <br/><span class="text-brand-primary">tu espalda en 40 minutos</span>
+        </h2>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {pasos.map((paso) => (
+          <div class="text-center group">
+            <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-brand-light to-brand-primary/20 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <span class="text-2xl font-black text-brand-primary">{paso.num}</span>
+            </div>
+            <h3 class="text-lg font-black text-brand-dark mb-2">{paso.titulo}</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">{paso.desc}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div class="mt-16 bg-gradient-to-r from-brand-primary/5 to-brand-secondary/5 rounded-3xl p-8 text-center">
+        <p class="text-brand-dark font-semibold">
+          <span class="text-brand-primary text-2xl font-black">+40</span> años de investigación respaldan la tecnología Ceragem
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-28 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6">
+     <div class="max-w-7xl mx-auto  px-6">
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-slate-100 pb-10">
+    
+    <div class="text-left">
+      <span class="inline-block text-[10px] font-black text-brand-primary uppercase tracking-[0.3em] mb-3">
+        Resultados Reales
+      </span>
+      <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-brand-dark tracking-tighter leading-none italic">
+        Lo que dicen <br/>
+        <span class="text-brand-primary not-italic tracking-normal">quienes ya lo probaron.</span>
+      </h2>
+    </div>
+
+    <div class="pb-2">
+      <a href="https://wa.me/50688227210" 
+         class="group inline-flex items-center gap-2 text-brand-primary font-black text-xs uppercase tracking-[0.2em] hover:text-zinc-800 transition-colors" target="_blank">
+        Contáctanos
+        <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {testimonios.map((t) => (
+          <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 hover:shadow-2xl transition-all">
+            <div class="flex items-center gap-4 mb-6">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-brand-primary to-brand-secondary flex items-center justify-center text-white font-black">
+                {t.avatar}
+              </div>
+              <div>
+                <p class="font-black text-brand-dark">{t.nombre}</p>
+                <p class="text-xs text-slate-400">{t.edad}</p>
+              </div>
+            </div>
+            <p class="text-slate-600 italic mb-4">"{t.texto}"</p>
+            <div class="pt-4 border-t border-slate-100">
+              <span class="text-xs font-bold text-brand-primary uppercase tracking-wider">Resultado:</span>
+              <p class="text-sm font-semibold text-brand-dark">{t.resultado}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Por qué elegirnos</span>
+          <h2 class="text-4xl font-black text-brand-dark mt-3 mb-6">
+            Más que una camilla,<br/>
+            <span class="text-brand-primary">un centro de bienestar integral</span>
+          </h2>
+          <ul class="space-y-4 mb-8">
+            <li class="flex gap-3">
+              <span class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-sm font-black">✓</span>
+              <span class="text-slate-600"><strong class="text-brand-dark">Certificación FDA</strong> – Respaldo médico internacional</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-sm font-black">✓</span>
+              <span class="text-slate-600"><strong class="text-brand-dark">Terapeutas especializados</strong> – Acompañamiento profesional durante toda la sesión</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-sm font-black">✓</span>
+              <span class="text-slate-600"><strong class="text-brand-dark">Ambiente de lujo</strong> – Aromaterapia, música terapéutica y privacidad total</span>
+            </li>
+            <li class="flex gap-3">
+              <span class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center text-sm font-black">✓</span>
+              <span class="text-slate-600"><strong class="text-brand-dark">Paquetes especiales</strong> – Desde ₡28,000 por 4 sesiones con seguimiento personalizado</span>
+            </li>
+          </ul>
+           <button 
+             id="btn-reserva-ceragem-2"
+             class="inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-3 rounded-full font-black hover:bg-brand-primary/90 transition-all cursor-pointer uppercase text-xs tracking-widest"
+          >
+            Agendar Cita
+          </button>
+        </div>
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 blur-[80px] rounded-full"></div>
+          <div class="relative bg-slate-100 rounded-3xl overflow-hidden shadow-2xl">
+            <img src="/images/S-camilla.jpg" alt="Ambiente Micropulse Spa" class="w-full h-auto object-cover" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="py-28 bg-slate-50">
+    <div class="max-w-4xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Resuelve tus dudas</span>
+        <h2 class="text-6xl font-black text-brand-dark mt-3">
+          Preguntas <span class="text-brand-primary">frecuentes</span>
+        </h2>
+      </div>
+      
+      <div class="space-y-4">
+        {[
+          { 
+            q: "¿Duele la sesión de Ceragem?", 
+            a: "No. La sensación es de presión profunda pero placentera. Tú controlas la intensidad en todo momento. Muchos pacientes incluso se quedan dormidos durante el masaje." 
+          },
+          { 
+            q: "¿Cuántas sesiones necesito?", 
+            a: "Depende de cada caso. Para dolores agudos, 3-4 sesiones suelen mostrar mejoría notable. Para resultados duraderos en postura, recomendamos un plan de 10-12 sesiones." 
+          },
+          { 
+            q: "¿Tiene contraindicaciones?", 
+            a: "No se recomienda en embarazadas, personas con marcapasos o procesos inflamatorios agudos. Nuestro terapeuta evalúa tu caso antes de iniciar." 
+          },
+          { 
+            q: "¿Qué debo llevar?", 
+            a: "Ropa cómoda (preferiblemente licra o ropa deportiva). Nosotros proporcionamos todo lo necesario para tu comodidad." 
+          }
+        ].map((faq) => (
+          <details class="group bg-white rounded-2xl shadow-sm border border-slate-200">
+            <summary class="flex justify-between items-center cursor-pointer list-none p-6 font-black text-zinc-800 text-lg">
+              {faq.q}
+              <span class="transition-transform group-open:rotate-180">
+                <svg class="w-7 h-7 text-brand-primary  bg-brand-primary/20 rounded-[2rem]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+              </span>
+            </summary>
+            <p class="px-6 pb-6 text-slate-600 border-t border-slate-100 pt-4">{faq.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto relative overflow-hidden rounded-[3.5rem] lg:rounded-[4.5rem] shadow-2xl shadow-black/20">
+    
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-primary to-brand-primary/90"></div>
+    
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px]"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px]"></div>
+
+    <div class="py-16  px-6 max-w-4xl mx-auto text-center relative z-10">
+      <h2 class="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter">
+        ¿List@ para <span class="text-brand-light italic">transformar</span> tu vida?
+      </h2>
+      
+      <p class="text-white/80 text-lg mb-10 max-w-xl mx-auto font-medium">
+        Reserva tu primera sesión hoy. Cupos limitados por demanda.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button 
+          id="btn-reserva-ceragem-3" 
+          class="bg-white text-zinc-800 px-8 py-3 rounded-full font-black hover:bg-brand-light hover:text-brand-dark transition-all shadow-2xl cursor-pointer uppercase text-xs tracking-widest"
+        >
+          RESERVAR AHORA
+        </button>
+        
+        <a 
+          href="tel:+50688227210" 
+          class="border-2 border-white/30 text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all text-center uppercase text-xs tracking-widest"
+        >
+          Llamar ahora
+        </a>
+      </div>
+
+      <p class="mt-8 text-white/40 text-[10px] font-bold uppercase tracking-widest">
+        Micropulse Spa · Tibás · Atención personalizada
+      </p>
+    </div>
+  </div>
+</section>
+
+<div id="modal-reserva" class="fixed inset-0 z-[150] hidden items-center justify-center p-4">
+  <div id="overlay-reserva" class="absolute inset-0 bg-brand-dark/80 backdrop-blur-md transition-opacity duration-300"></div>
+  <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <button id="cerrar-reserva" class="absolute top-6 right-6 z-50 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <BookingFlow />
+  </div>
+</div>
+
+<script>
+  const initReservaCeragem = () => {
+    // Todos los botones que pueden abrir el modal de Ceragem
+    const btnIds = ['btn-reserva-ceragem', 'btn-reserva-ceragem-2', 'btn-reserva-ceragem-3'];
+    const modal = document.getElementById('modal-reserva');
+    const overlay = document.getElementById('overlay-reserva');
+    const cerrar = document.getElementById('cerrar-reserva');
+
+    const openModal = () => {
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        
+        // RE-INICIALIZAR LOGICA Y SALTAR AL PASO 2
+        // Usamos (window as any) para evitar errores de TypeScript
+        if ((window as any).initBookingLogic) (window as any).initBookingLogic();
+        if ((window as any).forceBookingStep2) (window as any).forceBookingStep2("Camilla Ceragem V3");
+      }
+    };
+
+    const closeModal = () => {
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+    };
+
+    btnIds.forEach(id => {
+      document.getElementById(id)?.addEventListener('click', openModal);
+    });
+
+    overlay?.addEventListener('click', closeModal);
+    cerrar?.addEventListener('click', closeModal);
+  };
+
+  // Inicializar en carga y en cambios de Astro
+  initReservaCeragem();
+  document.addEventListener('astro:after-swap', initReservaCeragem);
+</script>
+
+</Layout>

@@ -1,5 +1,7 @@
 ---
 // src/components/Hero.astro
+import BookingFlow from '../BookingFlow.astro'; // Importamos el flujo de reserva
+
 const beforeImage = "/images/con-estrias.jpg";
 const afterImage = "/images/sin-estrias.jpg";
 ---
@@ -30,13 +32,12 @@ const afterImage = "/images/sin-estrias.jpg";
       </div>
 
       <div class="flex flex-col sm:flex-row gap-5">
-        <a 
-          href="https://wa.me/50688227210" 
-          target="_blank"
-          class="bg-brand-primary text-white px-10 py-5 rounded-full font-bold text-center hover:bg-brand-dark transition-all duration-300 shadow-xl shadow-brand-primary/25 hover:-translate-y-1"
+        <button 
+          id="btn-abrir-reserva"
+          class="bg-brand-primary text-white px-10 py-5 rounded-full font-bold text-center hover:bg-brand-dark transition-all duration-300 shadow-xl shadow-brand-primary/25 hover:-translate-y-1 cursor-pointer"
         >
           ¡Reserva tu cita ahora!
-        </a>
+        </button>
       </div>
 
       <div class="flex items-center gap-5 pt-6 border-t border-brand-light w-fit">
@@ -94,61 +95,83 @@ const afterImage = "/images/sin-estrias.jpg";
 
       <div class="absolute -top-10 -right-10 w-full h-full border-2 border-brand-primary/20 rounded-[2rem] -z-10 translate-x-4 translate-y-4"></div>
     </div>
+  </div>
 
+  <div id="modal-reserva" class="fixed inset-0 z-[150] hidden items-center justify-center p-4">
+    <div id="overlay-reserva" class="absolute inset-0 bg-brand-dark/80 backdrop-blur-md transition-opacity duration-300"></div>
+    
+    <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+        <button id="cerrar-reserva" class="absolute top-6 right-6 z-50 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <BookingFlow />
+    </div>
   </div>
 </section>
 
 <script>
+    // --- Lógica del Slider (Sin cambios) ---
     const initSlider = () => {
         const slider = document.getElementById('image-comparison-slider');
         const beforeContainer = document.getElementById('before-image-container');
         const handle = document.getElementById('slider-handle');
         const beforeImg = document.getElementById('before-img-el') as HTMLImageElement;
-
         if (!slider || !beforeContainer || !handle || !beforeImg) return;
-
         let isResizing = false;
-
         const updateDimensions = () => {
             const width = slider.offsetWidth;
             beforeImg.style.width = `${width}px`;
         };
-
         const setPosition = (x: number) => {
             const rect = slider.getBoundingClientRect();
             let position = ((x - rect.left) / rect.width) * 100;
             if (position < 0) position = 0;
             if (position > 100) position = 100;
-            
             beforeContainer.style.width = `${position}%`;
             handle.style.left = `${position}%`;
         };
-
-        // Eventos
-        const onMove = (e: any) => {
-            if (!isResizing) return;
-            const x = e.pageX || e.touches?.[0].pageX;
-            setPosition(x);
-        };
-
         slider.addEventListener('mousedown', () => isResizing = true);
         slider.addEventListener('touchstart', () => isResizing = true);
         window.addEventListener('mouseup', () => isResizing = false);
         window.addEventListener('touchend', () => isResizing = false);
-        window.addEventListener('mousemove', onMove);
-        window.addEventListener('touchmove', onMove);
-
-        // Inicializar y observar cambios de tamaño
+        window.addEventListener('mousemove', (e) => { if (isResizing) setPosition(e.pageX); });
+        window.addEventListener('touchmove', (e) => { if (isResizing) setPosition(e.touches[0].pageX); });
         updateDimensions();
         window.addEventListener('resize', updateDimensions);
-        
-        // Re-inicializar cuando la imagen cargue por si acaso
         beforeImg.onload = updateDimensions;
     };
 
-    // Ejecutar en carga y tras navegación de Astro (si usas View Transitions)
+    // --- Lógica del Modal de Reserva ---
+    const initModalReserva = () => {
+        const btnAbrir = document.getElementById('btn-abrir-reserva');
+        const btnCerrar = document.getElementById('cerrar-reserva');
+        const modal = document.getElementById('modal-reserva');
+        const overlay = document.getElementById('overlay-reserva');
+
+        const toggleModal = () => {
+            if (modal?.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal?.classList.add('hidden');
+                modal?.classList.remove('flex');
+                document.body.style.overflow = '';
+            }
+        };
+
+        btnAbrir?.addEventListener('click', toggleModal);
+        btnCerrar?.addEventListener('click', toggleModal);
+        overlay?.addEventListener('click', toggleModal);
+    };
+
+    // Inicializar todo
     initSlider();
-    document.addEventListener('astro:after-swap', initSlider);
+    initModalReserva();
+    document.addEventListener('astro:after-swap', () => {
+        initSlider();
+        initModalReserva();
+    });
 </script>
 
 <style>
@@ -159,12 +182,10 @@ const afterImage = "/images/sin-estrias.jpg";
   .animate-bounce-slow {
     animation: bounce-slow 4s ease-in-out infinite;
   }
-  
   img {
     user-select: none;
     pointer-events: none;
   }
-  
   #image-comparison-slider {
     touch-action: pan-y;
   }

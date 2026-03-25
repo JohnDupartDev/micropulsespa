@@ -1,26 +1,46 @@
-
 ---
 // src/components/Header.astro
+const servicios = [
+  { name: "Camilla Ceragem ", href: "/servicios/camilla-ceragem" },
+  { name: "Masaje con Pindas", href: "/servicios/masaje-pindas" },
+  { name: "Limpieza Facial", href: "/servicios/limpieza-facial" },
+  { name: "Drenaje Linfático", href: "/servicios/drenaje-linfatico" },
+];
 ---
 
 <header id="header-wrapper" class="fixed top-0 left-0 w-full z-[100] px-4 py-2 transition-all duration-300">
   <div class="max-w-6xl mx-auto">
     <nav id="nav-container" class="bg-white/90 backdrop-blur-md rounded-full px-4 sm:px-8 shadow-lg border border-gray-100 flex items-center justify-between transition-all duration-300 min-h-[70px] sm:min-h-0">
       
-      <a href="/" class="flex items-center gap-2  shrink-0">
+      <a href="/" class="flex items-center gap-2 shrink-0">
         <img id="header-logo" src="/logo_spa.svg" alt="MicropulseSpa Logo" class="h-16 md:h-20 lg:h-20 w-auto transition-all duration-300" />
       </a>
 
-      <!-- Desktop Navigation -->
       <ul class="hidden md:flex items-center gap-6 lg:gap-8 text-sm font-medium text-gray-600">
         <li><a href="/" class="hover:text-brand-primary transition whitespace-nowrap">Home</a></li>
         <li><a href="/sobre-nosotros" class="hover:text-brand-primary transition whitespace-nowrap">Sobre Nosotros</a></li>
-        <li><a href="#servicios" class="hover:text-brand-primary transition whitespace-nowrap">Servicios</a></li>
-        <li><a href="#camilla" class="hover:text-brand-primary transition whitespace-nowrap">Camilla Ceragem</a></li>
+        
+        <li class="relative group py-4">
+          <button class="flex items-center gap-1 hover:text-brand-primary transition whitespace-nowrap outline-none">
+            Servicios
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-180 transition-transform duration-300"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          
+          <div class="absolute top-[100%] left-1/2 -translate-x-1/2 w-64 bg-white rounded-3xl shadow-2xl border border-gray-100 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+            <div class="grid grid-cols-1 gap-1">
+              {servicios.map((servicio) => (
+                <a href={servicio.href} class="px-4 py-3 rounded-2xl hover:bg-brand-light/10 hover:text-brand-primary transition-all flex items-center justify-between group/item">
+                  <span>{servicio.name}</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="opacity-0 -translate-x-2 group-hover/item:opacity-100 group-hover/item:translate-x-0 transition-all"><path d="m9 18 6-6-6-6"/></svg>
+                </a>
+              ))}
+            </div>
+          </div>
+        </li>
+
         <li><a href="/contacto" class="hover:text-brand-primary transition whitespace-nowrap">Contacto</a></li>
       </ul>
 
-      <!-- Desktop CTA -->
       <a 
         href="https://wa.me/50688227210" 
         target="_blank"
@@ -31,20 +51,17 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform shrink-0"><path d="m9 18 6-6-6-6"/></svg>
       </a>
 
-      <!-- Mobile Menu Button -->
       <button id="open-menu" class="md:hidden text-brand-dark p-2 -mr-2 active:bg-brand-light/20 rounded-full transition-colors" aria-label="Abrir menú">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
       </button>
     </nav>
   </div>
 
-  <!-- Mobile Sidebar Mejorada -->
   <div id="mobile-sidebar" class="fixed inset-0 z-[200] hidden">
     <div id="sidebar-overlay" class="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
     
     <div id="sidebar-panel" class="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-out will-change-transform">
       
-      <!-- Header del Sidebar -->
       <div class="flex justify-between items-center p-5 border-b border-gray-100">
         <img src="/logo_spa.svg" alt="Logo" class="h-10 w-auto" />
         <button id="close-menu" class="p-2 bg-brand-light/10 text-brand-dark hover:bg-brand-light/30 rounded-full transition-colors" aria-label="Cerrar menú">
@@ -52,35 +69,41 @@
         </button>
       </div>
 
-      <!-- Navegación Principal -->
       <nav class="flex-1 px-6 py-6 overflow-y-auto">
         <ul class="flex flex-col gap-2">
           <li>
-            <a href="/" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all">
+            <a href="/" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all text-sm">
               <span>Inicio</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
             </a>
           </li>
+          
+          <li class="flex flex-col">
+            <button id="mobile-servicios-btn" class="text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all outline-none">
+              <span>Servicios</span>
+              <svg id="mobile-servicios-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary transition-transform duration-300"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div id="mobile-servicios-content" class="hidden overflow-hidden bg-gray-50/50 rounded-2xl mt-1 ml-4 border-l-2 border-brand-primary/20">
+              <ul class="py-2 flex flex-col">
+                {servicios.map((servicio) => (
+                  <li>
+                    <a href={servicio.href} class="mobile-link block py-3 px-6 text-base font-medium text-gray-600 hover:text-brand-primary transition-colors">
+                      {servicio.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </li>
+
           <li>
-            <a href="/sobre-nosotros" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all">
+            <a href="/sobre-nosotros" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all text-sm">
               <span>Sobre Nosotros</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
             </a>
           </li>
           <li>
-            <a href="#servicios" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all">
-              <span>Servicios</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          </li>
-          <li>
-            <a href="#camilla" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all">
-              <span>Camilla Ceragem</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
-          </li>
-          <li>
-            <a href="/contacto" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all">
+            <a href="/contacto" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all text-sm">
               <span>Contacto</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
             </a>
@@ -88,29 +111,23 @@
         </ul>
       </nav>
 
-      <!-- Footer del Sidebar -->
       <div class="p-6 border-t border-gray-100 bg-gray-50/50 space-y-5">
-        <!-- Redes Sociales -->
         <div class="flex gap-3 justify-center">
-          <a href="#" class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-95" aria-label="Facebook">
+          <a href="https://www.facebook.com/profile.php?id=61552307075682" class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-95" aria-label="Facebook">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
           </a>
-          <a href="#" class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-95" aria-label="Instagram">
+          <a href="https://instagram.com/micropulsespa" class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-95" aria-label="Instagram">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           </a>
-          <a href="#" class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-95" aria-label="TikTok">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-          </a>
+       
         </div>
         
-        <!-- CTA Principal -->
         <a href="https://wa.me/50688227210" target="_blank" class="block w-full bg-brand-primary text-white text-center py-4 rounded-xl font-bold text-base shadow-lg shadow-brand-primary/30 hover:shadow-xl active:scale-[0.98] transition-all">
           Agendar Cita por WhatsApp
         </a>
         
-        <!-- Contacto rápido -->
         <div class="text-center text-xs text-gray-500">
-          <p>Respuesta en menos de 5 minutos</p>
+          <p>Respuesta en menos de 10 minutos</p>
         </div>
       </div>
     </div>
@@ -119,7 +136,7 @@
 
 <script>
   // @ts-nocheck
-  import { animate, spring } from "motion";
+  import { animate } from "motion";
 
   const headerWrapper = document.getElementById('header-wrapper');
   const navContainer = document.getElementById('nav-container');
@@ -130,40 +147,44 @@
   const overlay = document.getElementById('sidebar-overlay');
   const panel = document.getElementById('sidebar-panel');
   const mobileLinks = document.querySelectorAll('.mobile-link');
+  
+  const mobileServiciosBtn = document.getElementById('mobile-servicios-btn');
+  const mobileServiciosContent = document.getElementById('mobile-servicios-content');
+  const mobileServiciosIcon = document.getElementById('mobile-servicios-icon');
 
-  // Detectar si es dispositivo móvil para optimizar scroll
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-  // 1. Efecto Scroll suave - Optimizado para móvil
+  // 1. EFECTO SCROLL CORREGIDO (Logo más equilibrado)
   window.addEventListener('scroll', () => {
     if (window.scrollY > 30) {
-      headerWrapper.classList.replace('py-6', 'py-2');
+      // Cuando baja: py-2 y logo a un tamaño moderado
+      headerWrapper.style.paddingTop = '8px';
+      headerWrapper.style.paddingBottom = '8px';
       navContainer.classList.add('shadow-xl', 'bg-white/95');
       
-      // Cambios más sutiles en móvil
       if (isMobile) {
-        headerLogo.classList.replace('h-14', 'h-10');
+        headerLogo.style.height = '50px'; // Antes estaba en 40px (muy pequeño)
       } else {
-        headerLogo.classList.replace('h-20', 'h-14');
+        headerLogo.style.height = '65px'; // Tamaño ideal para desktop al bajar
       }
     } else {
-      headerWrapper.classList.replace('py-2', 'py-6');
+      // Cuando está arriba: py original y logo grande
+      headerWrapper.style.paddingTop = '24px';
+      headerWrapper.style.paddingBottom = '24px';
       navContainer.classList.remove('shadow-xl', 'bg-white/95');
       
       if (isMobile) {
-        headerLogo.classList.replace('h-10', 'h-14');
+        headerLogo.style.height = '60px'; // Logo móvil arriba
       } else {
-        headerLogo.classList.replace('h-14', 'h-20');
+        headerLogo.style.height = '85px'; // Logo desktop arriba
       }
     }
   });
 
-  // 2. Lógica de Apertura/Cierre Mejorada
+  // 2. Lógica Sidebar
   const openMenu = () => {
     sidebar.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    
-    // Pequeño retraso para asegurar que el DOM está listo
     setTimeout(() => {
       overlay.classList.remove('opacity-0');
       overlay.classList.add('opacity-100');
@@ -172,70 +193,39 @@
   };
 
   const closeMenu = async () => {
-    overlay.classList.remove('opacity-100');
-    overlay.classList.add('opacity-0');
+    overlay.classList.replace('opacity-100', 'opacity-0');
     panel.classList.add('translate-x-full');
-    
-    // Esperar a que termine la animación CSS
     setTimeout(() => {
       sidebar.classList.add('hidden');
       document.body.style.overflow = '';
+      if(mobileServiciosContent) mobileServiciosContent.classList.add('hidden');
     }, 300);
   };
 
-  // Event Listeners
+  // 3. Lógica Submenú Móvil
+  mobileServiciosBtn?.addEventListener('click', () => {
+    const isHidden = mobileServiciosContent.classList.contains('hidden');
+    if (isHidden) {
+      mobileServiciosContent.classList.remove('hidden');
+      mobileServiciosIcon.style.transform = 'rotate(180deg)';
+      animate(mobileServiciosContent, { opacity: [0, 1], y: [-10, 0] }, { duration: 0.3 });
+    } else {
+      mobileServiciosContent.classList.add('hidden');
+      mobileServiciosIcon.style.transform = 'rotate(0deg)';
+    }
+  });
+
   openBtn?.addEventListener('click', openMenu);
   closeBtn?.addEventListener('click', closeMenu);
   overlay?.addEventListener('click', closeMenu);
-  
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', closeMenu);
-  });
-
-  // Prevenir scroll del body cuando el sidebar está abierto
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !sidebar.classList.contains('hidden')) {
-      closeMenu();
-    }
-  });
-
-  // Cleanup
-  window.addEventListener('unload', () => {
-    document.body.style.overflow = '';
-  });
+  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
 </script>
 
 <style is:global>
-  /* Optimizaciones móviles */
-  #sidebar-panel {
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior: contain;
-  }
+  #sidebar-panel { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; transform: translate3d(0, 0, 0); backface-visibility: hidden; }
+  .mobile-link { -webkit-tap-highlight-color: transparent; min-height: 44px; }
+  .transition-transform { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
   
-  .mobile-link {
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  /* Mejorar touch targets en móvil */
-  @media (max-width: 768px) {
-    .mobile-link {
-      min-height: 44px;
-    }
-    
-    #open-menu {
-      min-width: 44px;
-      min-height: 44px;
-    }
-  }
-  
-  /* Suavizar animaciones */
-  .transition-transform {
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  /* Prevenir parpadeos en iOS */
-  #sidebar-panel {
-    transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;
-  }
+  /* Evitar que el dropdown desktop se corte */
+  .group:hover .group-hover\:visible { visibility: visible; }
 </style>

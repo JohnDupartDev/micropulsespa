@@ -9,20 +9,20 @@ const specialistImage = "/images/nelly-micropuntura.jpg";
 
 // Horarios de atención
 const businessHours = [
-  { day: "Lunes a Sábados", hours: "10:30 AM - 7:00 PM" },
-  { day: "Domingos", hours: "10:30 AM - 4:00 PM"  }
+  { day: "Lunes a Sábados", hours: "9:00 AM - 7:00 PM" },
+  { day: "Domingos", hours: "10:00 AM - 4:00 PM"  }
 ];
 
 // Preguntas frecuentes rápidas
 const quickFaqs = [
-  { question: "¿Cuánto dura una sesión?", answer: "60-90 minutos aprox." },
-  { question: "¿Duele?", answer: "Sensación tolerable, aplicamos anestesia tópica" },
+  { question: "¿Cuánto dura una sesión?", answer: "60 minutos aprox." },
+  { question: "¿Duele?", answer: "Sensación tolerable." },
   { question: "¿Resultados visibles?", answer: "Desde la primera sesión" }
 ];
 
 // Beneficios destacados
 const benefits = [
-  { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", text: "Respuesta en < 5 min" },
+  { icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z", text: "Respuesta en  10 min maximo" },
   { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", text: "Resultados garantizados" },
   { icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z", text: "Ubicación accesible" }
 ];
@@ -126,18 +126,18 @@ const benefits = [
                   <div class="grid md:grid-cols-2 gap-8">
                     <div class="relative group">
                       <input type="text" id="name" name="name" required class="w-full bg-transparent border-b-2 border-slate-200 py-4 text-lg font-medium text-brand-dark outline-none focus:border-brand-primary transition-all peer placeholder:text-transparent" placeholder="Nombre" />
-                      <label for="name" class="absolute left-0 top-4 text-lg text-slate-400 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:font-black peer-focus:uppercase peer-focus:text-brand-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">Nombre Completo</label>
+                      <label for="name" class="absolute left-0 top-4 text-lg text-slate-400 pointer-events-none transition-all peer-focus:-top-6 peer-focus:text-xs peer-focus:font-black peer-focus:uppercase peer-focus:text-brand-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">Nombre Completo</label>
                     </div>
 
                     <div class="relative group">
                       <input type="tel" id="phone" name="phone" required class="w-full bg-transparent border-b-2 border-slate-200 py-4 text-lg font-medium text-brand-dark outline-none focus:border-brand-primary transition-all peer placeholder:text-transparent" placeholder="Tel" />
-                      <label for="phone" class="absolute left-0 top-4 text-lg text-slate-400 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:font-black peer-focus:uppercase peer-focus:text-brand-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">Número de WhatsApp</label>
+                      <label for="phone" class="absolute left-0 top-4 text-lg text-slate-400 pointer-events-none transition-all peer-focus:-top-6 peer-focus:text-xs peer-focus:font-black peer-focus:uppercase peer-focus:text-brand-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">Número de WhatsApp</label>
                     </div>
                   </div>
 
                   <div class="relative group">
-                    <textarea id="message" name="message" rows="3" required class="w-full bg-transparent border-b-2 border-slate-200 py-4 text-lg font-medium text-brand-dark outline-none focus:border-brand-primary transition-all peer placeholder:text-transparent resize-none" placeholder="Msg"></textarea>
-                    <label for="message" class="absolute left-0 top-4 text-lg text-slate-400 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:font-black peer-focus:uppercase peer-focus:text-brand-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">¿Qué área te gustaría tratar?</label>
+                    <textarea id="message" name="message" rows="3" required class="w-full bg-transparent  border-slate-200 py-4 text-lg font-medium text-brand-dark outline-none focus:border-brand-primary transition-all peer placeholder:text-transparent resize-none" placeholder="Msg"></textarea>
+                    <label for="message" class="absolute left-0 top-4 text-lg text-slate-400 pointer-events-none transition-all peer-focus:-top-6 peer-focus:text-xs peer-focus:font-black peer-focus:uppercase peer-focus:text-brand-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-xs">¿Qué área te gustaría tratar?</label>
                   </div>
 
                   <button type="submit" class="w-full bg-brand-primary text-white py-6 rounded-3xl font-black text-xl shadow-xl shadow-brand-primary/30 hover:bg-brand-dark hover:-translate-y-1 active:scale-95 transition-all group overflow-hidden relative">
@@ -173,7 +173,7 @@ const benefits = [
                 <h3 class="text-brand-dark font-black text-xl tracking-tight ">Nuestra Sede</h3>
               </div>
               <p class="text-slate-500 text-sm font-medium leading-relaxed mb-4 ">
-                "5 esquinas del puente elevado, 300m Este y 75m Norte. Séptima casa, portón negro."
+                "5 ESQUINAS DE TIBAS DE SUPER BATERIAS 100 OSTE Y 75 ESTE SEPTIMA CASA ENTRANDO A MANO IZQUIERDA PORTON NEGRO."
               </p>
               <a 
                 href="https://www.google.com/maps/place/Micropulsespa/@9.9475277,-84.0766619,866m/data=!3m1!1e3!4m14!1m7!3m6!1s0x81f346903a946e47:0x8e3f4334401405e6!2sMicropulsespa!8m2!3d9.9475277!4d-84.0766619!16s%2Fg%2F11yj9txy_n!3m5!1s0x81f346903a946e47:0x8e3f4334401405e6!8m2!3d9.9475277!4d-84.0766619!16s%2Fg%2F11yj9txy_n?entry=ttu&g_ep=EgoyMDI2MDMxNS4wIKXMDSoASAFQAw%3D%3D" 
@@ -206,17 +206,7 @@ const benefits = [
     <section class="py-24 px-6 bg-slate-50 relative overflow-hidden">
    
 
-        <div class="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-xl max-w-6xl mx-auto relative overflow-hidden group">
-          <div class="absolute inset-0 bg-brand-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <h3 class="text-2xl font-black text-brand-dark mb-4 relative z-10 tracking-tight">¿Prefieres que te llamemos?</h3>
-          <p class="text-slate-500 mb-8 relative z-10 font-medium">Déjanos tu número y te contactamos en menos de 30 minutos.</p>
-          <form class="flex flex-col sm:flex-row gap-4 relative z-10">
-            <input type="tel" placeholder="Tu número de WhatsApp" class="flex-1 px-8 py-5 rounded-full border border-slate-200 focus:outline-none focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/10 transition-all font-medium" />
-            <button type="submit" class="bg-brand-dark text-white px-10 py-5 rounded-full font-black hover:bg-brand-primary transition-all shadow-xl active:scale-95">
-              Solicitar llamada
-            </button>
-          </form>
-        </div>
+       
       </div>
     </section>
   </main>

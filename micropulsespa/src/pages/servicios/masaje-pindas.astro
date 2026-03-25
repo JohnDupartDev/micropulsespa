@@ -1,0 +1,328 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const beneficiosPindas = [
+  {
+    title: "Descontracturante",
+    desc: "Alivio profundo de tensiones acumuladas mediante el calor y la presión.",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z"
+  },
+  {
+    title: "Circulación Saludable",
+    desc: "El calor herbal activa el flujo sanguíneo, mejorando la oxigenación celular.",
+    icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+  },
+  {
+    title: "Absorción Herbal",
+    desc: "La piel absorbe las propiedades curativas de las hierbas gracias a la termoterapia.",
+    icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+  }
+];
+
+const galeria = [
+  { src: "/images/pindas-costa-rica.jpg", alt: "Preparación de pindas herbales", size: "col-span-2 row-span-2" },
+  { src: "/images/pindas-costa-rica-micropulsespa.jpg", alt: "Masaje en espalda", size: "col-span-1 row-span-1" },
+  { src: "/images/pindas-costarica-micropulse.jpg", alt: "Aceites esenciales y pindas", size: "col-span-1 row-span-1" },
+  { src: "/images/pindas-micropulsespa.com.jpg", alt: "Detalle de saquito herbal", size: "col-span-2 row-span-1" }
+];
+
+const pasosRitual = [
+  { num: "01", titulo: "Preparación Herbal", desc: "Calentamos los saquitos con hierbas seleccionadas a 60°C para máxima liberación de aceites esenciales." },
+  { num: "02", titulo: "Masaje Inicial", desc: "Técnica manual suave que prepara músculos y activa circulación." },
+  { num: "03", titulo: "Aplicación de Pindas", desc: "Saquitos calientes se deslizan con presión terapéutica, liberando propiedades antiinflamatorias." },
+  { num: "04", titulo: "Cierre Energético", desc: "Final con aromaterapia y estiramiento suave para sellar la relajación profunda." }
+];
+
+const testimoniosPindas = [
+  { 
+    nombre: "Laura M.", 
+    edad: "41 años", 
+    texto: "Después de una semana de estrés brutal, salí flotando. El aroma y el calor de las pindas me devolvieron la paz que no sentía hace meses.", 
+    resultado: "Relajación total", 
+    avatar: "LM" 
+  },
+  { 
+    nombre: "Diego R.", 
+    edad: "34 años", 
+    texto: "Mi espalda estaba hecha un nudo. En 60 minutos sentí cómo se disolvía todo. El ritual es mágico.", 
+    resultado: "Descontracturado", 
+    avatar: "DR" 
+  },
+  { 
+    nombre: "Sofía C.", 
+    edad: "48 años", 
+    texto: "El mejor regalo que me he dado en años. Ahora vengo cada mes. Es mi momento sagrado.", 
+    resultado: "Bienestar profundo", 
+    avatar: "SC" 
+  }
+];
+---
+
+<Layout
+  title="Masaje con Pindas Herbales | Relajación Profunda en Tibás"
+  description="Terapia profundamente relajante que combina técnicas manuales con saquitos herbales calientes en Micropulse Spa. Equilibra cuerpo y mente."
+>
+
+  <main class="overflow-x-hidden">
+    <section class="relative pt-32 pb-32  overflow-hidden bg-gradient-to-br from-white via-white to-brand-light/20">
+      <div class="absolute top-0 right-0 w-[650px] h-[650px] bg-brand-primary/5 rounded-full blur-[130px] animate-pulse"></div>
+      <div class="absolute bottom-0 left-0 w-[450px] h-[450px] bg-brand-secondary/5 rounded-full blur-[110px] animate-pulse"></div>
+      
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center relative z-10">
+        <div class="space-y-8">
+          <div class="inline-flex items-center gap-2 bg-brand-primary/10 rounded-full px-4 py-1.5 border border-brand-primary/20">
+            <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.2em]">Terapia Aromática & Térmica</span>
+          </div>
+          
+          <h1 class="text-5xl md:text-7xl font-black text-brand-dark leading-[0.9] tracking-tighter ">
+            Masaje con <br/> <span class="bg-gradient-to-r from-brand-primary to-black bg-clip-text text-transparent">Pindas.</span>
+          </h1>
+          
+          <p class="text-lg text-slate-500 leading-relaxed max-w-lg font-medium">
+            Un ritual profundamente relajante que fusiona maniobras manuales con el poder sanador de <strong class="text-brand-primary">saquitos herbales calientes</strong>. 🌿✨
+          </p>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="https://wa.me/50688227210?text=Hola, quiero reservar un masaje con pindas" 
+               class="bg-brand-primary text-white px-10 py-5 rounded-3xl font-black shadow-xl shadow-brand-primary/20 hover:-translate-y-1 transition-all text-center text-lg">
+              RESERVAR MI MOMENTO
+            </a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 blur-[100px] rounded-full"></div>
+          <img src="/images/portada-pindas-micropulspa-costarica.jpg" alt="Masaje con pindas Micropulse" 
+               class="relative rounded-[3rem] shadow-2xl border-8 border-white object-cover aspect-[4/5] w-full" />
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Beneficios del ritual</span>
+          <h2 class="text-4xl font-black text-brand-dark mt-3">Tres razones por las que tu cuerpo te lo agradecerá</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {beneficiosPindas.map((b) => (
+            <div class="group bg-white p-10 rounded-3xl border border-slate-100 hover:border-brand-primary/30 transition-all relative overflow-hidden shadow-sm">
+              <div class="w-14 h-14 rounded-3xl bg-brand-light flex items-center justify-center text-brand-primary mb-8 group-hover:scale-110 transition-transform">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-width="2" d={b.icon} />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-black text-brand-dark mb-4 tracking-tight">{b.title}</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">{b.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div class="text-left">
+            <h2 class="text-4xl font-black text-brand-dark italic tracking-tight leading-none">Galería del <span class="text-brand-primary">Ritual</span></h2>
+            <p class="text-slate-500 mt-3 font-medium italic text-sm">Cada detalle está diseñado para inducir un estado de paz absoluta.</p>
+          </div>
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.4em] border-b border-brand-primary/20 pb-1">Micropulse Spa Experience</span>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[220px] md:auto-rows-[300px]">
+          {galeria.map((item) => (
+            <div class={`${item.size} rounded-3xl overflow-hidden group border-4 border-white shadow-xl relative`}>
+              <img src={item.src} alt={item.alt} 
+                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+              <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-end p-6">
+                <p class="text-white text-xs font-black uppercase tracking-widest">{item.alt}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-slate-50" id="proceso">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">El ritual completo</span>
+          <h2 class="text-4xl font-black text-brand-dark mt-3">Así se vive el masaje con Pindas en 60 minutos</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+          {pasosRitual.map((paso) => (
+            <div class="text-center group bg-white p-8 rounded-[2.5rem] border border-slate-100 hover:shadow-lg transition-all">
+              <div class="w-20 h-20 mx-auto rounded-2xl bg-brand-light flex items-center justify-center mb-6 text-3xl font-black text-brand-primary">
+                {paso.num}
+              </div>
+              <h3 class="font-black text-xl text-brand-dark mb-3 italic">{paso.titulo}</h3>
+              <p class="text-slate-600 text-sm leading-relaxed">{paso.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Experiencias reales</span>
+          <h2 class="text-4xl font-black text-brand-dark mt-2 italic tracking-tight">Lo que sienten quienes ya lo probaron</h2>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimoniosPindas.map((t) => (
+            <div class="bg-slate-50 p-10 rounded-[3rem] border border-slate-100 hover:shadow-2xl transition-all group">
+              <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-2xl bg-brand-primary text-white font-black flex items-center justify-center text-xl italic shadow-lg shadow-brand-primary/20">
+                  {t.avatar}
+                </div>
+                <div>
+                  <p class="font-black text-brand-dark italic">{t.nombre}</p>
+                  <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{t.edad}</p>
+                </div>
+              </div>
+              <p class="italic text-slate-600 mb-8 leading-relaxed">“{t.texto}”</p>
+              <div class="pt-6 border-t border-slate-200">
+                <span class="text-[10px] font-black text-brand-primary uppercase tracking-widest block mb-1">Resultado:</span>
+                <p class="text-sm font-black text-brand-dark italic">{t.resultado}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="py-24 bg-slate-50" >
+      <div class="max-w-4xl mx-auto px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Dudas frecuentes</span>
+          <h2 class="text-6xl font-black text-brand-dark mt-2">Preguntas sobre el ritual</h2>
+        </div>
+        
+        <div class="space-y-4">
+          {[
+            { q: "¿Es doloroso?", a: "No. Es un masaje placentero y cálido. Tú controlas la presión en todo momento." },
+            { q: "¿Cuánto dura la sesión?", a: "60 minutos completos. Incluye preparación, masaje y cierre energético." },
+            { q: "¿Puedo hacerlo si estoy embarazada?", a: "Sí, pero usamos hierbas suaves y adaptamos la presión. Consulta con tu médico antes de agendar." },
+            { q: "¿Qué debo traer?", a: "Solo ropa cómoda. Nosotros proporcionamos toalla, aceites y todo lo necesario para tu confort." }
+          ].map((faq) => (
+            <details class="group bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+              <summary class="flex justify-between items-center cursor-pointer list-none p-8 font-black text-brand-dark text-lg hover:text-brand-primary transition-colors">
+                {faq.q}
+                <span class=" h-7 w-7 text-center transition-transform group-open:rotate-180 text-brand-primary text-xl font-black  bg-brand-primary/20 rounded-full">
+                  ↓
+                </span>
+              </summary>
+              <p class="px-8 pb-8 text-slate-500 font-medium leading-relaxed border-t border-slate-50 pt-6">{faq.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div class="space-y-10">
+          <div>
+            <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Ubicación y Citas</span>
+            <h2 class="text-4xl font-black text-brand-dark mt-4 mb-8 leading-tight italic tracking-tighter">Ven y vive el ritual en <br/> <span class="text-brand-primary">Tibás, San José.</span></h2>
+          </div>
+          
+          <div class="space-y-8 text-slate-600">
+            <div class="flex gap-5">
+              <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/></svg>
+              </div>
+              <div>
+                <p class="text-sm font-black uppercase text-brand-dark tracking-widest mb-1">Nuestra Dirección</p>
+                <p class="text-sm font-medium lowercase ">5 ESQUINAS DE TIBAS DE SUPER BATERIAS 100 ESTE Y 75 NORTE SEPTIMA CASA ENTRANDO A MANO IZQUIERDA PORTON NEGRO.</p>
+              </div>
+            </div>
+            
+            <div class="flex gap-5">
+                <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 005.47 5.47l.772-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+                </div>
+              <div>
+                <p class="text-sm font-black uppercase text-brand-dark tracking-widest mb-1">WhatsApp de Citas</p>
+                <p class="font-black text-brand-primary text-lg">+506 8822 7210</p>
+                <a href="https://wa.me/50688227210" target="_blank" class="text-xs font-bold border-b border-brand-primary/30 hover:border-brand-primary pb-1 transition-all">Escríbenos ahora mismo →</a>
+              </div>
+            </div>
+
+            <div class="flex gap-5">
+                <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-brand-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg>
+                </div>
+              <div>
+                <p class="text-sm font-black uppercase text-brand-dark tracking-widest mb-1">Horario de Atención</p>
+                <p class="text-sm font-medium leading-relaxed italic">Lunes a Sábado 9:00 am – 7:00 pm <br/> Domingo 10:00 am – 4:00 pm</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100 aspect-video lg:aspect-square relative group">
+          <div class="absolute inset-0 bg-brand-primary/5 group-hover:bg-transparent transition-colors z-10 pointer-events-none"></div>
+          <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.2106383092682!2d-84.07666189999999!3d9.9475277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x81f346903a946e47%3A0x8e3f4334401405e6!2sMicropulsespa!5e1!3m2!1ses-419!2sco!4v1773795911757!5m2!1ses-419!2sco" 
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="relative z-0">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-20 px-6">
+      <div class="max-w-7xl mx-auto relative overflow-hidden rounded-[4rem] shadow-2xl shadow-brand-dark/20 group">
+        <div class="absolute inset-0 bg-gradient-to-r from-brand-primary to-brand-primary/90"></div>
+        
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-[120px] transition-transform duration-1000 group-hover:scale-110"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-white/5 rounded-full blur-[100px] transition-transform duration-1000 group-hover:scale-110"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10 py-24 px-6 md:py-12">
+          <h2 class="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight mb-8 italic">
+            ¿List@ para <span class="text-brand-light not-italic">transformar</span> <br/> tu cuerpo y mente?
+          </h2>
+          <p class="text-white/80 text-lg md:text-xl max-w-md mx-auto mb-5 font-medium">
+            Reserva tu ritual con pindas hoy mismo en Tibás. 
+          
+          <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a href="https://wa.me/50688227210?text=Hola, quiero reservar un masaje con pindas" 
+               class="bg-white text-brand-dark px-12 py-5 rounded-full font-black text-base hover:bg-brand-light transition-all shadow-xl w-full sm:w-auto">
+              RESERVAR MI RITUAL
+            </a>
+            <a href="tel:+50688227210" 
+               class="flex items-center gap-3 text-white font-black text-xs uppercase tracking-[0.3em] hover:text-black transition-colors">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 005.47 5.47l.772-1.548a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+              Llamar ahora
+            </a>
+          </div>
+          
+          <p class="mt-16 text-white/60 text-[9px] font-black uppercase tracking-[0.5em] italic">
+            Micropulse Spa · Auténtico Bienestar en San José
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  /* Prevención de desbordamiento horizontal */
+  main { width: 100%; max-width: 100vw; }
+  
+
+  /* Animación suave para los FAQs */
+  details summary::-webkit-details-marker { display: none; }
+  details[open] summary ~ * {
+    animation: slideDown 0.4s ease-out forwards;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

@@ -12,10 +12,34 @@ const services = [
   { 
     title: "Camilla Ceragem", 
     desc: "Masaje térmico automatizado que combina quiropraxia y calor infrarrojo.", 
-    price: "Desde ₡15,000", 
+    price: "Desde ₡7,000", 
     image: "/images/S-camilla.jpg",
     category: "Bienestar y Salud",
     details: ["Alineación de columna", "Reducción de estrés", "Mejora la circulación"]
+  },
+  { 
+    title: "Limpieza Facial Profunda", 
+    desc: "Elimina impurezas y puntos negros para devolverle la luminosidad y salud a tu rostro.", 
+    price: "Consultar", 
+    image: "/images/facial-micropulse.jpg",
+    category: "Estética Facial",
+    details: ["Extracción de comedones", "Alta frecuencia bactericida", "Hidratación profunda"]
+  },
+  { 
+    title: "Masaje con Pindas", 
+    desc: "Ritual relajante con saquitos herbales calientes que equilibran cuerpo y mente.", 
+    price: "Consultar", 
+    image: "/images/pindas-costa-rica.jpg",
+    category: "Bienestar y Salud",
+    details: ["Descontracturante térmico", "Aromaterapia herbal", "Relajación absoluta"]
+  },
+  { 
+    title: "Drenaje Linfático", 
+    desc: "Técnica rítmica para eliminar toxinas, reducir retención de líquidos y moldear la figura.", 
+    price: "Consultar", 
+    image: "/images/drenaje-linfatico-antes.jpg",
+    category: "Tratamiento Corporal",
+    details: ["Elimina líquidos retenidos", "Moldea la silueta", "Efecto detox profundo"]
   },
   { 
     title: "Microneedling", 
@@ -28,34 +52,43 @@ const services = [
 ];
 ---
 
-<section id="servicios" class="py-20 bg-white overflow-hidden">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+<section id="servicios" class="py-24 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
       <div>
-        <h2 class="text-brand-primary font-bold tracking-[0.3em] uppercase text-xs mb-3">Especialidades</h2>
-        <p class="text-4xl md:text-6xl font-black text-brand-dark tracking-tighter">Nuestros Servicios</p>
+        <h2 class="text-brand-primary font-black tracking-[0.4em] uppercase text-[10px] mb-4">Especialidades Premium</h2>
+        <p class="text-5xl md:text-7xl font-black text-brand-dark tracking-tighter italic leading-none">Nuestros <span class="text-brand-primary not-italic">Servicios</span></p>
       </div>
-      <a href="#" class="text-brand-primary font-bold flex items-center gap-2 group italic text-sm md:text-base">
-        Ver todos <span class="group-hover:translate-x-2 transition-transform">→</span>
-      </a>
+      <p class="text-slate-400 font-bold text-[10px] uppercase tracking-widest italic">Desliza para explorar →</p>
     </div>
 
-    <div class="flex gap-6 overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide md:grid md:grid-cols-3 md:overflow-visible">
+    <div class="flex gap-4 md:gap-6 overflow-x-auto pb-20 snap-x snap-mandatory scrollbar-hide items-stretch">
       {services.map((service) => (
         <div 
-          class="service-card min-w-[320px] md:min-w-0 bg-white rounded-[2.5rem] border border-brand-light p-5 snap-center cursor-pointer hover:border-brand-primary/30 transition-all hover:shadow-xl group"
+          class="service-card flex-shrink-0 snap-center cursor-pointer group flex"
           data-service={JSON.stringify(service)}
         >
-          <div class="aspect-[4/3] rounded-[2rem] overflow-hidden mb-6">
-            <img src={service.image} alt={service.title} class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
-          </div>
-          <span class="text-[10px] font-black uppercase tracking-widest text-brand-primary/60">{service.category}</span>
-          <h3 class="text-2xl font-bold text-brand-dark mt-1 mb-3">{service.title}</h3>
-          <p class="text-gray-500 text-sm line-clamp-2 mb-6">{service.desc}</p>
-          <div class="flex justify-between items-center pt-5 border-t border-brand-light">
-            <span class="font-bold text-brand-dark">{service.price}</span>
-            <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <div class="w-full bg-white rounded-[3rem] border border-slate-100 p-6 transition-all duration-500 group-hover:border-brand-primary/30 group-hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex flex-col">
+            
+            <div class="aspect-[4/3] rounded-[2.2rem] overflow-hidden mb-8 relative shrink-0">
+                <img src={service.image} alt={service.title} class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy" />
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </div>
+            
+            <div class="space-y-2 mb-8 flex-1">
+                <span class="text-[9px] font-black uppercase tracking-[0.2em] text-brand-primary bg-brand-primary/5 px-3 py-1 rounded-full">{service.category}</span>
+                <h3 class="text-2xl font-black text-brand-dark tracking-tight italic group-hover:text-brand-primary transition-colors leading-tight">{service.title}</h3>
+                <p class="text-slate-500 text-sm line-clamp-3 leading-relaxed font-medium">{service.desc}</p>
+            </div>
+
+            <div class="flex justify-between items-center pt-6 border-t border-slate-50 shrink-0">
+              <div class="flex flex-col">
+                  <span class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Desde</span>
+                  <span class="font-black text-brand-dark text-lg">{service.price}</span>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-500 group-hover:rotate-[360deg]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </div>
             </div>
           </div>
         </div>
@@ -64,93 +97,82 @@ const services = [
   </div>
 
   <div id="service-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
-    <div id="modal-backdrop" class="absolute inset-0 bg-brand-dark/80 backdrop-blur-md transition-opacity duration-300 opacity-0"></div>
-    
-    <div id="modal-content" class="relative bg-white w-full max-w-lg rounded-[3rem] shadow-2xl overflow-hidden transition-all duration-300 translate-y-10 opacity-0 scale-95">
-      <button id="close-modal" class="absolute top-6 right-6 p-2 bg-slate-100 hover:bg-brand-primary hover:text-white rounded-full transition-colors z-20">
+    <div id="modal-backdrop" class="absolute inset-0 bg-brand-dark/80 backdrop-blur-xl opacity-0 transition-opacity duration-300"></div>
+    <div id="modal-content" class="relative bg-white w-full max-w-xl rounded-[4rem] shadow-2xl overflow-hidden transition-all duration-300 translate-y-12 opacity-0 scale-95 border-8 border-white">
+      <button id="close-modal" class="absolute top-8 right-8 p-3 bg-slate-100 hover:bg-brand-primary hover:text-white rounded-full transition-all z-20 active:scale-90">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
-      <div id="modal-body" class="p-8 md:p-12 relative z-10"></div>
+      <div id="modal-body" class="p-10 md:p-14 relative z-10"></div>
     </div>
   </div>
 </section>
 
 <script>
-  // Seleccionamos los elementos con su tipo de HTML correspondiente
+  // @ts-nocheck
   const cards = document.querySelectorAll('.service-card');
-  const modal = document.getElementById('service-modal') as HTMLElement | null;
-  const modalBackdrop = document.getElementById('modal-backdrop') as HTMLElement | null;
-  const modalContent = document.getElementById('modal-content') as HTMLElement | null;
-  const modalBody = document.getElementById('modal-body') as HTMLElement | null;
-  const closeBtn = document.getElementById('close-modal') as HTMLElement | null;
+  const modal = document.getElementById('service-modal');
+  const modalBackdrop = document.getElementById('modal-backdrop');
+  const modalContent = document.getElementById('modal-content');
+  const modalBody = document.getElementById('modal-body');
+  const closeBtn = document.getElementById('close-modal');
 
-  // Tipamos el parámetro 'card' como Element
   function openModal(card: Element) {
     const rawData = card.getAttribute('data-service');
-    
-    // Verificamos que todos los elementos existan antes de usarlos
     if (!rawData || !modalBody || !modal || !modalBackdrop || !modalContent) return;
-    
     const data = JSON.parse(rawData);
     
-    // Tipamos 'detail' como string para el map
     const detailsHtml = data.details.map((detail: string) => `
-      <li class="flex items-center gap-3 font-bold text-brand-dark text-sm">
-        <div class="w-6 h-6 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center shrink-0">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6 9 17l-5-5"/></svg>
+      <li class="flex items-center gap-4 font-bold text-brand-dark text-sm">
+        <div class="w-6 h-6 rounded-xl bg-brand-primary/10 text-brand-primary flex items-center justify-center shrink-0">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6 9 17l-5-5"/></svg>
         </div>
         ${detail}
       </li>
     `).join('');
 
     modalBody.innerHTML = `
-      <div class="mb-6">
-        <span class="text-xs font-black text-brand-primary uppercase tracking-[0.2em]">${data.category}</span>
-        <h3 class="text-3xl md:text-4xl font-black text-brand-dark leading-tight mt-2">${data.title}</h3>
+      <div class="mb-8">
+        <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">${data.category}</span>
+        <h3 class="text-4xl md:text-5xl font-black text-brand-dark leading-[0.9] mt-3 italic tracking-tighter">${data.title}</h3>
       </div>
-      <p class="text-slate-600 mb-8 leading-relaxed text-lg">${data.desc}</p>
+      <p class="text-slate-500 mb-10 leading-relaxed text-lg font-medium">${data.desc}</p>
       
-      <div class="space-y-4 mb-10">
-        <p class="text-[10px] font-black text-brand-dark/40 uppercase tracking-widest">Beneficios destacados:</p>
-        <ul class="space-y-3">
+      <div class="space-y-4 mb-12">
+        <p class="text-[9px] font-black text-slate-300 uppercase tracking-[0.3em]">Beneficios Exclusivos</p>
+        <ul class="grid grid-cols-1 gap-4 text-left">
           ${detailsHtml}
         </ul>
       </div>
 
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-slate-100">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-8 pt-10 border-t border-slate-50">
         <div class="text-center sm:text-left">
-          <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Inversión aprox.</p>
-          <p class="text-3xl font-black text-brand-primary">${data.price}</p>
+          <p class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Inversión</p>
+          <p class="text-4xl font-black text-brand-primary tracking-tighter">${data.price}</p>
         </div>
         <a href="https://wa.me/50688227210?text=Hola, quiero información sobre ${data.title}" 
            target="_blank" 
-           class="bg-brand-primary text-white px-10 py-5 rounded-2xl font-black shadow-xl shadow-brand-primary/30 hover:bg-brand-dark transition-all text-center">
-           AGENDAR CITA
+           class="bg-brand-primary text-white px-12 py-5 rounded-[2rem] font-black shadow-2xl shadow-brand-primary/30 hover:bg-brand-dark transition-all text-center uppercase text-xs tracking-[0.2em] w-full sm:w-auto">
+           Reservar Cita
         </a>
       </div>
     `;
 
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-
     setTimeout(() => {
-      if (modalBackdrop && modalContent) {
-        modalBackdrop.classList.replace('opacity-0', 'opacity-100');
-        modalContent.classList.replace('opacity-0', 'opacity-100');
-        modalContent.classList.replace('translate-y-10', 'translate-y-0');
-        modalContent.classList.replace('scale-95', 'scale-100');
-      }
+      modalBackdrop.classList.replace('opacity-0', 'opacity-100');
+      modalContent.classList.replace('opacity-0', 'opacity-100');
+      modalContent.classList.replace('translate-y-12', 'translate-y-0');
+      modalContent.classList.replace('scale-95', 'scale-100');
     }, 10);
   }
 
   function closeModal() {
     if (!modal || !modalBackdrop || !modalContent || !modalBody) return;
-    
     modalBackdrop.classList.replace('opacity-100', 'opacity-0');
     modalContent.classList.replace('opacity-100', 'opacity-0');
-    modalContent.classList.replace('translate-y-0', 'translate-y-10');
+    modalContent.classList.replace('translate-y-0', 'translate-y-12');
     modalContent.classList.replace('scale-100', 'scale-95');
-
     setTimeout(() => {
       modal.classList.add('hidden');
       document.body.style.overflow = '';
@@ -158,24 +180,38 @@ const services = [
     }, 300);
   }
 
-  // Event Listeners
   cards.forEach(card => card.addEventListener('click', () => openModal(card)));
   closeBtn?.addEventListener('click', closeModal);
   modalBackdrop?.addEventListener('click', closeModal);
-  
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
-      closeModal();
-    }
-  });
 </script>
 
 <style>
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   
-  /* Asegura que las transiciones sean fluidas */
-  #modal-backdrop, #modal-content {
-    will-change: opacity, transform;
+  /* Contenedor flex con items-stretch para forzar altura igual */
+  .overflow-x-auto {
+    display: flex;
+    align-items: stretch;
+  }
+
+  /* Móvil: 85% de ancho para ver la siguiente card */
+  @media (max-width: 767px) {
+    .service-card {
+      width: 85%;
+    }
+  }
+
+  /* Desktop: 3 cards exactas */
+  @media (min-width: 768px) {
+    .service-card {
+      width: calc(33.333% - 1rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .service-card {
+      width: calc(33.333% - 1.5rem);
+    }
   }
 </style>

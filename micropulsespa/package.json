@@ -6,7 +6,7 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --port 4023",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
@@ -17,5 +17,8 @@
     "astro": "^6.0.5",
     "motion": "^12.37.0",
     "tailwindcss": "^4.2.1"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-darwin-arm64": "^1.0.0-rc.11"
   }
 }

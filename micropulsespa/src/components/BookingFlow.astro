@@ -1,0 +1,294 @@
+---
+// src/components/BookingFlow.astro
+const servicios = [
+  { id: "micropuntura", name: "Micropuntura Brasileña",  },
+  { id: "facial", name: "Limpieza Facial Profunda"  },
+  { id: "drenaje", name: "Drenaje Linfático"   },
+  { id: "ceragem", name: "Camilla Ceragem " },
+  { id: "pindas", name: "Masaje con Pindas" },
+];
+
+// Definición de bloques horarios (Aseguramos que coincidan con el script)
+const horasSemana = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM"];
+const horasDomingo = ["10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"];
+---
+
+<div class="max-w-2xl mx-auto px-4 md:px-0">
+
+  <div class="bg-white rounded-[3.5rem] shadow-[0_30px_100px_-20px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden relative">
+    
+    <div class="h-2 w-full bg-slate-50 flex">
+      <div id="step-progress" class="h-full bg-brand-primary transition-all duration-700 ease-out w-1/3 shadow-[0_0_15px_rgba(var(--brand-primary-rgb),0.5)]"></div>
+    </div>
+
+    <div class="p-8 md:p-14 overflow-hidden">
+      
+      <div id="step-1" class="booking-step space-y-8">
+        <div class="space-y-2">
+          <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest text-center md:text-left">Paso 01</p>
+          <h3 class="text-2xl md:text-3xl font-black text-brand-dark italic tracking-tighter text-center md:text-left">
+            Selecciona tu <span class="text-brand-primary not-italic">Tratamiento</span>
+          </h3>
+        </div>
+
+        <div class="grid grid-cols-1 gap-3">
+          {servicios.map((s) => (
+            <button 
+              class="service-select-btn group flex items-center justify-between p-5 rounded-[2rem] border-2 border-slate-50 hover:border-brand-primary/20 hover:bg-brand-primary/5 transition-all text-left outline-none active:scale-[0.98]"
+              data-name={s.name}
+            >
+              <div class="flex items-center gap-5">
+                <span class="font-black text-brand-dark text-base tracking-tight">{s.name}</span>
+              </div>
+              <div class="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-brand-primary group-hover:text-white transition-all">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div id="step-2" class="booking-step hidden space-y-8">
+        <button id="back-to-1" class="group flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-brand-primary transition-colors">
+            <div class="w-6 h-6 rounded-full border border-slate-200 flex items-center justify-center group-hover:border-brand-primary transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+            </div>
+            Volver al inicio
+        </button>
+
+        <div class="space-y-8">
+          <div class="space-y-4">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">¿Qué día vienes?</label>
+            </div>
+            <input 
+                type="date" 
+                id="date-input" 
+                onclick="this.showPicker()"
+                class="w-full p-5 rounded-[1.5rem] bg-slate-50 border-2 border-transparent font-bold text-brand-dark focus:border-brand-primary/20 focus:bg-white transition-all outline-none text-base cursor-pointer" 
+            />
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-brand-primary"></div>
+                <label class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Horarios Disponibles</label>
+            </div>
+            
+            <div id="hours-grid" class="grid grid-cols-3 md:grid-cols-4 gap-2">
+                </div>
+            <div id="date-hint" class="bg-slate-50 p-6 rounded-3xl border border-dashed border-slate-200 text-center">
+                <p class="text-[11px] font-bold text-slate-400 italic">Selecciona una fecha para ver horarios disponibles</p>
+            </div>
+          </div>
+        </div>
+
+        <button id="to-step-3" class="w-full py-5 bg-brand-dark text-white rounded-[2rem] font-black text-xs uppercase tracking-[0.2em] hover:bg-brand-primary transition-all disabled:opacity-20 shadow-xl" disabled>
+          Confirmar Datos
+        </button>
+      </div>
+
+      <div id="step-3" class="booking-step hidden space-y-6 text-center">
+        <div class="flex flex-col items-center space-y-4">
+            <div class="w-16 h-16 bg-brand-primary/10 rounded-full flex items-center justify-center text-brand-primary animate-pulse-slow">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h3 class="text-2xl font-black text-brand-dark italic tracking-tighter leading-none">Casi listo, <br/><span class="text-brand-primary not-italic">solo falta un paso</span></h3>
+        </div>
+
+        <div class="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 space-y-6 text-left relative overflow-hidden group">
+          <div class="absolute top-0 right-0 p-4 opacity-5 group-hover:scale-110 transition-transform duration-700">
+              <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          
+          <div class="relative z-10">
+            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Tratamiento Seleccionado</p>
+            <p id="summary-service" class="font-black text-brand-dark italic text-xl leading-tight">---</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-6 relative z-10">
+            <div>
+              <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Fecha</p>
+              <p id="summary-date" class="font-bold text-brand-dark text-sm border-l-2 border-brand-primary pl-3 whitespace-nowrap">---</p>
+            </div>
+            <div>
+              <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">Hora</p>
+              <p id="summary-hour" class="font-bold text-brand-dark text-sm border-l-2 border-brand-primary pl-3 whitespace-nowrap">---</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+            <button id="send-whatsapp" class="w-full py-5 bg-brand-primary text-white rounded-[2rem] font-black text-xs uppercase tracking-[0.3em] shadow-2xl shadow-brand-primary/30 hover:bg-brand-dark transition-all active:scale-95">
+                Confirmar por WhatsApp
+            </button>
+            <button id="back-to-2" class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] hover:text-brand-primary transition-colors py-2 block mx-auto">
+                ¿Deseas cambiar algo? Editar datos
+            </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  // @ts-nocheck
+  const HORAS_SEMANA = ["09:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM"];
+  const HORAS_DOMINGO = ["10:00 AM", "11:00 AM", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM"];
+
+  window.bookingData = { service: "", date: "", hour: "" };
+
+  window.initBookingLogic = () => {
+    const steps = document.querySelectorAll('.booking-step');
+    const progressBar = document.getElementById('step-progress');
+    const hoursGrid = document.getElementById('hours-grid');
+    const dateInput = document.getElementById('date-input');
+    const toStep3Btn = document.getElementById('to-step-3');
+
+    const hoy = new Date().toISOString().split('T')[0];
+    if(dateInput) dateInput.setAttribute('min', hoy);
+
+    window.showStep = (index) => {
+      document.querySelectorAll('.booking-step').forEach((s, i) => s.classList.toggle('hidden', i !== index));
+      if(progressBar) progressBar.style.width = `${((index + 1) / 3) * 100}%`;
+    };
+
+    document.querySelectorAll('.service-select-btn').forEach(btn => {
+      btn.onclick = () => {
+        window.bookingData.service = btn.dataset.name;
+        window.showStep(1);
+      };
+    });
+
+    const back1 = document.getElementById('back-to-1');
+    if(back1) back1.onclick = () => window.showStep(0);
+    
+    const back2 = document.getElementById('back-to-2');
+    if(back2) back2.onclick = () => window.showStep(1);
+
+    if(dateInput) {
+      dateInput.onchange = (e) => {
+        const selectedDate = new Date(e.target.value + 'T00:00:00');
+        const isSunday = selectedDate.getDay() === 0;
+        window.bookingData.date = e.target.value;
+        window.bookingData.hour = "";
+        
+        renderHours(isSunday ? HORAS_DOMINGO : HORAS_SEMANA);
+        document.getElementById('date-hint')?.classList.add('hidden');
+        checkValidation();
+      };
+    }
+
+    function renderHours(lista) {
+      if(!hoursGrid) return;
+      hoursGrid.innerHTML = '';
+      lista.forEach(h => {
+        const btn = document.createElement('button');
+        btn.className = "hour-btn p-4 rounded-2xl border-2 border-slate-50 font-black text-[10px] text-slate-500 hover:border-brand-primary/30 transition-all outline-none";
+        btn.innerText = h;
+        btn.type = "button";
+        btn.onclick = () => {
+          document.querySelectorAll('.hour-btn').forEach(b => b.classList.remove('bg-brand-primary', 'text-white', 'border-brand-primary', 'shadow-lg'));
+          btn.classList.add('bg-brand-primary', 'text-white', 'border-brand-primary', 'shadow-lg');
+          window.bookingData.hour = h;
+          checkValidation();
+        };
+        hoursGrid.appendChild(btn);
+      });
+    }
+
+    function checkValidation() {
+      if(toStep3Btn) toStep3Btn.disabled = !(window.bookingData.date && window.bookingData.hour);
+    }
+
+    if(toStep3Btn) {
+      toStep3Btn.onclick = () => {
+        document.getElementById('summary-service').innerText = window.bookingData.service;
+        document.getElementById('summary-date').innerText = window.bookingData.date;
+        document.getElementById('summary-hour').innerText = window.bookingData.hour;
+        window.showStep(2);
+      };
+    }
+
+    const waBtn = document.getElementById('send-whatsapp');
+    if(waBtn) {
+      waBtn.onclick = () => {
+        const text = `Hola Micropulse Spa! ✨%0A%0AQuiero agendar una cita:%0A🌿 *Servicio:* ${window.bookingData.service}%0A📅 *Fecha:* ${window.bookingData.date}%0A⏰ *Hora:* ${window.bookingData.hour}%0A%0A¿Tienen disponibilidad?`;
+        window.open(`https://wa.me/50688227210?text=${text}`, '_blank');
+      };
+    }
+
+    window.forceBookingStep2 = (serviceName) => {
+      window.bookingData.service = serviceName;
+      window.bookingData.date = "";
+      window.bookingData.hour = "";
+      if(dateInput) dateInput.value = "";
+      if(hoursGrid) hoursGrid.innerHTML = '';
+      document.getElementById('date-hint')?.classList.remove('hidden');
+      checkValidation();
+      window.showStep(1);
+    };
+
+    window.resetBookingFlow = () => {
+        window.bookingData = { service: "", date: "", hour: "" };
+        if(dateInput) dateInput.value = "";
+        if(hoursGrid) hoursGrid.innerHTML = '';
+        document.getElementById('date-hint')?.classList.remove('hidden');
+        window.showStep(0);
+    };
+  };
+
+  window.initBookingLogic();
+  document.addEventListener('astro:after-swap', window.initBookingLogic);
+</script>
+
+<style is:global>
+  /* Ocultar barra de scroll en Chrome, Safari y Opera */
+  .p-8.md:p-14::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Ocultar barra de scroll en IE, Edge y Firefox */
+  .p-8.md:p-14 {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  input[type="date"] {
+    position: relative;
+    -webkit-appearance: none;
+    display: block;
+  }
+  
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .booking-step {
+    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+  }
+</style>

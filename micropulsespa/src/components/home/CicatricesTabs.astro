@@ -1,0 +1,200 @@
+---
+const cicatrices = [
+  {
+    id: "01",
+    title: "Hipertróficas",
+    description: "Cicatrices elevadas que no se extienden más allá de la herida original. Nuestro tratamiento suaviza su textura y reduce el relieve mediante regeneración dérmica profunda.",
+    image: "/images/cicatrices-hipertroficas.jpg",
+  },
+  {
+    id: "02",
+    title: "Atroficas",
+    description: "Pequeñas depresiones comunes tras el acné o varicela. Estimulamos la producción de colágeno natural para nivelar la superficie cutánea y devolver la firmeza.",
+    image: "/images/cicatrices-atroficas.jpg",
+  },
+  {
+    id: "03",
+    title: "Queloides",
+    description: "Tejido fibroso que crece fuera de la zona lesionada. Utilizamos protocolos de bio-estimulación para aplanar el tejido y recuperar la elasticidad de la piel.",
+    image: "/images/cicatrices-queloides.jpg",
+  },
+];
+---
+
+<section class="w-full bg-white py-20 lg:py-32 overflow-hidden" id="cicatrices-section">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+      
+      <div class="lg:col-span-5 order-2 lg:order-1">
+        <div class="mb-12 space-y-4">
+          <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.4em] block">Micropuntura Especializada </span>
+          <h2 class="text-4xl md:text-6xl font-black text-brand-dark tracking-tighter leading-tight italic">
+           Ayuda a Eliminar <br/> <span class="text-brand-primary not-italic">Cicatrices.</span>
+          </h2>
+        </div>
+
+        <div class="flex flex-col space-y-0 min-h-[450px] md:min-h-[500px]" id="tabs-container">
+          {cicatrices.map((item, index) => (
+            <button
+              class={`tab-btn group relative flex flex-col items-start gap-2 py-8 text-left transition-all duration-500 border-t border-slate-100 first:border-0 outline-none ${index === 0 ? 'active' : 'opacity-40'}`}
+              data-index={index}
+            >
+              <div class="absolute left-[-20px] top-0 bottom-0 w-[3px] bg-slate-100 rounded-full overflow-hidden">
+                <div class="progress-bar w-full bg-brand-primary h-0 origin-top"></div>
+              </div>
+
+              <div class="flex items-center gap-4">
+                <span class="text-[10px] font-black text-brand-primary opacity-50 tracking-widest italic">/{item.id}</span>
+                <span class="tab-title text-2xl md:text-4xl font-black tracking-tighter transition-colors text-slate-400 group-[.active]:text-brand-dark group-[.active]:italic">
+                  {item.title}
+                </span>
+              </div>
+
+              <div class="tab-content hidden group-[.active]:block overflow-hidden transition-all duration-500">
+                <p class="text-slate-500 text-sm md:text-base font-medium leading-relaxed max-w-sm pt-4">
+                  {item.description}
+                </p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 order-1 lg:order-2">
+        <div class="relative aspect-[4/5] md:aspect-[16/11] rounded-[3rem] overflow-hidden bg-slate-100 border-8 border-white shadow-2xl group/img">
+          
+          <div id="image-container" class="relative w-full h-full">
+            {cicatrices.map((item, index) => (
+              <img
+                src={item.image}
+                alt={item.title}
+                class={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
+                data-img-index={index}
+              />
+            ))}
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/40 via-transparent to-transparent z-20"></div>
+          </div>
+
+          <div class="absolute bottom-8 right-8 flex gap-3 z-30">
+            <button id="prev-btn" class="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-brand-dark hover:bg-brand-primary hover:text-white transition-all shadow-lg active:scale-90">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="3" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="next-btn" class="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-brand-dark hover:bg-brand-primary hover:text-white transition-all shadow-lg active:scale-90">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="3" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { animate } from "motion";
+
+  const tabs = document.querySelectorAll('.tab-btn') as NodeListOf<HTMLButtonElement>;
+  const images = document.querySelectorAll('#image-container img') as NodeListOf<HTMLImageElement>;
+  const nextBtn = document.querySelector('#next-btn') as HTMLButtonElement | null;
+  const prevBtn = document.querySelector('#prev-btn') as HTMLButtonElement | null;
+  const imgContainer = document.querySelector('#image-container') as HTMLElement | null;
+  
+  let currentIndex: number = 0;
+  let interval: ReturnType<typeof setInterval> | undefined;
+  const duration: number = 5000;
+
+  function updateTabs(index: number) {
+    tabs.forEach((tab, i) => {
+      const progressBar = tab.querySelector('.progress-bar') as HTMLElement | null;
+      
+      if (i === index) {
+        tab.classList.add('active', 'opacity-100');
+        tab.classList.remove('opacity-40');
+        
+        if (progressBar) {
+          animate(progressBar, { height: ["0%", "100%"] } as any, { 
+            duration: duration / 1000, 
+          });
+        }
+      } else {
+        tab.classList.remove('active', 'opacity-100');
+        tab.classList.add('opacity-40');
+        if (progressBar) {
+          animate(progressBar, { height: "0%" } as any, { duration: 0.3 });
+        }
+      }
+    });
+
+    images.forEach((img, i) => {
+      if (i === index) {
+        img.style.opacity = "1";
+        img.style.zIndex = "10";
+        animate(img, { scale: [1.05, 1], opacity: [0, 1] }, { duration: 0.8 });
+      } else {
+        img.style.opacity = "0";
+        img.style.zIndex = "0";
+      }
+    });
+
+    currentIndex = index;
+  }
+
+  function next() {
+    updateTabs((currentIndex + 1) % tabs.length);
+  }
+
+  function prev() {
+    updateTabs((currentIndex - 1 + tabs.length) % tabs.length);
+  }
+
+  function startInterval() {
+    if (interval) clearInterval(interval);
+    interval = setInterval(next, duration);
+  }
+
+  if (tabs.length > 0) {
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        updateTabs(i);
+        startInterval();
+      });
+    });
+
+    nextBtn?.addEventListener('click', () => {
+      next();
+      startInterval();
+    });
+
+    prevBtn?.addEventListener('click', () => {
+      prev();
+      startInterval();
+    });
+
+    if (imgContainer) {
+      imgContainer.addEventListener('mouseenter', () => {
+        if (interval) clearInterval(interval);
+      });
+      imgContainer.addEventListener('mouseleave', () => {
+        startInterval();
+      });
+    }
+
+    updateTabs(0);
+    startInterval();
+  }
+</script>
+
+<style>
+  .tab-btn.active .tab-content {
+    display: block;
+    animation: slideDown 0.4s ease-out forwards;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  #cicatrices-section button:focus {
+    outline: none;
+  }
+</style>

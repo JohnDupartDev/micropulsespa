@@ -1,0 +1,165 @@
+---
+// src/components/HeroMenFacial.astro
+const beforeImage = "/images/limpieza-facial-hombre-antes.jpg";
+const afterImage = "/images/limpieza-facial-hombre-despues.jpg";
+---
+
+<section class="relative pt-28 pb-20 px-6 overflow-hidden bg-white">
+  <div class="absolute top-0 left-0 -z-10 w-full lg:w-1/2 h-full bg-gradient-to-tr from-slate-50 via-white to-transparent opacity-80"></div>
+  <div class="absolute bottom-24 -left-24 w-96 h-96 bg-brand-primary/5 rounded-full blur-3xl -z-10"></div>
+
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    
+    <div class="space-y-10 order-2 lg:order-1">
+      <div class="space-y-6">
+        <div class="inline-flex items-center gap-2 bg-brand-dark text-white px-4 py-1.5 rounded-full">
+          <span class="text-[10px] font-black uppercase ">Especial para Caballeros</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-black text-brand-dark l tracking-tighter">
+          El cuidado facial <br />
+          <span class="text-brand-primary not-italic uppercase tracking-normal">también es para ti.</span>
+        </h1>
+        
+        <div class="space-y-2 border-l-4 border-brand-primary pl-6">
+          <h2 class="text-xl md:text-2xl font-bold text-brand-dark uppercase tracking-tight">
+            Rejuvenece y Limpia
+          </h2>
+          <p class="text-slate-500 font-medium text-lg italic">Elimina impurezas, exceso de grasa y fatiga del rostro.</p>
+        </div>
+
+        <p class="text-slate-600 text-lg md:text-xl leading-relaxed max-w-lg font-medium">
+          Siente tu piel renovada y libre de toxinas. Nuestra limpieza profunda para hombres está diseñada para combatir la piel grasa, los puntos negros y el desgaste diario. <strong>Vuelve a lucir un rostro radiante y saludable.</strong>
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-5">
+        <a 
+          href="https://wa.me/50688227210?text=Hola,%20quiero%20agendar%20una%20limpieza%20facial%20para%20hombres" 
+          target="_blank"
+          class="bg-brand-primary text-white px-10 py-5 rounded-full font-black text-center hover:bg-brand-dark transition-all duration-300 shadow-xl shadow-brand-primary/25 hover:-translate-y-1 uppercase text-sm tracking-widest"
+        >
+          Agendar mi cita hoy
+        </a>
+      </div>
+
+    </div>
+
+    <div class="relative group order-1 lg:order-2">
+      <div class="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-500 select-none aspect-square md:aspect-video lg:aspect-square border-4 border-white">
+        <div id="facial-comparison-slider" class="relative w-full h-full min-h-[400px] overflow-hidden cursor-ew-resize bg-slate-100">
+            <img 
+                src={afterImage} 
+                alt="Después del tratamiento facial masculino" 
+                class="absolute inset-0 w-full h-full object-cover"
+                onload="this.parentElement.classList.remove('bg-slate-100')"
+            />
+            
+            <div id="facial-before-container" class="absolute inset-0 w-1/2 overflow-hidden border-r-4 border-white shadow-2xl z-10">
+                <img 
+                    id="facial-before-img-el"
+                    src={beforeImage} 
+                    alt="Antes del tratamiento" 
+                    class="absolute inset-0 h-full max-w-none object-cover"
+                />
+                <div class="absolute top-6 left-6 bg-brand-dark/80 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em]">Antes</div>
+            </div>
+
+            <div id="label-after" class="absolute top-6 right-6 bg-brand-primary/90 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] z-20 transition-opacity duration-300">Después</div>
+
+            <div id="facial-slider-handle" class="absolute top-0 bottom-0 left-1/2 w-1 bg-white -ml-0.5 flex items-center justify-center z-30">
+                <div class="w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center border-4 border-brand-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+      <div class="hidden lg:block absolute -bottom-10 -right-6 bg-white p-10 rounded-[2.5rem] shadow-2xl z-20 border-l-8 border-brand-primary animate-bounce-slow">
+        <p class="text-5xl font-black text-brand-primary mb-1 italic tracking-tighter">100%</p>
+        <p class="text-[10px] font-black text-brand-dark leading-tight uppercase tracking-widest">Satisfacción <br/>en Renovación</p>
+        <div class="w-full bg-brand-light h-2 rounded-full mt-5 overflow-hidden">
+          <div class="bg-brand-primary h-full w-full rounded-full"></div>
+        </div>
+      </div>
+
+      <div class="absolute -top-10 -right-10 w-full h-full border-2 border-brand-primary/20 rounded-[3rem] -z-10 translate-x-4 translate-y-4"></div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+    const initFacialSlider = () => {
+        const slider = document.getElementById('facial-comparison-slider');
+        const beforeContainer = document.getElementById('facial-before-container');
+        const handle = document.getElementById('facial-slider-handle');
+        const labelAfter = document.getElementById('label-after');
+        const beforeImg = document.getElementById('facial-before-img-el') as HTMLImageElement;
+
+        if (!slider || !beforeContainer || !handle || !beforeImg || !labelAfter) return;
+
+        let isResizing = false;
+
+        const updateDimensions = () => {
+            const width = (slider as HTMLElement).offsetWidth;
+            beforeImg.style.width = `${width}px`;
+        };
+
+        const setPosition = (x: number) => {
+            const rect = slider.getBoundingClientRect();
+            let position = ((x - rect.left) / rect.width) * 100;
+            if (position < 0) position = 0;
+            if (position > 100) position = 100;
+            
+            beforeContainer.style.width = `${position}%`;
+            handle.style.left = `${position}%`;
+
+            // Lógica para ocultar el label "Después" cuando el slider se acerca (ej. al pasar del 70%)
+            if (position > 75) {
+                labelAfter.style.opacity = '0';
+            } else {
+                labelAfter.style.opacity = '1';
+            }
+        };
+
+        const onMove = (e: any) => {
+            if (!isResizing) return;
+            const x = e.pageX || (e.touches && e.touches[0].pageX);
+            setPosition(x);
+        };
+
+        slider.addEventListener('mousedown', () => isResizing = true);
+        slider.addEventListener('touchstart', () => isResizing = true, { passive: true });
+        window.addEventListener('mouseup', () => isResizing = false);
+        window.addEventListener('touchend', () => isResizing = false);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('touchmove', onMove, { passive: false });
+
+        updateDimensions();
+        window.addEventListener('resize', updateDimensions);
+        beforeImg.onload = updateDimensions;
+    };
+
+    initFacialSlider();
+    document.addEventListener('astro:after-swap', initFacialSlider);
+</script>
+
+<style>
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 4s ease-in-out infinite;
+  }
+  
+  img {
+    user-select: none;
+    pointer-events: none;
+  }
+  
+  #facial-comparison-slider {
+    touch-action: pan-y;
+  }
+</style>

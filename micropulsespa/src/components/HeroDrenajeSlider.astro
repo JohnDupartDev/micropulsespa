@@ -1,0 +1,137 @@
+---
+// HeroDrenajeSlider.astro
+const beforeImage = "/images/drenaje-linfatico-antes.jpg"; 
+const afterImage = "/images/drenaje-linfatico-despues.jpg";
+---
+
+<section class="relative pt-40 overflow-hidden bg-white">
+  <div class="absolute top-0 inset-x-0 h-96 bg-gradient-to-b from-brand-light/20 to-transparent -z-10 "></div>
+
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="max-w-4xl mx-auto text-center mb-6 space-y-8 relative z-10  ">
+    
+      <h1 class=" text-4xl md:text-7xl font-black text-brand-dark leading-[0.9] tracking-tighter ">
+        Drenaje Limfático <br />
+        <span class="text-brand-primary not-italic">Figura definida.</span>
+      </h1>
+      
+      <p class="text-slate-500 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto font-medium">
+        Elimina la retención de líquidos y redefine tu silueta con nuestro  <span class=" text-brand-primary">Drenaje Linfático Manual</span> Manual. Un ritual de bienestar que desinflama y esculpe tu figura.
+      </p>
+
+      
+    </div>
+
+    <div class="relative max-w-5xl mx-auto group">
+
+      <div class="relative z-10 rounded-[3rem] md:rounded-[4rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border-[12px] border-white select-none aspect-square md:aspect-video">
+        <div id="drenaje-comparison-slider" class="relative w-full h-full min-h-[500px] overflow-hidden cursor-ew-resize bg-slate-100">
+            
+            <img 
+                src={afterImage} 
+                alt="Después del Drenaje" 
+                class="absolute inset-0 w-full h-full object-cover"
+                onload="this.parentElement.classList.remove('bg-slate-100')"
+            />
+            
+            <div id="label-after-drenaje" class="absolute top-8 right-8 bg-brand-primary/90 backdrop-blur-md text-white px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em] z-20 transition-opacity duration-300">Después</div>
+            
+            <div id="drenaje-before-container" class="absolute inset-0 w-1/2 overflow-hidden border-r-4 border-white shadow-2xl z-10">
+                <img 
+                    id="drenaje-before-img-el"
+                    src={beforeImage} 
+                    alt="Antes del Drenaje" 
+                    class="absolute inset-0 h-full max-w-none object-cover"
+                />
+                <div class="absolute top-8 left-8 bg-brand-dark/80 backdrop-blur-md text-white px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.3em]">Antes</div>
+            </div>
+
+            <div id="drenaje-slider-handle" class="absolute top-0 bottom-0 left-1/2 w-1.5 bg-white flex items-center justify-center z-30 -translate-x-1/2">
+                <div class="w-16 h-16 bg-white rounded-full shadow-2xl flex items-center justify-center border-[6px] border-brand-primary transition-transform group-hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>
+                </div>
+            </div>
+        </div>
+      </div>
+      
+     
+
+      <div class="absolute -bottom-16 left-1/2 -translate-x-1/2 w-[90%] h-24 bg-brand-primary/10 blur-[100px] rounded-full -z-10"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+    const initDrenajeSlider = () => {
+        const slider = document.getElementById('drenaje-comparison-slider');
+        const beforeContainer = document.getElementById('drenaje-before-container');
+        const handle = document.getElementById('drenaje-slider-handle');
+        const labelAfter = document.getElementById('label-after-drenaje');
+        const beforeImg = document.getElementById('drenaje-before-img-el') as HTMLImageElement;
+
+        if (!slider || !beforeContainer || !handle || !beforeImg || !labelAfter) return;
+
+        let isResizing = false;
+
+        const updateDimensions = () => {
+            const width = (slider as HTMLElement).offsetWidth;
+            beforeImg.style.width = `${width}px`;
+        };
+
+        const setPosition = (x: number) => {
+            const rect = slider.getBoundingClientRect();
+            let position = ((x - rect.left) / rect.width) * 100;
+            if (position < 0) position = 0;
+            if (position > 100) position = 100;
+            
+            beforeContainer.style.width = `${position}%`;
+            handle.style.left = `${position}%`;
+
+            if (position > 75) {
+                labelAfter.style.opacity = '0';
+            } else {
+                labelAfter.style.opacity = '1';
+            }
+        };
+
+        const onMove = (e: any) => {
+            if (!isResizing) return;
+            const x = e.pageX || (e.touches && e.touches[0].pageX);
+            setPosition(x);
+        };
+
+        slider.addEventListener('mousedown', () => isResizing = true);
+        slider.addEventListener('touchstart', () => isResizing = true, { passive: true });
+        window.addEventListener('mouseup', () => isResizing = false);
+        window.addEventListener('touchend', () => isResizing = false);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('touchmove', onMove, { passive: false });
+
+        updateDimensions();
+        window.addEventListener('resize', updateDimensions);
+        beforeImg.onload = updateDimensions;
+    };
+
+    initDrenajeSlider();
+    document.addEventListener('astro:after-swap', initDrenajeSlider);
+</script>
+
+<style>
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 4s ease-in-out infinite;
+  }
+  
+  img {
+    user-select: none;
+    pointer-events: none;
+  }
+  
+  #drenaje-comparison-slider {
+    touch-action: pan-y;
+  }
+</style>

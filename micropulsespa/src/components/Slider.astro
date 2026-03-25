@@ -1,0 +1,165 @@
+---
+// Datos de los casos de éxito
+const casosExito = [
+  {
+    titulo: "Limpieza Profunda",
+    subtitulo: "Eliminación de comedones",
+    antes: "/images/limpieza-profunda-antes.jpg",
+    despues: "/images/limpieza-facial-despues.jpg",
+    mejora: "92%",
+    detalle: "Reducción de<br/>Puntos Negros"
+  },
+  {
+    titulo: "Control de Acné",
+    subtitulo: "Protocolo de 4 sesiones",
+    antes: "/images/eliminar-acne-costarica-antes.jpg",
+    despues: "/images/eliminar-acne-costarica-despues.jpg",
+    mejora: "75%",
+    detalle: "Disminución de<br/>Inflamación"
+  }
+];
+---
+
+<section class="py-24 bg-white overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+      <div class="max-w-2xl">
+        <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.4em] mb-4 block">Evidencia Clínica</span>
+        <h2 class="text-4xl md:text-6xl font-black text-brand-dark tracking-tighter leading-none italic">
+          Resultados <span class="text-brand-primary not-italic">Visibles.</span>
+        </h2>
+        <p class="text-slate-500 mt-4 font-medium italic">Desliza para comparar el cambio real tras nuestros tratamientos faciales.</p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-center">
+      {casosExito.map((caso, index) => (
+        <div class="relative group" data-case={index}>
+          <div class="mb-6">
+            <h3 class="text-2xl font-black text-brand-dark italic">{caso.titulo}</h3>
+            <p class="text-brand-primary text-xs font-bold uppercase tracking-widest">{caso.subtitulo}</p>
+          </div>
+
+          <div class="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-500 select-none aspect-square md:aspect-video lg:aspect-square">
+            <div class="image-comparison-slider relative w-full h-full bg-slate-200 cursor-ew-resize">
+                <img 
+                    src={caso.despues} 
+                    alt="Después" 
+                    class="absolute inset-0 w-full h-full object-cover"
+                />
+                
+                <div class="before-image-container absolute inset-0 w-1/2 overflow-hidden border-r-4 border-white shadow-2xl z-10">
+                    <img 
+                        src={caso.antes} 
+                        alt="Antes" 
+                        class="before-img-el absolute inset-0 h-full max-w-none object-cover"
+                    />
+                    <div class="absolute top-6 left-6 bg-brand-dark/80 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em]">Antes</div>
+                </div>
+
+                <div class="after-label absolute top-6 right-6 bg-brand-primary/90 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] z-20 transition-opacity duration-300">Después</div>
+
+                <div class="slider-handle absolute top-0 bottom-0 left-1/2 w-1 bg-white -ml-0.5 flex items-center justify-center z-30">
+                    <div class="w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center border-4 border-brand-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>
+                    </div>
+                </div>
+            </div>
+          </div>
+          
+          <div class="hidden md:block absolute -bottom-10 -right-6 bg-white p-8 rounded-[2.5rem] shadow-2xl z-20 border-l-8 border-brand-primary animate-bounce-slow max-w-[180px]">
+            <p class="text-5xl font-black text-brand-primary mb-1 tracking-tighter">{caso.mejora}</p>
+            <p class="text-[10px] font-black text-brand-dark leading-tight uppercase tracking-widest" set:html={caso.detalle}></p>
+            <div class="w-full bg-brand-light h-1.5 rounded-full mt-4 overflow-hidden">
+              <div class="bg-brand-primary h-full rounded-full" style={`width: ${caso.mejora}`}></div>
+            </div>
+          </div>
+
+          <div class="absolute -top-6 -left-6 w-full h-full border-2 border-brand-primary/10 rounded-[3.5rem] -z-10"></div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+    const initSliders = () => {
+        const sliders = document.querySelectorAll('.image-comparison-slider');
+
+        sliders.forEach(slider => {
+            const beforeContainer = slider.querySelector('.before-image-container') as HTMLElement;
+            const handle = slider.querySelector('.slider-handle') as HTMLElement;
+            const beforeImg = slider.querySelector('.before-img-el') as HTMLImageElement;
+            const afterLabel = slider.querySelector('.after-label') as HTMLElement;
+
+            if (!slider || !beforeContainer || !handle || !beforeImg || !afterLabel) return;
+
+            let isResizing = false;
+
+            const updateDimensions = () => {
+                const width = (slider as HTMLElement).offsetWidth;
+                beforeImg.style.width = `${width}px`;
+            };
+
+            const setPosition = (x: number) => {
+                const rect = slider.getBoundingClientRect();
+                let position = ((x - rect.left) / rect.width) * 100;
+                if (position < 0) position = 0;
+                if (position > 100) position = 100;
+                
+                beforeContainer.style.width = `${position}%`;
+                handle.style.left = `${position}%`;
+
+                // Ocultar label después si el slider se acerca (ej. al pasar del 75%)
+                if (position > 75) {
+                    afterLabel.style.opacity = '0';
+                } else {
+                    afterLabel.style.opacity = '1';
+                }
+            };
+
+            slider.addEventListener('mousedown', () => isResizing = true);
+            slider.addEventListener('touchstart', () => isResizing = true, {passive: true});
+            
+            window.addEventListener('mouseup', () => isResizing = false);
+            window.addEventListener('touchend', () => isResizing = false);
+            
+            window.addEventListener('mousemove', (e) => {
+                if (!isResizing) return;
+                setPosition(e.pageX);
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (!isResizing) return;
+                setPosition(e.touches[0].pageX);
+            }, {passive: false});
+
+            updateDimensions();
+            window.addEventListener('resize', updateDimensions);
+            beforeImg.onload = updateDimensions;
+        });
+    };
+
+    initSliders();
+    document.addEventListener('astro:after-swap', initSliders);
+</script>
+
+<style>
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 4s ease-in-out infinite;
+  }
+  
+  img {
+    user-select: none;
+    pointer-events: none;
+  }
+  
+  .image-comparison-slider {
+    touch-action: pan-y;
+  }
+</style>
