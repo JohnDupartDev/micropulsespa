@@ -2,7 +2,7 @@
 import HeroMenFacial from '../../components/HeroMenFacial.astro';
 import Slider from '../../components/Slider.astro';
 import Layout from '../../layouts/Layout.astro';
-
+import BookingFlow from '../../components/BookingFlow.astro';
 
 const beneficios = [
   {
@@ -70,8 +70,7 @@ const testimonios = [
   title="Limpieza Facial Profunda | Piel Radiante y Sana | Micropulse Spa"
   description="Elimina impurezas, puntos negros y exceso de grasa. Tratamiento facial avanzado con aparatología para una piel luminosa y saludable en Tibás."
 >
-
-  <section class="relative pt-40 overflow-hidden bg-gradient-to-br from-white via-white to-brand-light/20">
+<section class="relative pt-40 overflow-hidden bg-gradient-to-br from-white via-white to-brand-light/20">
    
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
       <div class="relative z-10 text-center lg:text-left">
@@ -88,14 +87,18 @@ const testimonios = [
         
         <p class="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
          Nuestra <strong class="text-brand-dark italic"> Limpieza Facial Profunda </strong> elimina impurezas, células muertas y exceso de grasa. Mediante técnicas manuales y aparatología de vanguardia, logramos que tu piel respire, luzca saludable y recupere su frescura natural ✨.
+        </p>
         
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10">
-          <a href="https://wa.me/50688227210?text=Hola%2C%20quiero%20agendar%20una%20Limpieza%20Facial%20Profunda" 
-             class="bg-gradient-to-r from-brand-primary to-pink-300 text-white px-5 py-3 rounded-full font-black shadow-2xl shadow-brand-primary/40 hover:-translate-y-1 transition-all text-center" target="_blank">
+          <button 
+            id="btn-reserva-facial-v2"
+            class="bg-gradient-to-r from-brand-primary to-pink-300 text-white px-5 py-4 lg:px-6 lg:py-3 rounded-full font-black shadow-2xl shadow-brand-primary/40 hover:-translate-y-1 transition-all text-center cursor-pointer uppercase text-xs tracking-widest"
+          >
             RESERVAR EXPERIENCIA
-          </a>
+          </button>
+
           <a href="#proceso" 
-             class="border-2 border-brand-primary/30 text-brand-dark px-5 py-3 rounded-full font-bold hover:bg-brand-primary/5 transition-all text-center">
+             class="border-2 border-brand-primary/30 text-brand-dark px-5 py-4 lg:px-6 lg:py-3 rounded-full font-bold hover:bg-brand-primary/5 transition-all text-center text-xs tracking-widest">
             Descubre el proceso
           </a>
         </div>
@@ -118,7 +121,7 @@ const testimonios = [
               <p class="text-sm font-black text-brand-dark">Luminosidad y Pureza inmediata</p>
             </div>
             <div class="w-10 h-10 rounded-full bg-brand-primary flex items-center justify-center shadow-lg shadow-brand-primary/30">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </div>
           </div>
         </div>
@@ -126,45 +129,7 @@ const testimonios = [
     </div>
 </section>
 
-  <section class="py-28 bg-slate-50">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="text-center max-w-2xl mx-auto mb-16">
-        <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em]">Salud Cutánea</span>
-        <h2 class="text-4xl md:text-5xl font-black text-brand-dark mt-3 mb-5 tracking-tight">
-          Piel libre de toxinas <br/>
-          <span class="text-brand-primary">rostro impecable</span>
-        </h2>
-        <p class="text-slate-500 text-lg">Combinamos exfoliación, extracción y nutrición para mantener una piel sana y radiante.</p>
-      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {beneficios.map((b) => (
-          <div class="bg-white p-8 rounded-[2rem] border border-slate-200 hover:border-brand-primary/40 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-primary/5 to-transparent rounded-full blur-2xl"></div>
-            
-            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-light to-brand-primary/10 flex items-center justify-center text-brand-primary mb-6 group-hover:scale-110 transition-transform">
-              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d={b.icon}></path>
-              </svg>
-            </div>
-            
-            <div class="flex items-baseline gap-1 mb-2">
-              <span class="text-3xl font-black text-brand-primary">{b.stat}</span>
-              <span class="text-xs font-medium text-slate-400 uppercase">{b.statLabel}</span>
-            </div>
-            
-            <span class="text-[10px] font-black text-brand-primary/70 uppercase tracking-[0.15em]">{b.subtitle}</span>
-            <h3 class="text-xl font-black text-brand-dark mt-2 mb-3">{b.title}</h3>
-            <p class="text-slate-500 text-sm leading-relaxed">{b.desc}</p>
-            
-            <div class="mt-6 w-full h-[2px] bg-slate-100 rounded-full overflow-hidden">
-              <div class="w-0 group-hover:w-full h-full bg-gradient-to-r from-brand-primary to-brand-secondary transition-all duration-1000"></div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
  <Slider />
   <section class="py-10 lg:16 bg-white" id="proceso">
     <div class="max-w-7xl mx-auto px-6">
@@ -271,10 +236,11 @@ const testimonios = [
               <span class="text-slate-600"><strong class="text-brand-dark">Resultados duraderos</strong> – Piel impecable por más tiempo</span>
             </li>
           </ul>
-    <a href="https://wa.me/50688227210?text=Hola, quiero reservar una Limpieza Facial Profunda" 
-                 class= "inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-3 rounded-full font-black hover:bg-brand-primary/90 transition-all" target="_blank">
+    <button 
+             id="btn-reserva-facial-v3"
+             class= "inline-flex items-center gap-2 bg-brand-primary text-white px-8 py-3 rounded-full font-black hover:bg-brand-primary/90 transition-all cursor-pointer uppercase text-xs tracking-widest">
             Agendar Mi Facial
-          </a>
+          </button>
         </div>
         <div class="relative">
           <div class="absolute inset-0 bg-gradient-to-r from-brand-primary/20 to-brand-secondary/20 blur-[80px] rounded-full"></div>
@@ -348,16 +314,16 @@ const testimonios = [
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          href="https://wa.me/50688227210?text=Hola%2C%20quiero%20reservar%20una%20Limpieza%20Facial%20Profunda" 
-          class="bg-white text-brand-dark px-8 py-3 rounded-full font-black hover:bg-brand-light hover:text-brand-dark transition-all shadow-2xl"
+        <button 
+          id="btn-reserva-facial-v4"
+          class="bg-white text-brand-dark px-8 py-3 rounded-full font-black hover:bg-brand-light hover:text-brand-dark transition-all shadow-2xl cursor-pointer uppercase text-xs tracking-widest"
         >
-          AGENDAR POR WHATSAPP
-        </a>
+          RESERVAR AHORA
+        </button>
         
         <a 
           href="tel:+50688227210" 
-          class="border-2 border-white/30 text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all text-center"
+          class="border-2 border-white/30 text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all text-center uppercase text-xs tracking-widest"
         >
           Llamar ahora
         </a>
@@ -370,4 +336,57 @@ const testimonios = [
   </div>
 </section>
 
+<div id="modal-reserva" class="fixed inset-0 z-[150] hidden items-center justify-center p-4">
+  <div id="overlay-reserva" class="absolute inset-0 bg-brand-dark/80 backdrop-blur-md transition-opacity duration-300"></div>
+  <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+      <button id="cerrar-reserva" class="absolute top-6 right-6 z-50 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <BookingFlow />
+  </div>
+</div>
+
+<script>
+  const initReservaFacialSeccion = () => {
+    // Listado de IDs de botones de reserva en esta página
+    const btnIds = ['btn-reserva-facial-v2', 'btn-reserva-facial-v3', 'btn-reserva-facial-v4'];
+    const modal = document.getElementById('modal-reserva');
+    const overlay = document.getElementById('overlay-reserva');
+    const cerrar = document.getElementById('cerrar-reserva');
+
+    const openModal = () => {
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        
+        // Re-inicializar lógica y forzar paso 2 con el nombre del servicio
+        if ((window as any).initBookingLogic) (window as any).initBookingLogic();
+        if ((window as any).forceBookingStep2) {
+          (window as any).forceBookingStep2("Limpieza Facial Profunda");
+        }
+      }
+    };
+
+    const closeModal = () => {
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+      }
+    };
+
+    // Asignar evento a todos los botones detectados
+    btnIds.forEach(id => {
+      document.getElementById(id)?.addEventListener('click', openModal);
+    });
+
+    overlay?.addEventListener('click', closeModal);
+    cerrar?.addEventListener('click', closeModal);
+  };
+
+  // Inicializar en carga y cambios de Astro
+  initReservaFacialSeccion();
+  document.addEventListener('astro:after-swap', initReservaFacialSeccion);
+</script>
 </Layout>

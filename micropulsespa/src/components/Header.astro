@@ -41,15 +41,14 @@ const servicios = [
         <li><a href="/contacto" class="hover:text-brand-primary transition whitespace-nowrap">Contacto</a></li>
       </ul>
 
-      <a 
-        href="https://wa.me/50688227210" 
-        target="_blank"
-        class="hidden sm:flex bg-brand-dark text-white px-4 lg:px-6 py-2 rounded-full text-sm font-semibold hover:bg-brand-primary transition items-center gap-2 group whitespace-nowrap"
+      <button 
+        id="btn-header-reserva"
+        class="hidden sm:flex bg-brand-dark text-white px-4 lg:px-6 py-2 rounded-full text-sm font-semibold hover:bg-brand-primary transition items-center gap-2 group whitespace-nowrap cursor-pointer"
       >
-        <span class="hidden lg:inline">Hablemos</span>
-        <span class="lg:hidden">WhatsApp</span>
+        <span class="hidden lg:inline">Agendar cita</span>
+        <span class="lg:hidden">Reserva</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform shrink-0"><path d="m9 18 6-6-6-6"/></svg>
-      </a>
+      </button>
 
       <button id="open-menu" class="md:hidden text-brand-dark p-2 -mr-2 active:bg-brand-light/20 rounded-full transition-colors" aria-label="Abrir menú">
         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
@@ -57,7 +56,7 @@ const servicios = [
     </nav>
   </div>
 
-  <div id="mobile-sidebar" class="fixed inset-0 z-[200] hidden">
+<div id="mobile-sidebar" class="fixed inset-0 z-[200] hidden">
     <div id="sidebar-overlay" class="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
     
     <div id="sidebar-panel" class="absolute top-0 right-0 h-full w-[85%] max-w-sm bg-white shadow-2xl flex flex-col translate-x-full transition-transform duration-300 ease-out will-change-transform">
@@ -69,25 +68,24 @@ const servicios = [
         </button>
       </div>
 
-      <nav class="flex-1 px-6 py-6 overflow-y-auto">
-        <ul class="flex flex-col gap-2">
-          <li>
-            <a href="/" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all text-sm">
+      <nav class="flex-1 px-6 py-8 overflow-y-auto">
+        <ul class="flex flex-col gap-3"> <li>
+            <a href="/" class="mobile-link text-xl font-medium text-brand-dark hover:text-brand-primary flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-brand-light/10 transition-all tracking-tight">
               <span>Inicio</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
             </a>
           </li>
           
           <li class="flex flex-col">
-            <button id="mobile-servicios-btn" class="text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all outline-none">
+            <button id="mobile-servicios-btn" class="text-xl font-medium text-brand-dark hover:text-brand-primary flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-brand-light/10 transition-all outline-none tracking-tight">
               <span>Servicios</span>
               <svg id="mobile-servicios-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary transition-transform duration-300"><path d="m6 9 6 6 6-6"/></svg>
             </button>
-            <div id="mobile-servicios-content" class="hidden overflow-hidden bg-gray-50/50 rounded-2xl mt-1 ml-4 border-l-2 border-brand-primary/20">
-              <ul class="py-2 flex flex-col">
+            <div id="mobile-servicios-content" class="hidden overflow-hidden bg-gray-50 rounded-2xl mt-1.5 ml-3 border-l-2 border-brand-primary/20 hover:border-brand-primary transition-colors">
+              <ul class="flex flex-col py-1.5">
                 {servicios.map((servicio) => (
                   <li>
-                    <a href={servicio.href} class="mobile-link block py-3 px-6 text-base font-medium text-gray-600 hover:text-brand-primary transition-colors">
+                    <a href={servicio.href} class="mobile-link block py-3 px-6 text-lg font-medium text-gray-600 hover:text-brand-primary transition-colors tracking-tight">
                       {servicio.name}
                     </a>
                   </li>
@@ -97,13 +95,13 @@ const servicios = [
           </li>
 
           <li>
-            <a href="/sobre-nosotros" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all text-sm">
+            <a href="/sobre-nosotros" class="mobile-link text-xl font-medium text-brand-dark hover:text-brand-primary flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-brand-light/10 transition-all tracking-tight">
               <span>Sobre Nosotros</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
             </a>
           </li>
           <li>
-            <a href="/contacto" class="mobile-link text-lg font-semibold text-brand-dark hover:text-brand-primary flex items-center justify-between py-3 px-4 rounded-xl hover:bg-brand-light/10 transition-all text-sm">
+            <a href="/contacto" class="mobile-link text-xl font-medium text-brand-dark hover:text-brand-primary flex items-center justify-between py-3.5 px-4 rounded-xl hover:bg-brand-light/10 transition-all tracking-tight">
               <span>Contacto</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary/40"><path d="m9 18 6-6-6-6"/></svg>
             </a>
@@ -111,23 +109,25 @@ const servicios = [
         </ul>
       </nav>
 
-      <div class="p-6 border-t border-gray-100 bg-gray-50/50 space-y-5">
-        <div class="flex gap-3 justify-center">
-          <a href="https://www.facebook.com/profile.php?id=61552307075682" class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-95" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+      <div class="p-6 border-t border-gray-100 bg-gray-50/50 space-y-6">
+        <div class="flex gap-4 justify-center">
+          <a href="https://www.facebook.com/profile.php?id=61552307075682" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 transition-all active:scale-90" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
           </a>
-          <a href="https://instagram.com/micropulsespa" class="w-11 h-11 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 hover:shadow-md transition-all active:scale-95" aria-label="Instagram">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          <a href="https://instagram.com/micropulsespa" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-brand-dark hover:text-brand-primary shadow-sm border border-gray-100 transition-all active:scale-90" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           </a>
-       
         </div>
         
-        <a href="https://wa.me/50688227210" target="_blank" class="block w-full bg-brand-primary text-white text-center py-4 rounded-xl font-bold text-base shadow-lg shadow-brand-primary/30 hover:shadow-xl active:scale-[0.98] transition-all">
-          Agendar Cita por WhatsApp
-        </a>
+        <button 
+          id="btn-header-reserva-mobile"
+          class="block w-full bg-brand-primary text-white text-center py-4.5 rounded-[1.5rem] font-medium text-xl shadow-xl shadow-brand-primary/20 active:scale-[0.96] transition-all cursor-pointer tracking-tight"
+        >
+          Agendar Cita Ahora
+        </button>
         
-        <div class="text-center text-xs text-gray-500">
-          <p>Respuesta en menos de 10 minutos</p>
+        <div class="text-center text-xs font-medium tracking-wide text-slate-400">
+          <p>Resultados reales • Atención Premium</p>
         </div>
       </div>
     </div>
@@ -152,80 +152,88 @@ const servicios = [
   const mobileServiciosContent = document.getElementById('mobile-servicios-content');
   const mobileServiciosIcon = document.getElementById('mobile-servicios-icon');
 
-  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const initHeaderLogic = () => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
-  // 1. EFECTO SCROLL CORREGIDO (Logo más equilibrado)
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) {
-      // Cuando baja: py-2 y logo a un tamaño moderado
-      headerWrapper.style.paddingTop = '8px';
-      headerWrapper.style.paddingBottom = '8px';
-      navContainer.classList.add('shadow-xl', 'bg-white/95');
-      
-      if (isMobile) {
-        headerLogo.style.height = '50px'; // Antes estaba en 40px (muy pequeño)
+    // 1. EFECTO SCROLL
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) {
+        headerWrapper.style.paddingTop = '8px';
+        headerWrapper.style.paddingBottom = '8px';
+        navContainer.classList.add('shadow-xl', 'bg-white/95');
+        headerLogo.style.height = isMobile ? '60px' : '65px';
       } else {
-        headerLogo.style.height = '65px'; // Tamaño ideal para desktop al bajar
+        headerWrapper.style.paddingTop = '24px';
+        headerWrapper.style.paddingBottom = '24px';
+        navContainer.classList.remove('shadow-xl', 'bg-white/95');
+        headerLogo.style.height = isMobile ? '60px' : '85px';
       }
-    } else {
-      // Cuando está arriba: py original y logo grande
-      headerWrapper.style.paddingTop = '24px';
-      headerWrapper.style.paddingBottom = '24px';
-      navContainer.classList.remove('shadow-xl', 'bg-white/95');
-      
-      if (isMobile) {
-        headerLogo.style.height = '60px'; // Logo móvil arriba
-      } else {
-        headerLogo.style.height = '85px'; // Logo desktop arriba
-      }
-    }
-  });
+    });
 
-  // 2. Lógica Sidebar
-  const openMenu = () => {
-    sidebar.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      overlay.classList.remove('opacity-0');
-      overlay.classList.add('opacity-100');
-      panel.classList.remove('translate-x-full');
-    }, 10);
+    // 2. Lógica Sidebar
+    const openMenu = () => {
+      sidebar.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-100');
+        panel.classList.remove('translate-x-full');
+      }, 10);
+    };
+
+    const closeMenu = () => {
+      overlay.classList.replace('opacity-100', 'opacity-0');
+      panel.classList.add('translate-x-full');
+      setTimeout(() => {
+        sidebar.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 300);
+    };
+
+    // 3. Lógica Submenú Móvil
+    mobileServiciosBtn?.addEventListener('click', () => {
+      const isHidden = mobileServiciosContent.classList.contains('hidden');
+      if (isHidden) {
+        mobileServiciosContent.classList.remove('hidden');
+        mobileServiciosIcon.style.transform = 'rotate(180deg)';
+        animate(mobileServiciosContent, { opacity: [0, 1], y: [-10, 0] }, { duration: 0.3 });
+      } else {
+        mobileServiciosContent.classList.add('hidden');
+        mobileServiciosIcon.style.transform = 'rotate(0deg)';
+      }
+    });
+
+    // 4. INTEGRACIÓN BOOKING FLOW (NUEVO)
+    const handleReservaClick = () => {
+      const modalReserva = document.getElementById('modal-reserva');
+      if (modalReserva) {
+        closeMenu(); // Cerrar sidebar si está abierto
+        modalReserva.classList.remove('hidden');
+        modalReserva.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        
+        // Inicializar lógica de reserva y resetear al Paso 1
+        if (window.initBookingLogic) window.initBookingLogic();
+        if (window.resetBookingFlow) window.resetBookingFlow();
+      }
+    };
+
+    document.getElementById('btn-header-reserva')?.addEventListener('click', handleReservaClick);
+    document.getElementById('btn-header-reserva-mobile')?.addEventListener('click', handleReservaClick);
+
+    openBtn?.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+    overlay?.addEventListener('click', closeMenu);
+    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
   };
 
-  const closeMenu = async () => {
-    overlay.classList.replace('opacity-100', 'opacity-0');
-    panel.classList.add('translate-x-full');
-    setTimeout(() => {
-      sidebar.classList.add('hidden');
-      document.body.style.overflow = '';
-      if(mobileServiciosContent) mobileServiciosContent.classList.add('hidden');
-    }, 300);
-  };
-
-  // 3. Lógica Submenú Móvil
-  mobileServiciosBtn?.addEventListener('click', () => {
-    const isHidden = mobileServiciosContent.classList.contains('hidden');
-    if (isHidden) {
-      mobileServiciosContent.classList.remove('hidden');
-      mobileServiciosIcon.style.transform = 'rotate(180deg)';
-      animate(mobileServiciosContent, { opacity: [0, 1], y: [-10, 0] }, { duration: 0.3 });
-    } else {
-      mobileServiciosContent.classList.add('hidden');
-      mobileServiciosIcon.style.transform = 'rotate(0deg)';
-    }
-  });
-
-  openBtn?.addEventListener('click', openMenu);
-  closeBtn?.addEventListener('click', closeMenu);
-  overlay?.addEventListener('click', closeMenu);
-  mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+  initHeaderLogic();
+  document.addEventListener('astro:after-swap', initHeaderLogic);
 </script>
 
 <style is:global>
   #sidebar-panel { -webkit-overflow-scrolling: touch; overscroll-behavior: contain; transform: translate3d(0, 0, 0); backface-visibility: hidden; }
   .mobile-link { -webkit-tap-highlight-color: transparent; min-height: 44px; }
   .transition-transform { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
-  
-  /* Evitar que el dropdown desktop se corte */
   .group:hover .group-hover\:visible { visibility: visible; }
 </style>

@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro'; 
 import Footer from '../components/Footer.astro';
-
+import StickyBooking from '../components/StickyBooking.astro';
 
 interface Props {
     title?: string;
@@ -19,7 +19,7 @@ const {
 const canonicalURL = new URL(Astro.url.pathname, "https://micropulsespa.com");
 const socialImageURL = new URL(image, Astro.url);
 
-// JSON-LD para SEO Local y Negocio (Rich Snippets)
+// JSON-LD para SEO Local y Negocio (Rich Snippets) - Versión Robusta
 const schema = {
   "@context": "https://schema.org",
   "@type": "HealthAndBeautyBusiness",
@@ -40,8 +40,8 @@ const schema = {
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": 9.9575,
-    "longitude": -84.0811
+    "latitude": 9.957545,
+    "longitude": -84.081121
   },
   "openingHoursSpecification": [
     {
@@ -55,7 +55,8 @@ const schema = {
     "https://www.facebook.com/profile.php?id=61552307075682",
     "https://www.instagram.com/micropulsespa/"
   ],
-  "description": "Expertos en salud estética. Especialidad en micropuntura brasileña para estrías y terapia de relajación con tecnología Ceragem en Costa Rica."
+  "description": "Expertos en salud estética. Especialidad en micropuntura brasileña para estrías y terapia de relajación con tecnología Ceragem en Costa Rica.",
+  "hasMap": "https://www.google.com/maps?cid=TU_CID_AQUI" // Agregado para SEO local
 };
 ---
 
@@ -76,6 +77,12 @@ const schema = {
         
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+
+        <meta name="geo.region" content="CR-SJ" />
+        <meta name="geo.placename" content="Tibás" />
+        <meta name="geo.position" content="9.9575;-84.0811" />
+        <meta name="ICBM" content="9.9575, -84.0811" />
 
         <meta property="og:type" content="website" />
         <meta property="og:url" content={Astro.url} />
@@ -83,6 +90,8 @@ const schema = {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={socialImageURL} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:locale" content="es_CR" />
 
         <meta property="twitter:card" content="summary_large_image" />
@@ -100,6 +109,26 @@ const schema = {
         <link rel="manifest" href="/site.webmanifest" />
 
         <link rel="sitemap" href="/sitemap-index.xml" />
+
+        <script>
+            // Estrategia de carga para mejorar el LCP y el FID
+            document.addEventListener('DOMContentLoaded', () => {
+                // Lazy load de imágenes con clase .lazy-load si existiera
+                const lazyImages = [].slice.call(document.querySelectorAll('img:not([loading])'));
+                if ("IntersectionObserver" in window) {
+                    let lazyImageObserver = new IntersectionObserver((entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting) {
+                                let lazyImage = entry.target as HTMLImageElement;
+                                if (lazyImage.dataset.src) lazyImage.src = lazyImage.dataset.src;
+                                lazyImageObserver.unobserve(lazyImage);
+                            }
+                        });
+                    });
+                    lazyImages.forEach((lazyImage) => lazyImageObserver.observe(lazyImage));
+                }
+            });
+        </script>
     </head>
     <body class="bg-brand-white text-brand-dark selection:bg-brand-primary/30 selection:text-brand-dark">
         <Header />
@@ -107,7 +136,8 @@ const schema = {
         <main id="main-content">
             <slot />
         </main>
-        
+
+        <StickyBooking />
         <Footer />
 
         <style is:global>
@@ -137,6 +167,11 @@ const schema = {
                 font-display: swap;
             }
 
+            /* Optimización de Rendering */
+            img {
+                content-visibility: auto; /* Optimiza carga de imágenes fuera de pantalla */
+            }
+
             /* Accesibilidad: Foco visible */
             :focus-visible {
                 outline: 2px solid var(--brand-primary);
@@ -146,6 +181,22 @@ const schema = {
             /* Estilos sutiles para el desarrollador en consola */
             @media print {
                 .no-print { display: none; }
+            }
+            
+            /* Mejora de la experiencia de scroll */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+            ::-webkit-scrollbar-track {
+                background: var(--brand-white);
+            }
+            ::-webkit-scrollbar-thumb {
+                background: var(--brand-light);
+                border-radius: 10px;
+                border: 2px solid var(--brand-white);
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--brand-primary);
             }
         </style>
     </body>
