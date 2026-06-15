@@ -1,20 +1,13 @@
-// @ts-nocheck
+// @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
-import sitemap from '@astrojs/sitemap'; // 1. Importamos la integración
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  // Dominio principal para generar las URLs del sitemap
-  site: 'https://micropulsespa.com',
-
-  // 2. Añadimos la integración aquí
-  integrations: [sitemap()],
-
+  output: 'server',
+  adapter: vercel(),
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
-
-  adapter: vercel()
 });

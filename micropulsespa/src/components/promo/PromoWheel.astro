@@ -1,0 +1,137 @@
+---
+const prizes = [
+  {
+    id: 1,
+    shortLabel: 'Micropuntura',
+    color: '#ffffff',
+    text: '#1f2024',
+  },
+  {
+    id: 2,
+    shortLabel: 'Limpieza Facial',
+    color: '#b76bc0',
+    text: '#ffffff',
+  },
+  {
+    id: 3,
+    shortLabel: 'Masaje Relajante',
+    color: '#f6e7f7',
+    text: '#1f2024',
+  },
+  {
+    id: 4,
+    shortLabel: 'Camilla Ceragem',
+    color: '#1f2024',
+    text: '#ffffff',
+  },
+  {
+    id: 5,
+    shortLabel: 'Masaje con Pindas',
+    color: '#ffffff',
+    text: '#1f2024',
+  },
+  {
+    id: 6,
+    shortLabel: '15% OFF',
+    color: '#b76bc0',
+    text: '#ffffff',
+  },
+  {
+    id: 7,
+    shortLabel: '20% OFF',
+    color: '#f6e7f7',
+    text: '#1f2024',
+  },
+  {
+    id: 8,
+    shortLabel: 'Bono Sorpresa',
+    color: '#1f2024',
+    text: '#ffffff',
+  },
+];
+
+const arc = 360 / prizes.length;
+
+const gradient = `conic-gradient(${prizes
+  .map((prize, index) => `${prize.color} ${index * arc}deg ${(index + 1) * arc}deg`)
+  .join(', ')})`;
+---
+
+<div
+  data-wheel-area
+  data-prizes={JSON.stringify(prizes)}
+  class="flex flex-col items-center justify-center"
+>
+  <div class="relative mx-auto h-[300px] w-[300px] sm:h-[380px] sm:w-[380px] lg:h-[430px] lg:w-[430px]">
+    <!-- Pointer -->
+    <div class="absolute -top-5 left-1/2 z-30 -translate-x-1/2">
+      <div class="h-0 w-0 border-l-[18px] border-r-[18px] border-t-[34px] border-l-transparent border-r-transparent border-t-[#1f2024] drop-shadow-xl"></div>
+    </div>
+
+    <!-- Glow -->
+    <div class="absolute inset-3 rounded-full bg-[#b76bc0]/10 blur-3xl"></div>
+
+    <!-- Outer ring -->
+    <div class="absolute inset-0 rounded-full bg-white shadow-[0_25px_80px_rgba(43,22,47,.12)]"></div>
+
+    <!-- Wheel -->
+    <div
+      data-wheel
+      class="wheel-idle relative h-full w-full overflow-hidden rounded-full border-[10px] border-white shadow-[0_22px_60px_rgba(43,22,47,.14)]"
+      style={`background: ${gradient};`}
+    >
+      {prizes.map((prize, index) => (
+        <div
+          class="absolute left-1/2 top-0 h-1/2 w-1 origin-bottom"
+          style={`transform: translateX(-50%) rotate(${index * arc + arc / 2}deg);`}
+        >
+          <div
+            class="ml-[-48px] flex w-24 rotate-180 flex-col items-center pt-7 text-center text-[10px] font-black uppercase leading-tight tracking-[0.03em] sm:pt-10 sm:text-[11px]"
+            style={`color: ${prize.text};`}
+          >
+            <span class="mb-1 text-lg">✦</span>
+            <span>{prize.shortLabel}</span>
+          </div>
+        </div>
+      ))}
+
+      <!-- Center -->
+      <div class="absolute left-1/2 top-1/2 z-20 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-white bg-[#fbf8fb] shadow-xl">
+        <div class="flex h-20 w-20 items-center justify-center rounded-full bg-white shadow-inner">
+          <img
+            src="/logo_spa.png"
+            alt="MicroPulse Spa"
+            class="h-14 w-14 object-contain"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    data-spin
+    class="mt-7 w-full max-w-xs rounded-full bg-[#1f2024] px-6 py-4 font-black text-white shadow-[0_10px_24px_rgba(31,32,36,.16)] transition hover:bg-[#b76bc0] disabled:cursor-not-allowed disabled:opacity-60"
+  >
+    Girar ruleta
+  </button>
+
+  <p data-wheel-hint class="mt-3 max-w-xs text-center text-xs leading-relaxed text-[#667085]">
+    Regístrate primero para activar tu giro.
+  </p>
+</div>
+
+<style>
+  @keyframes promo-idle-spin {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .wheel-idle {
+    animation: promo-idle-spin 48s linear infinite;
+  }
+</style>
