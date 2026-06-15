@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  /* Definimos tus colores corporativos aquí para v4 */
+  --color-brand-primary: #b66ab2;
+  --color-brand-light: #ecdfed;
+  --color-brand-dark: #212121;
+  --color-brand-white: #ffffff;
+
+  /* Tipografías */
+  --font-sans: "Inter", "ui-sans-serif", "system-ui", "sans-serif";
+}
+
+@layer base {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-brand-white);
+    color: var(--color-brand-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

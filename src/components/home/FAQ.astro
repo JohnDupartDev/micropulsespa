@@ -1,0 +1,147 @@
+---
+// src/components/FAQ.astro
+---
+
+<main class="flex-1 bg-white">
+  <section class="relative py-20 lg:py-32 text-center px-6 overflow-hidden bg-brand-primary">
+    <div class="absolute inset-0 opacity-20">
+        <div class="absolute top-0 left-0 w-96 h-96 bg-brand-primary/30 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-primary/20 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2"></div>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-3xl">
+      <span class="inline-block px-4 py-1.5 mb-6 text-[10px] font-black uppercase tracking-[0.3em] text-white bg-brand-primary/10 rounded-full border border-brand-primary/20">
+        Centro de Ayuda
+      </span>
+      <h1 class="text-4xl font-black tracking-tighter text-white sm:text-7xl mb-6 ">
+        Preguntas <span class="text-brand-dark">Frecuentes</span>
+      </h1>
+      <p class="text-lg text-slate-300 leading-relaxed font-medium">
+        Todo lo que necesitas saber sobre la Micropuntura Brasileña y nuestros tratamientos avanzados para la regeneración de la piel.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 px-6 lg:px-10 relative">
+    <div class="mx-auto max-w-4xl">
+      <div class="space-y-4">
+        
+        <details class="group rounded-[2rem] border border-slate-100 bg-white p-8 transition-all duration-500 open:shadow-2xl open:shadow-brand-primary/10 open:border-brand-primary/20" open>
+          <summary class="flex cursor-pointer items-center justify-between gap-4 list-none outline-none">
+            <h3 class="text-xl font-black text-brand-dark transition-colors group-open:text-brand-primary">
+                ¿Qué es la Micropuntura Brasileña?
+            </h3>
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 group-open:bg-brand-primary group-open:text-white transition-all duration-300 shadow-sm">
+                <svg class="w-6 h-6 transition-transform duration-500 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </summary>
+          <div class="mt-6 pt-6 border-t border-slate-50">
+            <p class="text-slate-500 text-lg leading-relaxed font-medium">
+                Es una técnica que regenera la piel desde el interior utilizando microagujas de acero quirúrgico. Estimula la producción de colágeno, elastina y ácido hialurónico, reduciendo marcas como estrías y cicatrices hasta en un <strong class="text-brand-primary">95%</strong>.
+            </p>
+          </div>
+        </details>
+
+        <details class="group rounded-[2rem] border border-slate-100 bg-white p-8 transition-all duration-500 open:shadow-2xl open:shadow-brand-primary/10 open:border-brand-primary/20">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 list-none outline-none">
+            <h3 class="text-xl font-black text-brand-dark transition-colors group-open:text-brand-primary">
+                ¿Cómo Funciona la Micropuntura Brasileña?
+            </h3>
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 group-open:bg-brand-primary group-open:text-white transition-all duration-300 shadow-sm">
+                <svg class="w-6 h-6 transition-transform duration-500 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </summary>
+          <div class="mt-6 pt-6 border-t border-slate-50">
+            <p class="text-slate-500 text-lg leading-relaxed font-medium">
+                El proceso crea microcanales controlados en la dermis, activando el mecanismo natural de reparación del cuerpo. Esto permite una absorción profunda de activos regeneradores y una reestructuración inmediata del tejido cutáneo.
+            </p>
+          </div>
+        </details>
+
+        <details class="group rounded-[2rem] border border-slate-100 bg-white p-8 transition-all duration-500 open:shadow-2xl open:shadow-brand-primary/10 open:border-brand-primary/20">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 list-none outline-none">
+            <h3 class="text-xl font-black text-brand-dark transition-colors group-open:text-brand-primary">
+                ¿Cuántas Sesiones se Recomiendan?
+            </h3>
+            <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 group-open:bg-brand-primary group-open:text-white transition-all duration-300 shadow-sm">
+                <svg class="w-6 h-6 transition-transform duration-500 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+          </summary>
+          <div class="mt-6 pt-6 border-t border-slate-50">
+            <p class="text-slate-500 text-lg leading-relaxed font-medium">
+                Aunque los resultados son visibles desde la primera sesión, se recomiendan entre <strong class="text-brand-primary">3 y 5 sesiones</strong> dependiendo de la profundidad y tipo de marca, con intervalos de 30 días para respetar el ciclo celular.
+            </p>
+          </div>
+        </details>
+
+        <details class="group rounded-[2rem] border border-slate-100 bg-white p-8 transition-all duration-500 open:shadow-2xl open:shadow-brand-primary/10 open:border-brand-primary/20">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 list-none outline-none">
+              <h3 class="text-xl font-black text-brand-dark transition-colors group-open:text-brand-primary">
+                ¿Qué Marcas en la Piel Puede Tratar?
+              </h3>
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 group-open:bg-brand-primary group-open:text-white transition-all duration-300 shadow-sm">
+                  <svg class="w-6 h-6 transition-transform duration-500 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </summary>
+            <div class="mt-6 pt-6 border-t border-slate-50">
+              <p class="text-slate-500 text-lg leading-relaxed font-medium">
+                Es altamente efectivo para estrías blancas y rojas, cicatrices quirúrgicas, marcas de acné, arrugas profundas, líneas de expresión y flacidez cutánea en diversas áreas del cuerpo.
+              </p>
+            </div>
+          </details>
+
+        <details class="group rounded-[2rem] border border-slate-100 bg-white p-8 transition-all duration-500 open:shadow-2xl open:shadow-brand-primary/10 open:border-brand-primary/20">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 list-none outline-none">
+              <h3 class="text-xl font-black text-brand-dark transition-colors group-open:text-brand-primary">
+                ¿Cuánto Dura La Sesión?
+              </h3>
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 group-open:bg-brand-primary group-open:text-white transition-all duration-300 shadow-sm">
+                  <svg class="w-6 h-6 transition-transform duration-500 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </summary>
+            <div class="mt-6 pt-6 border-t border-slate-50">
+              <p class="text-slate-500 text-lg leading-relaxed font-medium">
+                La duración varía según el tamaño del área a tratar, oscilando generalmente entre <strong class="text-brand-primary">45 y 90 minutos</strong> por sesión.
+              </p>
+            </div>
+          </details>
+
+        <details class="group rounded-[2rem] border border-slate-100 bg-white p-8 transition-all duration-500 open:shadow-2xl open:shadow-brand-primary/10 open:border-brand-primary/20">
+            <summary class="flex cursor-pointer items-center justify-between gap-4 list-none outline-none">
+              <h3 class="text-xl font-black text-brand-dark transition-colors group-open:text-brand-primary">
+                ¿Es Doloroso el Tratamiento?
+              </h3>
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 group-open:bg-brand-primary group-open:text-white transition-all duration-300 shadow-sm">
+                  <svg class="w-6 h-6 transition-transform duration-500 group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"></path></svg>
+              </div>
+            </summary>
+            <div class="mt-6 pt-6 border-t border-slate-50">
+              <p class="text-slate-500 text-lg leading-relaxed font-medium">
+                El nivel de molestia es mínimo. Se utiliza <strong class="text-brand-primary">anestesia tópica de grado médico</strong> para asegurar que te sientas cómoda durante todo el procedimiento.
+              </p>
+            </div>
+          </details>
+
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<style>
+  /* Animación suave para el acordeón */
+  details[open] summary ~ * {
+    animation: slideDown 0.4s ease-out;
+  }
+
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Ocultar flecha nativa de summary */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+</style>
