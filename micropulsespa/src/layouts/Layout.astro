@@ -1,203 +1,735 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro'; 
+import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import StickyBooking from '../components/StickyBooking.astro';
 
 interface Props {
-    title?: string;
-    description?: string;
-    image?: string;
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  noindex?: boolean;
 }
 
-const { 
-    title = "MicropulseSpa | Micropuntura Brasileña y Bienestar en Tibás",
-    description = "Especialistas en micropuntura brasileña en San José. Eliminamos hasta un 95% de estrías. Relájate en nuestra camilla Ceragem. ¡Reserva hoy al 8822-7210!",
-    image = "/og-image.jpg"
+const {
+  title = "MicropulseSpa | Micropuntura Brasileña, Estética y Bienestar en Tibás",
+  description = "Centro estético y spa en Tibás, San José. Especialistas en micropuntura brasileña para mejorar la apariencia de estrías, limpieza facial profunda, masaje relajante, presoterapia y terapia de bienestar con camilla Ceragem.",
+  image = "/og-image.jpg",
+  canonical,
+  noindex = false,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, "https://micropulsespa.com");
-const socialImageURL = new URL(image, Astro.url);
+/**
+ * CONFIGURACIÓN BASE DEL SITIO
+ */
+const siteURL = Astro.site ?? new URL("https://micropulsespa.com");
+const businessURL = siteURL.origin;
+const currentURL = new URL(Astro.url.pathname, siteURL);
+const canonicalURL = canonical ? new URL(canonical, siteURL) : currentURL;
+const absoluteImageURL = new URL(image, siteURL);
+const logoURL = new URL("/favicon.ico", siteURL);
+const faviconURL = new URL("/favicon.ico", siteURL);
+const llmsURL = new URL("/llms.txt", siteURL);
 
-// JSON-LD para SEO Local y Negocio (Rich Snippets) - Versión Robusta
-const schema = {
+const imageExtension = absoluteImageURL.pathname.split(".").pop()?.toLowerCase();
+const ogImageType =
+  imageExtension === "png"
+    ? "image/png"
+    : imageExtension === "webp"
+    ? "image/webp"
+    : "image/jpeg";
+
+/**
+ * DATOS DEL NEGOCIO
+ */
+const businessName = "MicropulseSpa";
+const businessLegalName = "Micropulse Spa Costa Rica";
+const businessPhone = "+50688227210";
+const businessPhoneReadable = "8822-7210";
+const businessWhatsApp = "https://wa.me/50688227210";
+
+const businessAddress =
+  "5 esquinas del puente elevado, 300 metros al este y 75 al norte, séptima casa entrando a mano izquierda, portón negro";
+const businessCity = "Tibás";
+const businessRegion = "San José";
+const businessPostalCode = "11301";
+const businessCountry = "CR";
+const businessCountryName = "Costa Rica";
+
+const businessLatitude = 9.957545;
+const businessLongitude = -84.081121;
+
+const instagramURL = "https://www.instagram.com/micropulsespa/";
+const facebookURL = "https://www.facebook.com/profile.php?id=61552307075682";
+
+const robotsContent = noindex
+  ? "noindex, nofollow"
+  : "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1";
+
+/**
+ * KEYWORDS SEO
+ * Nota: Google no depende del meta keywords como antes,
+ * pero sirve como refuerzo semántico para otros motores, IA y estructura interna.
+ */
+const keywords = [
+  "micropuntura brasileña",
+  "micropuntura brasileña costa rica",
+  "micropuntura brasileña tibás",
+  "micropuntura brasileña san josé",
+  "micropuntura para estrías",
+  "micropuntura para estrias",
+  "tratamiento para estrías",
+  "tratamiento para estrias",
+  "eliminar estrías",
+  "eliminar estrias",
+  "reducir estrías",
+  "reducir estrias",
+  "mejorar apariencia de estrías",
+  "mejorar apariencia de estrias",
+  "tratamiento estético para estrías",
+  "tratamiento estetico para estrias",
+  "spa en tibás",
+  "spa en tibas",
+  "spa en san josé costa rica",
+  "spa en san jose costa rica",
+  "centro estético en tibás",
+  "centro estetico en tibas",
+  "centro de estética en san josé",
+  "centro de estetica en san jose",
+  "estética corporal costa rica",
+  "estetica corporal costa rica",
+  "estética facial costa rica",
+  "estetica facial costa rica",
+  "limpieza facial profunda",
+  "limpieza facial profunda tibás",
+  "limpieza facial san josé",
+  "facial profundo costa rica",
+  "masaje relajante",
+  "masaje relajante tibás",
+  "masaje relajante san josé",
+  "presoterapia",
+  "presoterapia costa rica",
+  "presoterapia tibás",
+  "botas de compresión",
+  "botas de compresion",
+  "drenaje linfático",
+  "drenaje linfatico",
+  "terapia de bienestar",
+  "camilla ceragem",
+  "ceragem costa rica",
+  "terapia ceragem",
+  "relajación corporal",
+  "relajacion corporal",
+  "bienestar corporal",
+  "tratamientos corporales",
+  "tratamientos faciales",
+  "spa cerca de mí",
+  "spa cerca de mi",
+  "estética cerca de mí",
+  "estetica cerca de mi",
+  "micropulse spa",
+  "micropulsespa",
+  "micropulse spa costa rica",
+  "micropulse spa tibás",
+  "micropulse spa san josé"
+];
+
+const serviceAreas = [
+  "Tibás",
+  "San José",
+  "Moravia",
+  "Guadalupe",
+  "Santo Domingo",
+  "Heredia",
+  "Costa Rica"
+];
+
+/**
+ * SERVICIOS PRINCIPALES
+ */
+const services = [
+  {
+    name: "Micropuntura brasileña para estrías",
+    description:
+      "Tratamiento estético especializado que ayuda a mejorar la apariencia de estrías mediante técnica de micropuntura brasileña.",
+    serviceType: "Micropuntura brasileña"
+  },
+  {
+    name: "Limpieza facial profunda",
+    description:
+      "Servicio facial orientado a limpiar, oxigenar y revitalizar la piel mediante protocolo estético profesional.",
+    serviceType: "Estética facial"
+  },
+  {
+    name: "Masaje relajante",
+    description:
+      "Experiencia corporal de bienestar diseñada para disminuir tensión, promover relajación y mejorar la sensación de descanso.",
+    serviceType: "Masaje de bienestar"
+  },
+  {
+    name: "Presoterapia con botas de compresión",
+    description:
+      "Terapia corporal con botas de compresión que favorece la sensación de descanso, bienestar y drenaje corporal.",
+    serviceType: "Presoterapia"
+  },
+  {
+    name: "Terapia de bienestar con camilla Ceragem",
+    description:
+      "Sesión de relajación y bienestar corporal con tecnología Ceragem para promover descanso y confort físico.",
+    serviceType: "Bienestar corporal"
+  },
+  {
+    name: "Valoración estética personalizada",
+    description:
+      "Evaluación inicial para orientar a cada paciente sobre el tratamiento estético más adecuado según sus necesidades.",
+    serviceType: "Valoración estética"
+  }
+];
+
+/**
+ * FAQ SEO
+ */
+const faqs = [
+  {
+    question: "¿Dónde está ubicado MicropulseSpa?",
+    answer:
+      "MicropulseSpa está ubicado en Tibás, San José, Costa Rica, cerca de las 5 esquinas del puente elevado, 300 metros al este y 75 al norte."
+  },
+  {
+    question: "¿Qué es la micropuntura brasileña?",
+    answer:
+      "La micropuntura brasileña es un tratamiento estético enfocado en mejorar la apariencia de estrías mediante una técnica especializada de estimulación cutánea."
+  },
+  {
+    question: "¿La micropuntura sirve para estrías?",
+    answer:
+      "Sí. En MicropulseSpa se trabaja la micropuntura brasileña como tratamiento estético para ayudar a mejorar la apariencia de estrías de forma progresiva."
+  },
+  {
+    question: "¿Qué servicios ofrece MicropulseSpa?",
+    answer:
+      "MicropulseSpa ofrece micropuntura brasileña, limpieza facial profunda, masaje relajante, presoterapia con botas de compresión, terapia de bienestar con camilla Ceragem y valoraciones estéticas."
+  },
+  {
+    question: "¿Cómo puedo reservar una cita?",
+    answer:
+      "Puedes reservar tu cita escribiendo por WhatsApp al 8822-7210 o utilizando los botones de reserva disponibles en el sitio web."
+  }
+];
+
+/**
+ * STRUCTURED DATA SEO AVANZADO
+ */
+const structuredData = {
   "@context": "https://schema.org",
-  "@type": "HealthAndBeautyBusiness",
-  "name": "MicropulseSpa",
-  "alternateName": "Micropulse Spa Costa Rica",
-  "image": socialImageURL,
-  "@id": "https://micropulsespa.com",
-  "url": "https://micropulsespa.com",
-  "telephone": "+50688227210",
-  "priceRange": "₡₡",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "5 esquinas del puente elevado, 300 metros al este y 75 al norte, séptima casa entrando a mano izquierda, portón negro",
-    "addressLocality": "Tibás",
-    "addressRegion": "San José",
-    "postalCode": "11301",
-    "addressCountry": "CR"
-  },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 9.957545,
-    "longitude": -84.081121
-  },
-  "openingHoursSpecification": [
+  "@graph": [
     {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "opens": "09:00",
-      "closes": "18:00"
+      "@type": "WebSite",
+      "@id": `${businessURL}/#website`,
+      "url": businessURL,
+      "name": businessName,
+      "alternateName": [
+        "Micropulse Spa",
+        "Micropulse Spa Costa Rica",
+        "MicropulseSpa Tibás",
+        "MicropulseSpa San José"
+      ],
+      "description": description,
+      "inLanguage": "es-CR",
+      "publisher": {
+        "@id": `${businessURL}/#organization`
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${businessURL}/?s={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonicalURL.toString()}#webpage`,
+      "url": canonicalURL.toString(),
+      "name": title,
+      "description": description,
+      "inLanguage": "es-CR",
+      "isPartOf": {
+        "@id": `${businessURL}/#website`
+      },
+      "about": {
+        "@id": `${businessURL}/#organization`
+      },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "@id": `${absoluteImageURL.toString()}#primaryimage`,
+        "url": absoluteImageURL.toString(),
+        "contentUrl": absoluteImageURL.toString(),
+        "caption": "MicropulseSpa centro estético y spa en Tibás, San José"
+      },
+      "breadcrumb": {
+        "@id": `${canonicalURL.toString()}#breadcrumb`
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonicalURL.toString()}#breadcrumb`,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": businessURL
+        }
+      ]
+    },
+    {
+      "@type": [
+        "Organization",
+        "LocalBusiness",
+        "HealthAndBeautyBusiness",
+        "BeautySalon",
+        "DaySpa"
+      ],
+      "@id": `${businessURL}/#organization`,
+      "name": businessName,
+      "legalName": businessLegalName,
+      "url": businessURL,
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${logoURL.toString()}#logo`,
+        "url": logoURL.toString(),
+        "contentUrl": logoURL.toString(),
+        "caption": "Logo de MicropulseSpa"
+      },
+      "image": [
+        absoluteImageURL.toString()
+      ],
+      "description":
+        "MicropulseSpa es un centro estético y spa ubicado en Tibás, San José, Costa Rica. Especialistas en micropuntura brasileña para mejorar la apariencia de estrías, limpieza facial profunda, masaje relajante, presoterapia con botas de compresión y terapia de bienestar con camilla Ceragem.",
+      "telephone": businessPhone,
+      "priceRange": "₡₡",
+      "currenciesAccepted": "CRC",
+      "paymentAccepted": [
+        "Cash",
+        "Credit Card",
+        "Debit Card",
+        "SINPE Móvil"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": businessAddress,
+        "addressLocality": businessCity,
+        "addressRegion": businessRegion,
+        "postalCode": businessPostalCode,
+        "addressCountry": businessCountry
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": businessLatitude,
+        "longitude": businessLongitude
+      },
+      "hasMap": `https://maps.google.com/?q=${businessLatitude},${businessLongitude}`,
+      "openingHours": "Mo-Sa 09:00-18:00",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": serviceAreas.map((area) => ({
+        "@type": area === "Costa Rica" ? "Country" : "City",
+        "name": area
+      })),
+      "knowsAbout": [
+        "Micropuntura brasileña",
+        "Tratamiento estético para estrías",
+        "Estética corporal",
+        "Estética facial",
+        "Limpieza facial profunda",
+        "Masaje relajante",
+        "Presoterapia",
+        "Botas de compresión",
+        "Camilla Ceragem",
+        "Bienestar corporal",
+        "Spa en Tibás",
+        "Centro estético en San José"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": businessPhone,
+          "contactType": "customer service",
+          "areaServed": "CR",
+          "availableLanguage": [
+            "es-CR",
+            "es"
+          ],
+          "url": businessWhatsApp
+        },
+        {
+          "@type": "ContactPoint",
+          "telephone": businessPhone,
+          "contactType": "reservations",
+          "areaServed": serviceAreas,
+          "availableLanguage": [
+            "es-CR",
+            "es"
+          ],
+          "url": businessWhatsApp
+        }
+      ],
+      "sameAs": [
+        facebookURL,
+        instagramURL
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "@id": `${businessURL}/#offer-catalog`,
+        "name": "Catálogo de servicios de MicropulseSpa",
+        "itemListElement": [
+          {
+            "@type": "OfferCatalog",
+            "name": "Tratamientos estéticos corporales",
+            "itemListElement": [
+              {
+                "@type": "Service",
+                "name": "Micropuntura brasileña para estrías",
+                "description":
+                  "Tratamiento estético especializado para mejorar la apariencia de estrías mediante técnica de micropuntura brasileña.",
+                "serviceType": "Micropuntura brasileña",
+                "provider": {
+                  "@id": `${businessURL}/#organization`
+                },
+                "areaServed": {
+                  "@type": "City",
+                  "name": "Tibás"
+                }
+              },
+              {
+                "@type": "Service",
+                "name": "Presoterapia con botas de compresión",
+                "description":
+                  "Terapia corporal con botas de compresión orientada al bienestar, descanso y sensación de drenaje corporal.",
+                "serviceType": "Presoterapia",
+                "provider": {
+                  "@id": `${businessURL}/#organization`
+                }
+              }
+            ]
+          },
+          {
+            "@type": "OfferCatalog",
+            "name": "Servicios faciales y de bienestar",
+            "itemListElement": [
+              {
+                "@type": "Service",
+                "name": "Limpieza facial profunda",
+                "description":
+                  "Protocolo facial profesional para limpiar, oxigenar y revitalizar la piel.",
+                "serviceType": "Estética facial",
+                "provider": {
+                  "@id": `${businessURL}/#organization`
+                }
+              },
+              {
+                "@type": "Service",
+                "name": "Masaje relajante",
+                "description":
+                  "Masaje corporal de bienestar para promover relajación y descanso.",
+                "serviceType": "Masaje relajante",
+                "provider": {
+                  "@id": `${businessURL}/#organization`
+                }
+              },
+              {
+                "@type": "Service",
+                "name": "Terapia de bienestar con camilla Ceragem",
+                "description":
+                  "Sesión de bienestar corporal con tecnología Ceragem para promover descanso y confort físico.",
+                "serviceType": "Bienestar corporal",
+                "provider": {
+                  "@id": `${businessURL}/#organization`
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${canonicalURL.toString()}#faq`,
+      "mainEntity": faqs.map((faq) => ({
+        "@type": "Question",
+        "name": faq.question,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": faq.answer
+        }
+      }))
+    },
+    {
+      "@type": "ItemList",
+      "@id": `${businessURL}/#services-list`,
+      "name": "Servicios estéticos y de bienestar de MicropulseSpa",
+      "description":
+        "Listado de servicios principales de MicropulseSpa en Tibás, San José, Costa Rica.",
+      "itemListElement": services.map((service, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "name": service.name,
+        "description": service.description,
+        "url": `${businessURL}/#servicios`
+      }))
     }
-  ],
-  "sameAs": [
-    "https://www.facebook.com/profile.php?id=61552307075682",
-    "https://www.instagram.com/micropulsespa/"
-  ],
-  "description": "Expertos en salud estética. Especialidad en micropuntura brasileña para estrías y terapia de relajación con tecnología Ceragem en Costa Rica.",
-  "hasMap": "https://www.google.com/maps?cid=TU_CID_AQUI" // Agregado para SEO local
+  ]
 };
 ---
 
 <!doctype html>
 <html lang="es-CR">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-        <meta name="generator" content={Astro.generator} />
-        <meta name="theme-color" content="#b66ab2" />
-        <meta name="author" content="ZipaquiraDigital.com" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=5.0" />
 
-        <title>{title}</title>
-        <meta name="title" content={title} />
-        <meta name="description" content={description} />
-        <link rel="canonical" href={canonicalURL} />
-        
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow" />
-        <meta name="bingbot" content="index, follow" />
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
+    <meta name="googlebot" content={robotsContent} />
+    <meta name="bingbot" content={robotsContent} />
+    <link rel="canonical" href={canonicalURL.toString()} />
 
-        <meta name="geo.region" content="CR-SJ" />
-        <meta name="geo.placename" content="Tibás" />
-        <meta name="geo.position" content="9.9575;-84.0811" />
-        <meta name="ICBM" content="9.9575, -84.0811" />
+    <!-- Configuración técnica -->
+    <meta name="generator" content={Astro.generator} />
+    <meta name="format-detection" content="telephone=yes, address=yes, email=no" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#b66ab2" />
+    <meta name="color-scheme" content="light" />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.url} />
-        <meta property="og:site_name" content="MicropulseSpa" />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={socialImageURL} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:locale" content="es_CR" />
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href={faviconURL.toString()} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={Astro.url} />
-        <meta property="twitter:title" content={title} />
-        <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content={socialImageURL} />
+    <!-- Autoría y metadatos -->
+    <meta name="author" content="Zipaquirá Digital | https://zipaquiradigital.com" />
+    <meta name="designer" content="Zipaquirá Digital" />
+    <meta name="publisher" content="Zipaquirá Digital" />
+    <meta name="copyright" content={`© ${new Date().getFullYear()} MicropulseSpa`} />
 
-        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <!-- Keywords optimizadas -->
+    <meta name="keywords" content={keywords.join(", ")} />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
+    <!-- SEO Local / GEO -->
+    <meta name="geo.region" content="CR-SJ" />
+    <meta name="geo.placename" content="Tibás, San José, Costa Rica" />
+    <meta name="geo.position" content={`${businessLatitude};${businessLongitude}`} />
+    <meta name="ICBM" content={`${businessLatitude}, ${businessLongitude}`} />
 
-        <link rel="sitemap" href="/sitemap-index.xml" />
+    <!-- Dublin Core -->
+    <meta name="DC.title" content={title} />
+    <meta name="DC.description" content={description} />
+    <meta name="DC.language" content="es-CR" />
+    <meta name="DC.coverage" content="Tibás, San José, Costa Rica" />
 
-        <script>
-            // Estrategia de carga para mejorar el LCP y el FID
-            document.addEventListener('DOMContentLoaded', () => {
-                // Lazy load de imágenes con clase .lazy-load si existiera
-                const lazyImages = [].slice.call(document.querySelectorAll('img:not([loading])'));
-                if ("IntersectionObserver" in window) {
-                    let lazyImageObserver = new IntersectionObserver((entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting) {
-                                let lazyImage = entry.target as HTMLImageElement;
-                                if (lazyImage.dataset.src) lazyImage.src = lazyImage.dataset.src;
-                                lazyImageObserver.unobserve(lazyImage);
-                            }
-                        });
-                    });
-                    lazyImages.forEach((lazyImage) => lazyImageObserver.observe(lazyImage));
-                }
-            });
-        </script>
-    </head>
-    <body class="bg-brand-white text-brand-dark selection:bg-brand-primary/30 selection:text-brand-dark">
-        <Header />
-        
-        <main id="main-content">
-            <slot />
-        </main>
+    <!-- Datos de negocio local -->
+    <meta name="business:contact_data:street_address" content={businessAddress} />
+    <meta name="business:contact_data:locality" content={businessCity} />
+    <meta name="business:contact_data:region" content={businessRegion} />
+    <meta name="business:contact_data:postal_code" content={businessPostalCode} />
+    <meta name="business:contact_data:country_name" content={businessCountryName} />
+    <meta name="business:contact_data:phone_number" content={businessPhoneReadable} />
 
-        <StickyBooking />
-        <Footer />
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.toString()} />
+    <meta property="og:site_name" content={businessName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={absoluteImageURL.toString()} />
+    <meta property="og:image:secure_url" content={absoluteImageURL.toString()} />
+    <meta property="og:image:type" content={ogImageType} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MicropulseSpa centro estético, micropuntura brasileña y spa en Tibás, San José" />
+    <meta property="og:locale" content="es_CR" />
 
-        <style is:global>
-            /* Variables Globales de Marca */
-            :root {
-                --brand-primary: #b66ab2;
-                --brand-light: #ecdfed;
-                --brand-dark: #212121;
-                --brand-white: #ffffff;
-            }
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalURL.toString()} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteImageURL.toString()} />
+    <meta name="twitter:image:alt" content="MicropulseSpa centro estético y spa en Tibás, San José" />
 
-            /* Reset y Prevención de Desbordamiento */
-            html, body {
-                overflow-x: hidden;
-                position: relative;
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                scroll-behavior: smooth;
-            }
+    <!-- Idioma y alternativas -->
+    <link rel="alternate" hreflang="es-CR" href={canonicalURL.toString()} />
+    <link rel="alternate" hreflang="x-default" href={businessURL} />
+    <link rel="alternate" type="text/plain" href={llmsURL.toString()} title="Información para IA" />
 
-            /* Tipografía y Renderizado Pro */
-            body {
-                -webkit-font-smoothing: antialiased;
-                -moz-osx-font-smoothing: grayscale;
-                text-rendering: optimizeLegibility;
-                font-display: swap;
-            }
+    <!-- Sitemap -->
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
-            /* Optimización de Rendering */
-            img {
-                content-visibility: auto; /* Optimiza carga de imágenes fuera de pantalla */
-            }
+    <!-- Preconexión a fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 
-            /* Accesibilidad: Foco visible */
-            :focus-visible {
-                outline: 2px solid var(--brand-primary);
-                outline-offset: 4px;
-            }
+    <!-- Carga optimizada de fuentes -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
 
-            /* Estilos sutiles para el desarrollador en consola */
-            @media print {
-                .no-print { display: none; }
-            }
-            
-            /* Mejora de la experiencia de scroll */
-            ::-webkit-scrollbar {
-                width: 10px;
-            }
-            ::-webkit-scrollbar-track {
-                background: var(--brand-white);
-            }
-            ::-webkit-scrollbar-thumb {
-                background: var(--brand-light);
-                border-radius: 10px;
-                border: 2px solid var(--brand-white);
-            }
-            ::-webkit-scrollbar-thumb:hover {
-                background: var(--brand-primary);
-            }
-        </style>
-    </body>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- JSON-LD Schema avanzado -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+    <!-- Script ligero para mejorar lazy loading sin afectar LCP -->
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const images = document.querySelectorAll('img:not([loading])');
+
+        images.forEach((img) => {
+          img.setAttribute('loading', 'lazy');
+          img.setAttribute('decoding', 'async');
+        });
+      });
+    </script>
+  </head>
+
+  <body class="bg-brand-white text-brand-dark selection:bg-brand-primary/30 selection:text-brand-dark antialiased min-h-screen">
+    <Header />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <StickyBooking />
+    <Footer />
+
+    <style is:global>
+      :root {
+        --brand-primary: #b66ab2;
+        --brand-primary-dark: #985294;
+        --brand-light: #ecdfed;
+        --brand-soft: #f8f1f8;
+        --brand-dark: #212121;
+        --brand-muted: #686868;
+        --brand-white: #ffffff;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
+
+      html {
+        background-color: var(--brand-white);
+      }
+
+      body {
+        position: relative;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+      }
+
+      img,
+      svg,
+      video,
+      canvas,
+      iframe {
+        max-width: 100%;
+      }
+
+      img {
+        height: auto;
+      }
+
+      a {
+        text-decoration-thickness: from-font;
+        text-underline-offset: 0.2em;
+      }
+
+      :focus-visible {
+        outline: 2px solid var(--brand-primary);
+        outline-offset: 4px;
+      }
+
+      ::selection {
+        background-color: rgba(182, 106, 178, 0.3);
+        color: var(--brand-dark);
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--brand-white);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--brand-light);
+        border-radius: 10px;
+        border: 2px solid var(--brand-white);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--brand-primary);
+      }
+
+      @media print {
+        .no-print,
+        header,
+        footer {
+          display: none !important;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.001ms !important;
+          animation-iteration-count: 1 !important;
+          scroll-behavior: auto !important;
+          transition-duration: 0.001ms !important;
+        }
+      }
+    </style>
+  </body>
 </html>
