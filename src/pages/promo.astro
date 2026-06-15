@@ -1,0 +1,97 @@
+---
+import '../styles/global.css';
+import PromoHero from '../components/promo/PromoHero.astro';
+import PromoGameSection from '../components/promo/PromoGameSection.astro';
+import PromoContentSections from '../components/promo/PromoContentSections.astro';
+---
+
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ruleta de Inauguración | MicroPulse Spa</title>
+    <meta
+      name="description"
+      content="Participa en la ruleta de inauguración de MicroPulse Spa. Regístrate, gira y reclama tu premio."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+
+  <body class="bg-[#fbf8fb] text-[#1f2024]">
+    <main class="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_top_right,rgba(187,106,193,0.11),transparent_32%),linear-gradient(90deg,#ffffff_0%,#fbf8fb_50%,#f8f1f8_100%)]">
+      <header class="mx-auto max-w-7xl px-5 pt-7 lg:px-10">
+        <nav class="flex items-center justify-between rounded-[2rem] border border-[#ead8ec] bg-white/90 px-5 py-4 shadow-[0_18px_45px_rgba(43,22,47,.08)] backdrop-blur md:px-7">
+          <a href="/" class="flex items-center gap-3">
+            <img
+              src="/logo_spa.png"
+              alt="MicroPulse Spa"
+              class="h-14 w-14 object-contain md:h-16 md:w-16"
+            />
+          </a>
+
+          <div class="hidden items-center gap-10 text-[15px] font-medium text-[#3f4652] md:flex">
+            <a href="/" class="transition hover:text-[#b76bc0]">Home</a>
+            <a href="/sobre-nosotros" class="transition hover:text-[#b76bc0]">Sobre Nosotros</a>
+            <a href="/#servicios" class="transition hover:text-[#b76bc0]">Servicios</a>
+            <a href="/contacto" class="transition hover:text-[#b76bc0]">Contacto</a>
+          </div>
+
+          <a
+            href="/"
+            class="rounded-full bg-[#1f2024] px-5 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-[#b76bc0] md:px-7"
+          >
+            Volver
+          </a>
+        </nav>
+      </header>
+
+      <PromoHero />
+      <PromoGameSection />
+      <PromoContentSections />
+    </main>
+
+    <div
+      data-notice
+      class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/30 p-4 backdrop-blur-sm"
+    >
+      <div class="w-full max-w-md rounded-[2rem] bg-white p-7 text-center shadow-[0_28px_80px_rgba(43,22,47,.2)]">
+        <div data-notice-icon class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#fbf2fc] text-3xl">
+          ⚠️
+        </div>
+
+        <h3 data-notice-title class="mt-5 text-2xl font-black text-[#1f2024]">
+          Atención
+        </h3>
+
+        <p data-notice-message class="mt-3 text-sm leading-relaxed text-[#667085]">
+          Primero debes registrarte para girar la ruleta.
+        </p>
+
+        <button
+          data-notice-close
+          class="mt-6 rounded-full bg-[#b76bc0] px-8 py-3 font-black text-white"
+        >
+          Entendido
+        </button>
+      </div>
+    </div>
+
+    <script src="../scripts/promo-wheel.js"></script>
+  </body>
+</html>
