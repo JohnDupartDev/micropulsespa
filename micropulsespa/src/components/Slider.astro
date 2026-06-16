@@ -1,165 +1,354 @@
 ---
-// Datos de los casos de éxito
-const casosExito = [
+const sliders = [
   {
-    titulo: "Limpieza Profunda",
-    subtitulo: "Eliminación de comedones",
-    antes: "/images/limpieza-profunda-antes.jpg",
-    despues: "/images/limpieza-facial-despues.jpg",
-    mejora: "92%",
-    detalle: "Reducción de<br/>Puntos Negros"
+    id: "limpieza-profunda",
+    title: "Limpieza Profunda",
+    subtitle: "ELIMINACIÓN DE COMEDONES",
+     beforeImage: "/images/limpieza-facial-despues.jpg",
+    afterImage: "/images/limpieza-profunda-antes.jpg",
+   
+    stat: "92%",
+    statLabel: "REDUCCIÓN DE\nPUNTOS NEGROS",
+    beforeLabel: "ANTES",
+    afterLabel: "DESPUÉS",
+    beforeFocusX: "50%",
+    beforeFocusY: "50%",
+    afterFocusX: "50%",
+    afterFocusY: "50%"
   },
+      
   {
-    titulo: "Control de Acné",
-    subtitulo: "Protocolo de 4 sesiones",
-    antes: "/images/eliminar-acne-costarica-antes.jpg",
-    despues: "/images/eliminar-acne-costarica-despues.jpg",
-    mejora: "75%",
-    detalle: "Disminución de<br/>Inflamación"
+    id: "control-acne",
+    title: "Control de Acné",
+    subtitle: "PROTOCOLO DE 4 SESIONES",
+    beforeImage: "/images/eliminar-acne-costarica-antes.jpg",
+    afterImage: "/images/eliminar-acne-costarica-despues.jpg",
+    stat: "75%",
+    statLabel: "DISMINUCIÓN DE\nINFLAMACIÓN",
+    beforeLabel: "ANTES",
+    afterLabel: "DESPUÉS",
+    beforeFocusX: "50%",
+    beforeFocusY: "50%",
+    afterFocusX: "50%",
+    afterFocusY: "50%"
   }
 ];
 ---
 
-<section class="py-24 bg-white overflow-hidden">
+<section class="relative py-16 lg:py-24 bg-white overflow-hidden">
   <div class="max-w-7xl mx-auto px-6">
-    
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
-      <div class="max-w-2xl">
-        <span class="text-[10px] font-black text-brand-primary uppercase tracking-[0.4em] mb-4 block">Evidencia Clínica</span>
-        <h2 class="text-4xl md:text-6xl font-black text-brand-dark tracking-tighter leading-none italic">
-          Resultados <span class="text-brand-primary not-italic">Visibles.</span>
-        </h2>
-        <p class="text-slate-500 mt-4 font-medium italic">Desliza para comparar el cambio real tras nuestros tratamientos faciales.</p>
-      </div>
-    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 xl:gap-20">
+      {sliders.map((item) => (
+        <article class="relative">
+          <div class="mb-8">
+            <h2 class="text-3xl md:text-4xl lg:text-5xl font-black italic text-brand-dark leading-none tracking-tight">
+              {item.title}
+            </h2>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-center">
-      {casosExito.map((caso, index) => (
-        <div class="relative group" data-case={index}>
-          <div class="mb-6">
-            <h3 class="text-2xl font-black text-brand-dark italic">{caso.titulo}</h3>
-            <p class="text-brand-primary text-xs font-bold uppercase tracking-widest">{caso.subtitulo}</p>
+            <p class="mt-3 text-[11px] md:text-sm font-black text-brand-primary uppercase tracking-[0.28em]">
+              {item.subtitle}
+            </p>
           </div>
 
-          <div class="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl transition-transform duration-500 select-none aspect-square md:aspect-video lg:aspect-square">
-            <div class="image-comparison-slider relative w-full h-full bg-slate-200 cursor-ew-resize">
-                <img 
-                    src={caso.despues} 
-                    alt="Después" 
-                    class="absolute inset-0 w-full h-full object-cover"
-                />
-                
-                <div class="before-image-container absolute inset-0 w-1/2 overflow-hidden border-r-4 border-white shadow-2xl z-10">
-                    <img 
-                        src={caso.antes} 
-                        alt="Antes" 
-                        class="before-img-el absolute inset-0 h-full max-w-none object-cover"
-                    />
-                    <div class="absolute top-6 left-6 bg-brand-dark/80 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em]">Antes</div>
-                </div>
+          <div
+            data-facial-comparison-slider
+            class="facial-comparison-slider relative w-full aspect-[4/5] sm:aspect-[5/4] lg:aspect-[4/5] xl:aspect-[5/4] rounded-[2.5rem] overflow-hidden bg-slate-100 shadow-2xl select-none cursor-ew-resize"
+            style={`--position: 50%; --before-focus-x: ${item.beforeFocusX}; --before-focus-y: ${item.beforeFocusY}; --after-focus-x: ${item.afterFocusX}; --after-focus-y: ${item.afterFocusY};`}
+            role="slider"
+            aria-label={`Comparador de resultado antes y después de ${item.title}`}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="50"
+            tabindex="0"
+          >
+            <!-- Imagen DESPUÉS: imagen base, ocupa todo el contenedor -->
+            <img
+              src={item.afterImage}
+              alt={`Después del tratamiento ${item.title} en Micropulse Spa`}
+              class="facial-comparison-image facial-comparison-after absolute inset-0 w-full h-full"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
 
-                <div class="after-label absolute top-6 right-6 bg-brand-primary/90 backdrop-blur-md text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] z-20 transition-opacity duration-300">Después</div>
+            <!-- Imagen ANTES: se sobrepone completa y se recorta con clip-path -->
+            <div
+              data-facial-before-layer
+              class="facial-comparison-before-layer absolute inset-0 z-10"
+            >
+              <img
+                src={item.beforeImage}
+                alt={`Antes del tratamiento ${item.title} en Micropulse Spa`}
+                class="facial-comparison-image facial-comparison-before absolute inset-0 w-full h-full"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              />
+            </div>
 
-                <div class="slider-handle absolute top-0 bottom-0 left-1/2 w-1 bg-white -ml-0.5 flex items-center justify-center z-30">
-                    <div class="w-12 h-12 bg-white rounded-full shadow-2xl flex items-center justify-center border-4 border-brand-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>
-                    </div>
-                </div>
+            <!-- Degradado sutil premium -->
+            <div class="pointer-events-none absolute inset-0 z-[12] bg-gradient-to-b from-black/5 via-transparent to-black/10"></div>
+
+            <!-- Etiqueta ANTES -->
+            <div class="absolute top-5 left-5 z-30 bg-brand-dark/75 backdrop-blur-md text-white px-5 py-2 rounded-full text-[11px] md:text-xs font-black uppercase tracking-[0.25em] shadow-lg">
+              {item.beforeLabel}
+            </div>
+
+            <!-- Etiqueta DESPUÉS -->
+            <div class="absolute top-5 right-5 z-30 bg-brand-primary/90 backdrop-blur-md text-white px-5 py-2 rounded-full text-[11px] md:text-xs font-black uppercase tracking-[0.25em] shadow-lg">
+              {item.afterLabel}
+            </div>
+
+            <!-- Línea central + handle fino -->
+            <div
+              data-facial-slider-handle
+              class="facial-comparison-handle absolute top-0 bottom-0 z-40 w-[2px] bg-white/95 shadow-[0_0_12px_rgba(0,0,0,0.12)]"
+              aria-hidden="true"
+            >
+              <div class="absolute top-1/2 left-1/2 w-9 h-9 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-[3px] border-brand-primary shadow-lg flex items-center justify-center">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="16" 
+                  height="16" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  stroke-width="2.5" 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  class="text-brand-primary"
+                >
+                  <path d="m9 18-6-6 6-6"/>
+                  <path d="m15 6 6 6-6 6"/>
+                </svg>
+              </div>
+
+              <div class="absolute top-1/2 left-1/2 w-[5px] h-14 -translate-x-1/2 -translate-y-1/2 bg-brand-primary rounded-full"></div>
+            </div>
+
+            <!-- Tarjeta de resultado -->
+            <div class="absolute bottom-0 right-0 z-30 bg-white/98 backdrop-blur-md rounded-tl-[2rem] rounded-br-[2.5rem] px-7 py-6 md:px-8 md:py-7 shadow-2xl min-w-[210px] md:min-w-[240px] border-l border-t border-white/80">
+              <p class="text-3xl md:text-4xl lg:text-5xl font-black text-brand-primary leading-none">
+                {item.stat}
+              </p>
+
+              <p class="mt-3 text-xs md:text-sm font-black text-brand-dark uppercase tracking-[0.14em] leading-tight whitespace-pre-line">
+                {item.statLabel}
+              </p>
+
+              <div class="w-full h-2 rounded-full bg-brand-light mt-5 overflow-hidden">
+                <div
+                  class="h-full bg-brand-primary rounded-full"
+                  style={`width: ${item.stat};`}
+                ></div>
+              </div>
             </div>
           </div>
-          
-          <div class="hidden md:block absolute -bottom-10 -right-6 bg-white p-8 rounded-[2.5rem] shadow-2xl z-20 border-l-8 border-brand-primary animate-bounce-slow max-w-[180px]">
-            <p class="text-5xl font-black text-brand-primary mb-1 tracking-tighter">{caso.mejora}</p>
-            <p class="text-[10px] font-black text-brand-dark leading-tight uppercase tracking-widest" set:html={caso.detalle}></p>
-            <div class="w-full bg-brand-light h-1.5 rounded-full mt-4 overflow-hidden">
-              <div class="bg-brand-primary h-full rounded-full" style={`width: ${caso.mejora}`}></div>
-            </div>
-          </div>
-
-          <div class="absolute -top-6 -left-6 w-full h-full border-2 border-brand-primary/10 rounded-[3.5rem] -z-10"></div>
-        </div>
+        </article>
       ))}
     </div>
   </div>
 </section>
 
 <script>
-    const initSliders = () => {
-        const sliders = document.querySelectorAll('.image-comparison-slider');
+  const initFacialComparisonSliders = () => {
+    const sliders = document.querySelectorAll<HTMLElement>('[data-facial-comparison-slider]');
 
-        sliders.forEach(slider => {
-            const beforeContainer = slider.querySelector('.before-image-container') as HTMLElement;
-            const handle = slider.querySelector('.slider-handle') as HTMLElement;
-            const beforeImg = slider.querySelector('.before-img-el') as HTMLImageElement;
-            const afterLabel = slider.querySelector('.after-label') as HTMLElement;
+    sliders.forEach((slider) => {
+      if (slider.dataset.initialized === 'true') return;
+      slider.dataset.initialized = 'true';
 
-            if (!slider || !beforeContainer || !handle || !beforeImg || !afterLabel) return;
+      const beforeLayer = slider.querySelector<HTMLElement>('[data-facial-before-layer]');
+      const handle = slider.querySelector<HTMLElement>('[data-facial-slider-handle]');
 
-            let isResizing = false;
+      if (!beforeLayer || !handle) return;
 
-            const updateDimensions = () => {
-                const width = (slider as HTMLElement).offsetWidth;
-                beforeImg.style.width = `${width}px`;
-            };
+      let isDragging = false;
+      let targetPosition = 50;
+      let currentPosition = 50;
+      let animationFrame = 0;
 
-            const setPosition = (x: number) => {
-                const rect = slider.getBoundingClientRect();
-                let position = ((x - rect.left) / rect.width) * 100;
-                if (position < 0) position = 0;
-                if (position > 100) position = 100;
-                
-                beforeContainer.style.width = `${position}%`;
-                handle.style.left = `${position}%`;
+      const clamp = (value: number, min: number, max: number) => {
+        return Math.min(Math.max(value, min), max);
+      };
 
-                // Ocultar label después si el slider se acerca (ej. al pasar del 75%)
-                if (position > 75) {
-                    afterLabel.style.opacity = '0';
-                } else {
-                    afterLabel.style.opacity = '1';
-                }
-            };
+      const applyPosition = (value: number) => {
+        slider.style.setProperty('--position', `${value}%`);
+        slider.setAttribute('aria-valuenow', String(Math.round(value)));
+      };
 
-            slider.addEventListener('mousedown', () => isResizing = true);
-            slider.addEventListener('touchstart', () => isResizing = true, {passive: true});
-            
-            window.addEventListener('mouseup', () => isResizing = false);
-            window.addEventListener('touchend', () => isResizing = false);
-            
-            window.addEventListener('mousemove', (e) => {
-                if (!isResizing) return;
-                setPosition(e.pageX);
-            });
+      const setTargetFromClientX = (clientX: number) => {
+        const rect = slider.getBoundingClientRect();
 
-            window.addEventListener('touchmove', (e) => {
-                if (!isResizing) return;
-                setPosition(e.touches[0].pageX);
-            }, {passive: false});
+        if (!rect.width) return;
 
-            updateDimensions();
-            window.addEventListener('resize', updateDimensions);
-            beforeImg.onload = updateDimensions;
-        });
-    };
+        const position = ((clientX - rect.left) / rect.width) * 100;
+        targetPosition = clamp(position, 0, 100);
+      };
 
-    initSliders();
-    document.addEventListener('astro:after-swap', initSliders);
+      const animate = () => {
+        currentPosition += (targetPosition - currentPosition) * 0.18;
+
+        if (Math.abs(targetPosition - currentPosition) < 0.05) {
+          currentPosition = targetPosition;
+        }
+
+        applyPosition(currentPosition);
+        animationFrame = requestAnimationFrame(animate);
+      };
+
+      const startDragging = (event: PointerEvent) => {
+        isDragging = true;
+        slider.classList.add('is-dragging');
+        slider.setPointerCapture?.(event.pointerId);
+        setTargetFromClientX(event.clientX);
+      };
+
+      const drag = (event: PointerEvent) => {
+        if (!isDragging) return;
+        setTargetFromClientX(event.clientX);
+      };
+
+      const stopDragging = (event: PointerEvent) => {
+        isDragging = false;
+        slider.classList.remove('is-dragging');
+        slider.releasePointerCapture?.(event.pointerId);
+      };
+
+      slider.addEventListener('pointerdown', startDragging);
+      slider.addEventListener('pointermove', drag);
+      slider.addEventListener('pointerup', stopDragging);
+      slider.addEventListener('pointercancel', stopDragging);
+      slider.addEventListener('pointerleave', (event) => {
+        if (isDragging) stopDragging(event);
+      });
+
+      slider.addEventListener('click', (event) => {
+        setTargetFromClientX(event.clientX);
+      });
+
+      slider.addEventListener('keydown', (event) => {
+        const step = event.shiftKey ? 10 : 5;
+
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          targetPosition = clamp(targetPosition - step, 0, 100);
+        }
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          targetPosition = clamp(targetPosition + step, 0, 100);
+        }
+
+        if (event.key === 'Home') {
+          event.preventDefault();
+          targetPosition = 0;
+        }
+
+        if (event.key === 'End') {
+          event.preventDefault();
+          targetPosition = 100;
+        }
+      });
+
+      applyPosition(50);
+      animate();
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReducedMotion) {
+        setTimeout(() => {
+          targetPosition = 42;
+        }, 500);
+
+        setTimeout(() => {
+          targetPosition = 58;
+        }, 1200);
+
+        setTimeout(() => {
+          targetPosition = 50;
+        }, 1900);
+      }
+
+      window.addEventListener('beforeunload', () => {
+        cancelAnimationFrame(animationFrame);
+      });
+    });
+  };
+
+  initFacialComparisonSliders();
+
+  document.addEventListener('astro:page-load', initFacialComparisonSliders);
+  document.addEventListener('astro:after-swap', initFacialComparisonSliders);
 </script>
 
 <style>
-  @keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
+  .facial-comparison-slider {
+    isolation: isolate;
+    touch-action: pan-y;
+    --position: 50%;
   }
-  .animate-bounce-slow {
-    animation: bounce-slow 4s ease-in-out infinite;
+
+  .facial-comparison-slider.is-dragging {
+    cursor: grabbing;
   }
-  
-  img {
+
+  .facial-comparison-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
     user-select: none;
     pointer-events: none;
   }
-  
-  .image-comparison-slider {
-    touch-action: pan-y;
+
+  .facial-comparison-after {
+    object-position: var(--after-focus-x, 50%) var(--after-focus-y, 50%);
+  }
+
+  .facial-comparison-before-layer {
+    clip-path: inset(0 calc(100% - var(--position)) 0 0);
+    will-change: clip-path;
+  }
+
+  .facial-comparison-before {
+    object-position: var(--before-focus-x, 50%) var(--before-focus-y, 50%);
+  }
+
+  .facial-comparison-handle {
+    left: var(--position);
+    transform: translateX(-50%);
+    will-change: left;
+    transition: box-shadow 0.25s ease, opacity 0.25s ease;
+  }
+
+  .facial-comparison-slider:hover .facial-comparison-handle {
+    box-shadow: 0 0 18px rgba(182, 106, 178, 0.18);
+  }
+
+  .facial-comparison-slider.is-dragging .facial-comparison-handle {
+    box-shadow: 0 0 20px rgba(182, 106, 178, 0.22);
+  }
+
+  @media (max-width: 768px) {
+    .facial-comparison-slider {
+      border-radius: 2rem;
+    }
+
+    .facial-comparison-slider .absolute.bottom-0.right-0 {
+      min-width: 180px;
+      padding: 1.25rem;
+    }
+
+    .facial-comparison-slider .absolute.bottom-0.right-0 p:first-child {
+      font-size: 3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .facial-comparison-handle {
+      transition: none;
+    }
   }
 </style>

@@ -1,6 +1,6 @@
 ---
 // src/components/Hero.astro
-import BookingFlow from '../BookingFlow.astro'; // Importamos el flujo de reserva
+import BookingFlow from '../BookingFlow.astro';
 
 const beforeImage = "/images/con-estrias.jpg";
 const afterImage = "/images/sin-estrias.jpg";
@@ -12,22 +12,28 @@ const afterImage = "/images/sin-estrias.jpg";
 
   <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
     
+    <!-- CONTENIDO TEXTO -->
     <div class="space-y-10">
       <div class="space-y-6">
         <h1 class="text-xl md:text-4xl font-bold text-brand-dark leading-[1.05] tracking-tight">
           Rejuvenece tu Piel con <br />
-          <span class="text-brand-primary text-4xl md:text-5xl block mt-2">Micro puntura brasileña</span>
+          <span class="text-brand-primary text-4xl md:text-5xl block mt-2">
+            Micropuntura brasileña
+          </span>
         </h1>
         
         <div class="space-y-2">
           <h2 class="text-xl md:text-2xl font-black text-brand-dark tracking-[0.2em] uppercase">
             Eliminamos hasta el 95%
           </h2>
-          <p class="text-brand-primary font-semibold text-lg uppercase tracking-wider">Las estrías y cicatrices.</p>
+          <p class="text-brand-primary font-semibold text-lg uppercase tracking-wider">
+            Las estrías y cicatrices.
+          </p>
         </div>
 
         <p class="text-gray-600 text-lg md:text-xl leading-relaxed max-w-lg">
-          Descubre cómo puedes decir adiós a las marcas en tu piel con el revolucionario método de <strong>micropuntura brasileña</strong>. Regeneramos tu confianza desde el interior.
+          Descubre cómo puedes decir adiós a las marcas en tu piel con el revolucionario método de 
+          <strong>micropuntura brasileña</strong>. Regeneramos tu confianza desde el interior.
         </p>
       </div>
 
@@ -42,52 +48,115 @@ const afterImage = "/images/sin-estrias.jpg";
 
       <div class="flex items-center gap-5 pt-6 border-t border-brand-light w-fit">
         <div class="flex -space-x-4">
-          <div class="w-12 h-12 rounded-full border-4 border-white bg-brand-light flex items-center justify-center text-[10px] font-bold">M</div>
-          <div class="w-12 h-12 rounded-full border-4 border-white bg-brand-primary/20 flex items-center justify-center text-[10px] font-bold">P</div>
-          <div class="w-12 h-12 rounded-full border-4 border-white bg-brand-dark text-white flex items-center justify-center text-[10px] font-bold">S</div>
+          <div class="w-12 h-12 rounded-full border-4 border-white bg-brand-light flex items-center justify-center text-[10px] font-bold">
+            M
+          </div>
+          <div class="w-12 h-12 rounded-full border-4 border-white bg-brand-primary/20 flex items-center justify-center text-[10px] font-bold">
+            P
+          </div>
+          <div class="w-12 h-12 rounded-full border-4 border-white bg-brand-dark text-white flex items-center justify-center text-[10px] font-bold">
+            S
+          </div>
         </div>
+
         <div class="text-sm">
           <div class="flex text-brand-primary mb-0.5">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
-          <p class="font-bold text-brand-dark">5.0/5 <span class="font-normal text-gray-500 ml-1">"Resultados reales"</span></p>
+          <p class="font-bold text-brand-dark">
+            5.0/5 <span class="font-normal text-gray-500 ml-1">"Resultados reales"</span>
+          </p>
         </div>
       </div>
     </div>
 
-    <div class="relative group">
-      <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-500 select-none aspect-square md:aspect-auto">
-        <div id="image-comparison-slider" class="relative w-full h-full min-h-[400px] overflow-hidden cursor-ew-resize bg-gray-200">
-            <img 
-                src={afterImage} 
-                alt="Después" 
-                class="absolute inset-0 w-full h-full object-cover"
-                onload="this.parentElement.classList.remove('bg-gray-200')"
-            />
-            
-            <div id="before-image-container" class="absolute inset-0 w-1/2 overflow-hidden border-r-4 border-white shadow-2xl z-10">
-                <img 
-                    id="before-img-el"
-                    src={beforeImage} 
-                    alt="Antes" 
-                    class="absolute inset-0 h-full max-w-none object-cover"
-                />
-                <div class="absolute top-4 left-4 bg-brand-dark/60 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Antes</div>
-            </div>
+    <!-- BLOQUE VISUAL / SLIDER -->
+    <div class="relative group w-full">
+      <div class="relative z-10 rounded-[2rem] overflow-hidden shadow-2xl transition-transform duration-500 select-none bg-gray-200">
+        
+        <div
+          data-comparison-slider
+          class="comparison-slider relative w-full aspect-[4/5] sm:aspect-[5/4] lg:aspect-[16/11] overflow-hidden rounded-[2rem] cursor-ew-resize select-none bg-gray-200"
+          style="--position: 50%; --before-focus-x: 50%; --before-focus-y: 55%; --after-focus-x: 50%; --after-focus-y: 55%;"
+          role="slider"
+          aria-label="Comparador de imagen antes y después"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="50"
+          tabindex="0"
+        >
+          <!-- IMAGEN DESPUÉS: ocupa TODO el slider -->
+          <img
+            src={afterImage}
+            alt="Resultado después del tratamiento de micropuntura brasileña"
+            class="comparison-image comparison-after-image absolute inset-0 w-full h-full"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            draggable="false"
+          />
 
-            <div class="absolute top-4 right-4 bg-brand-primary/80 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">Después</div>
+          <!-- IMAGEN ANTES: también ocupa TODO el slider, pero se recorta con clip-path -->
+          <img
+            src={beforeImage}
+            alt="Antes del tratamiento de micropuntura brasileña"
+            class="comparison-image comparison-before-image absolute inset-0 w-full h-full z-10"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+            draggable="false"
+          />
 
-            <div id="slider-handle" class="absolute top-0 bottom-0 left-1/2 w-1 bg-white -ml-0.5 flex items-center justify-center z-20">
-                <div class="w-10 h-10 bg-white rounded-full shadow-2xl flex items-center justify-center border-4 border-brand-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-brand-primary"><path d="m9 18-6-6 6-6"/><path d="m15 6 6 6-6 6"/></svg>
-                </div>
-            </div>
+          <!-- DEGRADADO SUTIL PARA DAR PROFUNDIDAD -->
+          <div class="pointer-events-none absolute inset-0 z-[11] bg-gradient-to-b from-black/5 via-transparent to-black/5"></div>
+
+          <!-- LABEL ANTES -->
+          <div class="absolute top-4 left-4 z-30 bg-brand-dark/70 backdrop-blur-md text-white px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest">
+            Antes
+          </div>
+
+          <!-- LABEL DESPUÉS -->
+          <div class="absolute top-4 right-4 z-30 bg-brand-primary/85 backdrop-blur-md text-white px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest">
+            Después
+          </div>
+
+          <!-- LÍNEA CENTRAL / HANDLE -->
+     <div
+  data-slider-handle
+  class="comparison-handle absolute top-0 bottom-0 z-40 w-[2px] bg-white/95 shadow-[0_0_12px_rgba(0,0,0,0.12)]"
+  aria-hidden="true"
+>
+  <div class="absolute top-1/2 left-1/2 w-9 h-9 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white border-[3px] border-brand-primary shadow-lg flex items-center justify-center">
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="16" 
+      height="16" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2.5" 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      class="text-brand-primary"
+    >
+      <path d="m9 18-6-6 6-6"/>
+      <path d="m15 6 6 6-6 6"/>
+    </svg>
+  </div>
+
+  <div class="absolute top-1/2 left-1/2 w-[5px] h-14 -translate-x-1/2 -translate-y-1/2 bg-brand-primary rounded-full"></div>
+</div>
         </div>
       </div>
       
+      <!-- CARD ESTADÍSTICA -->
       <div class="hidden lg:block absolute -bottom-8 -left-8 bg-white p-8 rounded-3xl shadow-2xl z-20 border-l-8 border-brand-primary animate-bounce-slow">
-        <p class="text-5xl font-black text-brand-primary mb-1">48%</p>
-        <p class="text-sm font-bold text-brand-dark leading-tight">Mejora de la<br/>Elasticidad</p>
+        <p class="text-5xl font-black text-brand-primary mb-1">
+          48%
+        </p>
+        <p class="text-sm font-bold text-brand-dark leading-tight">
+          Mejora de la<br/>Elasticidad
+        </p>
         <div class="w-full bg-brand-light h-1.5 rounded-full mt-4">
           <div class="bg-brand-primary h-full w-[48%] rounded-full"></div>
         </div>
@@ -97,96 +166,280 @@ const afterImage = "/images/sin-estrias.jpg";
     </div>
   </div>
 
+  <!-- MODAL RESERVA -->
   <div id="modal-reserva" class="fixed inset-0 z-[150] hidden items-center justify-center p-4">
     <div id="overlay-reserva" class="absolute inset-0 bg-brand-dark/80 backdrop-blur-md transition-opacity duration-300"></div>
     
     <div class="relative w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-        <button id="cerrar-reserva" class="absolute top-6 right-6 z-50 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M18 6 6 18M6 6l12 12"/></svg>
-        </button>
-        <BookingFlow />
+      <button 
+        id="cerrar-reserva" 
+        class="absolute top-6 right-6 z-50 bg-white/20 hover:bg-white/40 text-white p-2 rounded-full transition-colors"
+        aria-label="Cerrar reserva"
+      >
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          stroke-width="3"
+        >
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <BookingFlow />
     </div>
   </div>
 </section>
 
 <script>
-    // --- Lógica del Slider (Sin cambios) ---
-    const initSlider = () => {
-        const slider = document.getElementById('image-comparison-slider');
-        const beforeContainer = document.getElementById('before-image-container');
-        const handle = document.getElementById('slider-handle');
-        const beforeImg = document.getElementById('before-img-el') as HTMLImageElement;
-        if (!slider || !beforeContainer || !handle || !beforeImg) return;
-        let isResizing = false;
-        const updateDimensions = () => {
-            const width = slider.offsetWidth;
-            beforeImg.style.width = `${width}px`;
-        };
-        const setPosition = (x: number) => {
-            const rect = slider.getBoundingClientRect();
-            let position = ((x - rect.left) / rect.width) * 100;
-            if (position < 0) position = 0;
-            if (position > 100) position = 100;
-            beforeContainer.style.width = `${position}%`;
-            handle.style.left = `${position}%`;
-        };
-        slider.addEventListener('mousedown', () => isResizing = true);
-        slider.addEventListener('touchstart', () => isResizing = true);
-        window.addEventListener('mouseup', () => isResizing = false);
-        window.addEventListener('touchend', () => isResizing = false);
-        window.addEventListener('mousemove', (e) => { if (isResizing) setPosition(e.pageX); });
-        window.addEventListener('touchmove', (e) => { if (isResizing) setPosition(e.touches[0].pageX); });
-        updateDimensions();
-        window.addEventListener('resize', updateDimensions);
-        beforeImg.onload = updateDimensions;
-    };
+  const initComparisonSliders = () => {
+    const sliders = document.querySelectorAll<HTMLElement>('[data-comparison-slider]');
 
-    // --- Lógica del Modal de Reserva ---
-    const initModalReserva = () => {
-        const btnAbrir = document.getElementById('btn-abrir-reserva');
-        const btnCerrar = document.getElementById('cerrar-reserva');
-        const modal = document.getElementById('modal-reserva');
-        const overlay = document.getElementById('overlay-reserva');
+    sliders.forEach((slider) => {
+      if (slider.dataset.initialized === 'true') return;
+      slider.dataset.initialized = 'true';
 
-        const toggleModal = () => {
-            if (modal?.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                document.body.style.overflow = 'hidden';
-            } else {
-                modal?.classList.add('hidden');
-                modal?.classList.remove('flex');
-                document.body.style.overflow = '';
-            }
-        };
+      const handle = slider.querySelector<HTMLElement>('[data-slider-handle]');
+      if (!handle) return;
 
-        btnAbrir?.addEventListener('click', toggleModal);
-        btnCerrar?.addEventListener('click', toggleModal);
-        overlay?.addEventListener('click', toggleModal);
-    };
+      let isDragging = false;
+      let targetPosition = 50;
+      let currentPosition = 50;
+      let animationFrame = 0;
 
-    // Inicializar todo
-    initSlider();
-    initModalReserva();
-    document.addEventListener('astro:after-swap', () => {
-        initSlider();
-        initModalReserva();
+      const clamp = (value: number, min: number, max: number) => {
+        return Math.min(Math.max(value, min), max);
+      };
+
+      const applyPosition = (value: number) => {
+        slider.style.setProperty('--position', `${value}%`);
+        slider.setAttribute('aria-valuenow', String(Math.round(value)));
+      };
+
+      const setTargetFromClientX = (clientX: number) => {
+        const rect = slider.getBoundingClientRect();
+
+        if (!rect.width) return;
+
+        const position = ((clientX - rect.left) / rect.width) * 100;
+        targetPosition = clamp(position, 0, 100);
+      };
+
+      const animate = () => {
+        currentPosition += (targetPosition - currentPosition) * 0.18;
+
+        if (Math.abs(targetPosition - currentPosition) < 0.05) {
+          currentPosition = targetPosition;
+        }
+
+        applyPosition(currentPosition);
+        animationFrame = requestAnimationFrame(animate);
+      };
+
+      const startDragging = (event: PointerEvent) => {
+        isDragging = true;
+        slider.classList.add('is-dragging');
+        slider.setPointerCapture?.(event.pointerId);
+        setTargetFromClientX(event.clientX);
+      };
+
+      const drag = (event: PointerEvent) => {
+        if (!isDragging) return;
+        setTargetFromClientX(event.clientX);
+      };
+
+      const stopDragging = (event: PointerEvent) => {
+        isDragging = false;
+        slider.classList.remove('is-dragging');
+        slider.releasePointerCapture?.(event.pointerId);
+      };
+
+      slider.addEventListener('pointerdown', startDragging);
+      slider.addEventListener('pointermove', drag);
+      slider.addEventListener('pointerup', stopDragging);
+      slider.addEventListener('pointercancel', stopDragging);
+      slider.addEventListener('pointerleave', (event) => {
+        if (isDragging) stopDragging(event);
+      });
+
+      slider.addEventListener('click', (event) => {
+        setTargetFromClientX(event.clientX);
+      });
+
+      slider.addEventListener('keydown', (event) => {
+        const step = event.shiftKey ? 10 : 5;
+
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          targetPosition = clamp(targetPosition - step, 0, 100);
+        }
+
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          targetPosition = clamp(targetPosition + step, 0, 100);
+        }
+
+        if (event.key === 'Home') {
+          event.preventDefault();
+          targetPosition = 0;
+        }
+
+        if (event.key === 'End') {
+          event.preventDefault();
+          targetPosition = 100;
+        }
+      });
+
+      applyPosition(50);
+      animate();
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!prefersReducedMotion) {
+        setTimeout(() => {
+          targetPosition = 38;
+        }, 500);
+
+        setTimeout(() => {
+          targetPosition = 62;
+        }, 1200);
+
+        setTimeout(() => {
+          targetPosition = 50;
+        }, 2000);
+      }
+
+      window.addEventListener('beforeunload', () => {
+        cancelAnimationFrame(animationFrame);
+      });
     });
+  };
+
+  const initModalReserva = () => {
+    const btnAbrir = document.getElementById('btn-abrir-reserva');
+    const btnCerrar = document.getElementById('cerrar-reserva');
+    const modal = document.getElementById('modal-reserva');
+    const overlay = document.getElementById('overlay-reserva');
+
+    if (!btnAbrir || !modal) return;
+    if (btnAbrir.dataset.initialized === 'true') return;
+
+    btnAbrir.dataset.initialized = 'true';
+
+    const openModal = () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    };
+
+    btnAbrir.addEventListener('click', openModal);
+    btnCerrar?.addEventListener('click', closeModal);
+    overlay?.addEventListener('click', closeModal);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  };
+
+  const initHero = () => {
+    initComparisonSliders();
+    initModalReserva();
+  };
+
+  initHero();
+
+  document.addEventListener('astro:page-load', initHero);
+  document.addEventListener('astro:after-swap', initHero);
 </script>
 
 <style>
   @keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { 
+      transform: translateY(0); 
+    }
+
+    50% { 
+      transform: translateY(-10px); 
+    }
   }
+
   .animate-bounce-slow {
     animation: bounce-slow 4s ease-in-out infinite;
   }
-  img {
+
+  .comparison-slider {
+    touch-action: pan-y;
+    isolation: isolate;
+    --position: 50%;
+  }
+
+  .comparison-slider.is-dragging {
+    cursor: grabbing;
+  }
+
+  .comparison-image {
+    display: block;
+    max-width: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     user-select: none;
     pointer-events: none;
   }
-  #image-comparison-slider {
-    touch-action: pan-y;
+
+  .comparison-after-image {
+    object-position: var(--after-focus-x, 50%) var(--after-focus-y, 55%);
+  }
+
+  .comparison-before-image {
+    object-position: var(--before-focus-x, 50%) var(--before-focus-y, 55%);
+    clip-path: inset(0 calc(100% - var(--position)) 0 0);
+    will-change: clip-path;
+  }
+.comparison-handle {
+  left: var(--position);
+  transform: translateX(-50%);
+  will-change: left;
+  transition: box-shadow 0.25s ease, opacity 0.25s ease;
+}
+
+.comparison-slider:hover .comparison-handle {
+  box-shadow: 0 0 18px rgba(182, 106, 178, 0.18);
+}
+
+.comparison-slider.is-dragging .comparison-handle {
+  box-shadow: 0 0 20px rgba(182, 106, 178, 0.22);
+}
+
+  #image-comparison-slider,
+  #image-comparison-slider img {
+    height: 100%;
+  }
+
+  img {
+    user-select: none;
+  }
+
+  @media (max-width: 640px) {
+    .comparison-slider {
+      border-radius: 1.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-bounce-slow {
+      animation: none;
+    }
   }
 </style>

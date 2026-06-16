@@ -520,7 +520,6 @@ const structuredData = {
     <link rel="icon" type="image/x-icon" href={faviconURL.toString()} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Autoría y metadatos -->
     <meta name="author" content="Zipaquirá Digital | https://zipaquiradigital.com" />
@@ -609,16 +608,7 @@ const structuredData = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
     <!-- Script ligero para mejorar lazy loading sin afectar LCP -->
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const images = document.querySelectorAll('img:not([loading])');
-
-        images.forEach((img) => {
-          img.setAttribute('loading', 'lazy');
-          img.setAttribute('decoding', 'async');
-        });
-      });
-    </script>
+  
   </head>
 
   <body class="bg-brand-white text-brand-dark selection:bg-brand-primary/30 selection:text-brand-dark antialiased min-h-screen">
@@ -641,7 +631,10 @@ const structuredData = {
         --brand-muted: #686868;
         --brand-white: #ffffff;
       }
-
+#image-comparison-slider,
+#image-comparison-slider img {
+  height: 100%;
+}
       html,
       body {
         width: 100%;
@@ -669,11 +662,11 @@ const structuredData = {
       canvas,
       iframe {
         max-width: 100%;
+
+
       }
 
-      img {
-        height: auto;
-      }
+  
 
       a {
         text-decoration-thickness: from-font;
