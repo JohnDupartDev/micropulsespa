@@ -24,8 +24,8 @@ export const WHEEL_PRIZES: WheelPrize[] = [
   },
   {
     id: 4,
-    label: 'Sesión de Camilla Ceragem',
-    shortLabel: 'Camilla Ceragem',
+    label: 'Dranaje linfático',
+    shortLabel: 'Dranaje linfático',
     weight: 18,
     category: 'service',
   },
